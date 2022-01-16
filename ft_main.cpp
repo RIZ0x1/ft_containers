@@ -11,16 +11,19 @@
 
 int main()
 {
+	std::cout << YELLOW;
 	std::cout << "############### FT_VECTOR ###############\n" << std::endl;
 	std::cout << GREEN;
 	{
 		
 	}
+	std::cout << YELLOW;
 	std::cout << "################  FT_MAP  ###############\n" << std::endl;
 	std::cout << ORANGE;
 	{
 
 	}
+	std::cout << YELLOW;
 	std::cout << "################ FT_STACK ###############\n" << std::endl;
 	std::cout << BLUE;
 	{
