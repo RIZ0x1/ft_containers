@@ -1,10 +1,10 @@
-CXX	= clang++
+CXX		= g++
 FLGS	= -Wall -Wextra -Werror -std=c++98
 
 NAME	= out
-HDRS	= vector.hpp map.hpp stack.hpp
-SRCS	= main.cpp
-OBJS	= $(SRCS:%.cpp=%.o)
+HDRS	= vector.hpp #map.hpp stack.hpp
+SRCS	= std_main.cpp
+OBJS	= $(SRCS:.cpp=.o)
 
 .PHONY: all clean fclean re
 
@@ -18,8 +18,9 @@ fclean: clean
 
 re: fclean all
 
-$(NAME): $(HDRS) $(OBJS)
+$(NAME): $(OBJS)
+	$(CXX) $(FLGS) $(OBJS) -o out
 
-%.o: %.cpp
+%.o: %.cpp $(HDRS)
 	$(CXX) $(FLGS) -c $< -o $@
 
