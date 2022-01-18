@@ -2,6 +2,8 @@
 # define FT_VECTOR_HPP
 
 #include <memory>
+#include <limits>
+#include "iterator.hpp"
 
 namespace ft {
 	class vector;
@@ -10,16 +12,15 @@ namespace ft {
 template < typename T, typename Allocator = std::allocator<T> >
 class vector
 {
-	T		*_array;
-	size_t	_max_capacity;
+	T			*_array;
+	Allocator	*_alloc;
+	size_t		_capacity;
 
 public:
-	using ft::iterator;
-
 	vector();
 	vector(const vector &other);
 	explicit vector(const Allocator &alloc);
-	explicit vector(size_t count, const T& value = T(), const Allocator& alloc = Allocator());
+	explicit vector(size_t count, const T &value = T(), const Allocator &alloc = Allocator());
 	template <class InputIt> vector(InputIt first, InputIt last, const Allocator &alloc = Allocator());
 	~vector();
 
@@ -48,9 +49,9 @@ public:
 	// ?                               ITERATORS                               *
 	// ? ***********************************************************************
 
-	iterator		begin();
-	iterator 		end();
-	const_iterator	end() const;
+	ft::iterator		begin();
+	ft::iterator 		end();
+	ft::const_iterator	end() const;
 
 	// ? ***********************************************************************
 	// ?                               CAPACITY                                *
@@ -67,11 +68,11 @@ public:
 	// ? ***********************************************************************
 
 	void		clear(void); // TODO: Erases all elements from the container. After this call, size() returns zero
-	iterator	insert(iterator pos, const T& value); // TODO: inserts value before pos
-	void		insert(iterator pos, size_t count, const T& value); // TODO: inserts value before pos
-	template<class InputIt> void insert( iterator pos, InputIt first, InputIt last ); // TODO: https://en.cppreference.com/w/cpp/container/vector/insert
-	iterator	erase(iterator pos); // TODO: Removes the element at pos
-	iterator	erase(iterator first, iterator last); // TODO: Removes the elements in the range [first, last)
+	ft::iterator	insert(ft::iterator pos, const T& value); // TODO: inserts value before pos
+	void		insert(ft::iterator pos, size_t count, const T& value); // TODO: inserts value before pos
+	template<class InputIt> void insert( ft::iterator pos, InputIt first, InputIt last ); // TODO: https://en.cppreference.com/w/cpp/container/vector/insert
+	ft::iterator	erase(ft::iterator pos); // TODO: Removes the element at pos
+	ft::iterator	erase(ft::iterator first, ft::iterator last); // TODO: Removes the elements in the range [first, last)
 	void		push_back(const T& value); // TODO: The new element is initialized as a copy of value
 	void		pop_back(void); // TODO: Removes the last element of the container
 	void		resize(size_t count); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize

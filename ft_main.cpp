@@ -2,7 +2,7 @@
 #include <memory>
 #include <limits>
 #include <iostream>
-
+#include "vector.hpp"
 
 #define NORMAL	"\033[0m"
 #define ORANGE	"\033[31m"
@@ -17,7 +17,6 @@
 
 using std::cout;
 using std::endl;
-using std::vector;
 
 template <typename T> void	test(vector<T> v);
 
@@ -97,18 +96,18 @@ void	test(vector<T> v)
 		cout << NORMAL	<< TAB << "capacity: " << v.capacity() << endl;
 
 		unsigned int			i;
-		vector<int>::iterator	it;
+		// vector<int>::iterator	it;
 
-		cout << TAB << MAGENTA << "elements: {" << endl;
-		it = v.begin();
-		while (it != v.end())
-		{
-			i = 0;
-			cout << TAB2;
-			while (it != v.end() && i++ < COLUMNS)
-				cout << *it++ << ' ';
-			cout << endl;
-		}
-		cout << TAB2 << '}' << endl;
+		// cout << TAB << MAGENTA << "elements: {" << endl;
+		// it = v.begin();
+		// while (it != v.end())
+		// {
+		// 	i = 0;
+		// 	cout << TAB2;
+		// 	while (it != v.end() && i++ < COLUMNS)
+		// 		cout << *it++ << ' ';
+		// 	cout << endl;
+		// }
+		// cout << TAB2 << '}' << endl;
 	cout << CYAN << TAB << '}' << endl << endl;
 }
