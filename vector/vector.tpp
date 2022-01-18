@@ -9,8 +9,14 @@ vector<T, Allocator>::vector(InputIt first, InputIt last, const Allocator &alloc
 
 }
 
-template <typename T, typename Allocator> template <class InputIt>
+template <typename T, typename Allocator> template <typename InputIt>
 void	vector<T, Allocator>::assign(InputIt first, InputIt last)
+{
+
+}
+
+template <typename T, typename Allocator> template <typename InputIt>
+void	vector<T, Allocator>::insert(iterator<T> pos, InputIt first, InputIt last)
 {
 
 }

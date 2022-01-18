@@ -48,6 +48,7 @@ int main()
 		vector<int> tmp(alloc);
 
 		tmp.push_back(100);
+		tmp.erase(tmp.begin());
 		
 		test(tmp);
 

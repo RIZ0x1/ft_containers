@@ -156,30 +156,25 @@ void		vector<T, Allocator>::clear(void)
 }
 
 template <typename T, typename Allocator>
-ft::iterator	insert(ft::iterator pos, const T& value)
+iterator<T>	insert(iterator<T> pos, const T& value)
 {
 
 }
 
 template <typename T, typename Allocator>
-void		insert(ft::iterator pos, size_t count, const T& value)
-{
-
-}
-
-template<class InputIt> void insert( ft::iterator pos, InputIt first, InputIt last )
+void		insert(iterator<T> pos, size_t count, const T& value)
 {
 
 }
 
 template <typename T, typename Allocator>
-ft::iterator	erase(ft::iterator pos)
+iterator<T>	erase(iterator<T> pos)
 {
 
 }
 
 template <typename T, typename Allocator>
-ft::iterator	erase(ft::iterator first, ft::iterator last)
+iterator<T>	erase(iterator<T> first, iterator<T> last)
 {
 
 }
