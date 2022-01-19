@@ -149,65 +149,65 @@ size_t	vector<T, Allocator>::capacity(void) const
 // ? *                                 MODIFIERS                               *
 // ? ***************************************************************************
 
-template <typename T, typename Allocator>
-void		vector<T, Allocator>::clear(void)
-{
+// template <typename T, typename Allocator>
+// void		vector<T, Allocator>::clear(void)
+// {
 
-}
+// }
 
-template <typename T, typename Allocator>
-iterator<T>	insert(iterator<T> pos, const T& value)
-{
+// template <typename T, typename Allocator>
+// iterator<T>	insert(iterator<T> pos, const T& value)
+// {
 
-}
+// }
 
-template <typename T, typename Allocator>
-void		insert(iterator<T> pos, size_t count, const T& value)
-{
+// template <typename T, typename Allocator>
+// void		insert(iterator<T> pos, size_t count, const T& value)
+// {
 
-}
+// }
 
-template <typename T, typename Allocator>
-iterator<T>	erase(iterator<T> pos)
-{
+// template <typename T, typename Allocator>
+// iterator<T>	erase(iterator<T> pos)
+// {
 
-}
+// }
 
-template <typename T, typename Allocator>
-iterator<T>	erase(iterator<T> first, iterator<T> last)
-{
+// template <typename T, typename Allocator>
+// iterator<T>	erase(iterator<T> first, iterator<T> last)
+// {
 
-}
+// }
 
-template <typename T, typename Allocator>
-void		push_back(const T& value)
-{
+// template <typename T, typename Allocator>
+// void		push_back(const T& value)
+// {
 
-}
+// }
 
-template <typename T, typename Allocator>
-void		pop_back(void)
-{
+// template <typename T, typename Allocator>
+// void		pop_back(void)
+// {
 
-}
+// }
 
-template <typename T, typename Allocator>
-void		resize(size_t count)
-{
+// template <typename T, typename Allocator>
+// void		resize(size_t count)
+// {
 
-}
+// }
 
-template <typename T, typename Allocator>
-void		resize(size_t count, T value = T())
-{
+// template <typename T, typename Allocator>
+// void		resize(size_t count, T value = T())
+// {
 
-}
+// }
 
-template <typename T, typename Allocator>
-void		vector<T, Allocator>::swap(vector<T, Allocator> &other)
-{
+// template <typename T, typename Allocator>
+// void		vector<T, Allocator>::swap(vector<T, Allocator> &other)
+// {
 
-}
+// }
 
 // ? ***************************************************************************
 // ? *                                 OPERATORS                               *

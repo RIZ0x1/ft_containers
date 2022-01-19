@@ -78,17 +78,17 @@ public:
 	// ?                               MODIFIERS                               *
 	// ? ***********************************************************************
 
-	void		clear(void); // TODO: Erases all elements from the container. After this call, size() returns zero
-	void		insert(iterator<T> pos, size_t count, const T& value); // TODO: inserts value before pos
-	iterator<T>	erase(iterator<T> pos); // TODO: Removes the element at pos
-	iterator<T>	erase(iterator<T> first, iterator<T> last); // TODO: Removes the elements in the range [first, last)
-	void		push_back(const T& value); // TODO: The new element is initialized as a copy of value
-	void		pop_back(void); // TODO: Removes the last element of the container
-	void		resize(size_t count); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize
-	void		resize(size_t count, T value = T()); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize
-	void		swap(vector& other); // TODO: https://en.cppreference.com/w/cpp/container/vector/swap
-	typename iterator<T>	insert(iterator<T> pos, const T& value); // TODO: inserts value before pos
-	template<class InputIt> void insert( iterator<T> pos, InputIt first, InputIt last ); // TODO: https://en.cppreference.com/w/cpp/container/vector/insert
+	// void		clear(void); // TODO: Erases all elements from the container. After this call, size() returns zero
+	// void		insert(iterator<T> pos, size_t count, const T& value); // TODO: inserts value before pos
+	// iterator<T>	erase(iterator<T> pos); // TODO: Removes the element at pos
+	// iterator<T>	erase(iterator<T> first, iterator<T> last); // TODO: Removes the elements in the range [first, last)
+	// void		push_back(const T& value); // TODO: The new element is initialized as a copy of value
+	// void		pop_back(void); // TODO: Removes the last element of the container
+	// void		resize(size_t count); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize
+	// void		resize(size_t count, T value = T()); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize
+	// void		swap(vector& other); // TODO: https://en.cppreference.com/w/cpp/container/vector/swap
+	// typename iterator<T>	insert(iterator<T> pos, const T& value); // TODO: inserts value before pos
+	// template<class InputIt> void insert( iterator<T> pos, InputIt first, InputIt last ); // TODO: https://en.cppreference.com/w/cpp/container/vector/insert
 
 	// ? ***********************************************************************
 	// ?                               OPERATORS                               *
