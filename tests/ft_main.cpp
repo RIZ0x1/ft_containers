@@ -42,29 +42,29 @@ int main()
 		}
 
 		// ? MEMBER FUNCTIONS
-		const std::allocator<int>	alloc;
+		// const std::allocator<int>	alloc;
 
-		vector<int> tmp(alloc);
+		// vector<int> tmp(alloc);
 
-		tmp.push_back(100);
-		
-		test(tmp);
+		// tmp.push_back(100);
 
-		// ? MODIFIERS & CAPACITY
-		v1_int.push_back(INT_MIN);
-		v1_int.push_back(INT_MAX);
-		test(v1_int);
+		// test(tmp);
 
-		for (unsigned i = 0; i < v2_int.size(); i++)
-			v2_int[i] = i;
-		test(v2_int);
+		// // ? MODIFIERS & CAPACITY
+		// v1_int.push_back(INT_MIN);
+		// v1_int.push_back(INT_MAX);
+		// test(v1_int);
 
-		if (v3_int.empty())
-		{
-			for (unsigned i = 0; i < 72; i++)
-				v3_int.push_back(i);
-			test(v3_int);
-		}
+		// for (unsigned i = 0; i < v2_int.size(); i++)
+		// 	v2_int[i] = i;
+		// test(v2_int);
+
+		// if (v3_int.empty())
+		// {
+		// 	for (unsigned i = 0; i < 72; i++)
+		// 		v3_int.push_back(i);
+		// 	test(v3_int);
+		// }
 		
 	}
 	cout << YELLOW;

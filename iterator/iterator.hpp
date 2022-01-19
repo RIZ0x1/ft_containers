@@ -9,7 +9,7 @@ namespace ft {
 }
 
 template <typename T>
-class iterator
+class iterator : public std::iterator<std::input_iterator_tag, T>
 {
 
 public:

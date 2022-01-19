@@ -33,4 +33,5 @@
 
 # Added by RIZ0x1
 .vscode
-
+ft_out.dSYM
+std_out.dSYM
