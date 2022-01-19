@@ -1,37 +1,34 @@
 CXX		= clang++
-FLGS	= -g #-Wall -Wextra -Werror -std=c++98
-
-NAME		= ft_out std_out
+FLGS	= #-Wall -Wextra -Werror -std=c++98
 
 VECTOR_HDRS	= vector.hpp vector.tpp
+VECTOR_SRCS	= 
+
 ITER_HDRS	= iterator.hpp
+ITER_SRCS	= 
 
-TESTS		= main.cpp
-FT_TESTS	= $(addprefix tests/ft_, $(TESTS))
-STD_TESTS	= $(addprefix tests/std_, $(TESTS))
-
-HDRS		= $(addprefix vector/, $(VECTOR_HDRS)) $(addprefix iterator/, $(ITER_HDRS))
-SRCS		= $(addprefix vector/, $(VECTOR_SRCS)) $(addprefix iterator/, $(ITER_SRCS))
+HDRS		= $(addprefix iterator/, $(ITER_HDRS)) $(addprefix vector/, $(VECTOR_HDRS)) 
+SRCS		= $(addprefix iterator/, $(ITER_SRCS)) $(addprefix vector/, $(VECTOR_SRCS)) 
 OBJS		= $(SRCS:.cpp=.o)
 INCLUDES	= -I vector/ -I iterator/
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re ft std
 
-all: $(NAME)
+all: ft std
 
 clean:
-	rm -f $(OBJS)
-	rm -f std_main.o
-	rm -f ft_main.o
+	rm -f $(OBJS) tests/ft_main.o tests/std_main.o
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f std_out ft_out
 
 re: fclean all
 
-$(NAME): $(OBJS)
-	$(CXX) $(FLGS) $(INCLUDES) $(OBJS) $(STD_TESTS) -o std_out
-	$(CXX) $(FLGS) $(INCLUDES) $(OBJS) $(FT_TESTS) -o ft_out
+ft: $(OBJS) tests/ft_main.o
+	$(CXX) $(FLGS) $(INCLUDES) $(OBJS) tests/ft_main.o -o ft_out
 
-%.o: %.cpp $(HDRS)
+std: $(OBJS) tests/std_main.o
+	$(CXX) $(FLGS) $(INCLUDES) $(OBJS) tests/std_main.o -o std_out
+
+%.o: %.cpp
 	$(CXX) $(INCLUDES) $(FLGS) -c $< -o $@
