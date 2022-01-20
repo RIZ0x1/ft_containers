@@ -12,8 +12,10 @@ namespace ft {
 template < typename T, typename Allocator = std::allocator<T> >
 class vector
 {
-	T			*_array;
-	Allocator	*_alloc;
+	T*			_array;
+	T*			_begin;
+	T*			_end;
+	Allocator*	_alloc;
 	size_t		_capacity;
 
 public:
@@ -60,9 +62,9 @@ public:
 	// ?                               ITERATORS                               *
 	// ? ***********************************************************************
 
-	iterator			begin();
-	iterator 			end();
-	const_iterator		end() const;
+	iterator			begin(void);
+	iterator 			end(void);
+	const_iterator		end(void) const;
 
 	// ? ***********************************************************************
 	// ?                               CAPACITY                                *
@@ -96,6 +98,10 @@ public:
 
 	vector&	operator = (const vector &other);
 	T&		operator [] (size_t pos) const;
+
+private:
+	T*		_get_array(void) const;
+	T*		_copy_array(T *data, const size_t size);
 };
 
 #include "vector.tpp"

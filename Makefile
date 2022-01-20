@@ -1,11 +1,9 @@
 CXX		= clang++
-FLGS	= #-Wall -Wextra -Werror -std=c++98
+FLGS	= -g #-Wall -Wextra -Werror -std=c++98
 
 VECTOR_HDRS	= vector.hpp vector.tpp
-VECTOR_SRCS	= 
 
 ITER_HDRS	= iterator.hpp
-ITER_SRCS	= 
 
 HDRS		= $(addprefix iterator/, $(ITER_HDRS)) $(addprefix vector/, $(VECTOR_HDRS)) 
 SRCS		= $(addprefix iterator/, $(ITER_SRCS)) $(addprefix vector/, $(VECTOR_SRCS)) 

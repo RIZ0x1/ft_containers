@@ -3,6 +3,8 @@
 
 #include "vector.hpp"
 
+#define EMPTY 0
+
 // ? ***************************************************************************
 // ? *                       CONSTRUCTORS & DESTRUCTOR                         *
 // ? ***************************************************************************
@@ -10,9 +12,11 @@
 template <typename T, typename Allocator>
 vector<T, Allocator>::vector()
 {
-	_capacity = 0;
 	_alloc = new Allocator();
-	_array = _alloc->allocate(0);
+	_array = NULL;
+	_begin = _array;
+	_end = _array;
+	_capacity = EMPTY;
 }
 
 template <typename T, typename Allocator>
@@ -24,20 +28,25 @@ vector<T, Allocator>::vector(const vector &other)
 template <typename T, typename Allocator>
 vector<T, Allocator>::vector(const Allocator &alloc)
 {
-	_capacity = 0;
-	_alloc = alloc;
-	_array = _alloc->allocate(0);
+	this->_alloc = alloc;
+	_array = NULL;
+	_begin = _array;
+	_end = _array;
+	_capacity = EMPTY;
 }
 
 template <typename T, typename Allocator>
 vector<T, Allocator>::vector(size_t count, const T& value, const Allocator& alloc)
 {
-	_capacity = count;
 	this->_alloc = new Allocator(alloc);
 	_array = this->_alloc->allocate(count);
+	_begin = _array;
 
-	for (size_t i = 0; i < count; i++)
+	size_t i = 0;
+	for (i = 0; i < count; i++)
 		_array[i] = value;
+	_end = &_array[i];
+	_capacity = i;
 }
 
 template <typename T, typename Allocator> template <typename InputIt>
@@ -49,7 +58,7 @@ vector<T, Allocator>::vector(InputIt first, InputIt last, const Allocator &alloc
 template <typename T, typename Allocator>
 vector<T, Allocator>::~vector()
 {
-	// todo: Allocator
+	_alloc->destroy(_get_array());
 }
 
 // ? ***************************************************************************
@@ -139,7 +148,7 @@ bool	vector<T, Allocator>::empty(void) const
 template <typename T, typename Allocator>
 size_t	vector<T, Allocator>::size(void) const
 {
-
+	return static_cast<size_t>((_end - _begin) / sizeof(T));
 }
 
 template <typename T, typename Allocator>
@@ -157,7 +166,7 @@ void	vector<T, Allocator>::reserve(size_t new_cap)
 template <typename T, typename Allocator>
 size_t	vector<T, Allocator>::capacity(void) const
 {
-	
+	return (_capacity);
 }
 
 // ? ***************************************************************************
@@ -231,20 +240,43 @@ void		vector<T, Allocator>::clear(void)
 // }
 
 // ? ***************************************************************************
-// ? *                                 OPERATORS                               *
+// ? *                               OPERATORS                                 *
 // ? ***************************************************************************
 
 template <typename T, typename Allocator>
 vector<T, Allocator>&	vector<T, Allocator>::operator = (const vector<T, Allocator> &other)
 {
+	this->_array = this->_copy_array(other._get_array(), other.size());
+	this->_begin = this->_array;
+	this->_end = this->_begin + (sizeof(T) * other.size());
+
 	return (*this);
 }
 
 template <typename T, typename Allocator>
 T&	vector<T, Allocator>::operator [] (size_t pos) const
 {
-
+	
 }
 
+// ? ***************************************************************************
+// ? *                            PRIVATE METHODS                              *
+// ? ***************************************************************************
+
+template <typename T, typename Allocator>
+T*	vector<T, Allocator>::_get_array(void) const
+{
+	return (_array);
+}
+
+template <typename T, typename Allocator>
+T*	vector<T, Allocator>::_copy_array(T *array, const size_t size)
+{
+	this->_alloc->destroy(this->_get_array());
+	this->_array = this->_alloc->allocate(size);
+
+	for (size_t i = 0; i < size; i++)
+		this->_array[i] = array[i];
+}
 
 #endif // VECTOR_TPP

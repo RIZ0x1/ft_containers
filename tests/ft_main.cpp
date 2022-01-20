@@ -1,4 +1,3 @@
-#include <vector>
 #include <memory>
 #include <limits>
 #include <iostream>
@@ -23,15 +22,15 @@ template <typename T> void	test(vector<T> v);
 int main()
 {
 	cout << YELLOW;
-	cout << "############### STD_VECTOR ###############\n" << std::endl;
+	cout << "############### FT_VECTOR ###############\n" << std::endl;
 	cout << NORMAL;
 	{
 		// ? CONSTRUCTORS
-		vector<int>				v1_int;
+		//vector<int>				v1_int;
 		vector<int>				v2_int(500);
 		vector<int>				v3_int(0);
 
-		test(v1_int);
+		//test(v1_int);
 		test(v2_int);
 		test(v3_int);
 
@@ -50,7 +49,7 @@ int main()
 
 		// test(tmp);
 
-		// // ? MODIFIERS & CAPACITY
+		// ? MODIFIERS & CAPACITY
 		// v1_int.push_back(INT_MIN);
 		// v1_int.push_back(INT_MAX);
 		// test(v1_int);
@@ -68,13 +67,13 @@ int main()
 		
 	}
 	cout << YELLOW;
-	cout << "################  STD_MAP  ###############\n" << std::endl;
+	cout << "################  FT_MAP  ###############\n" << std::endl;
 	cout << NORMAL;
 	{
 
 	}
 	cout << YELLOW;
-	cout << "################ STD_STACK ###############\n" << std::endl;
+	cout << "################ FT_STACK ###############\n" << std::endl;
 	cout << NORMAL;
 	{
 

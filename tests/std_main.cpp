@@ -3,7 +3,6 @@
 #include <limits>
 #include <iostream>
 
-
 #define NORMAL	"\033[0m"
 #define ORANGE	"\033[31m"
 #define GREEN	"\033[32m"
