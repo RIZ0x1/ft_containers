@@ -4,6 +4,7 @@
 #include <iterator>
 
 namespace ft {
+	
 	class iterator;
 	typedef const iterator const_iterator;
 }
@@ -11,8 +12,11 @@ namespace ft {
 template <typename T>
 class iterator : public std::iterator<std::input_iterator_tag, T>
 {
-
+	T*	_p;
 public:
+	iterator();
+	iterator(const iterator &other);
+	
 
 };
 

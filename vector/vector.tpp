@@ -5,6 +5,11 @@
 
 #define EMPTY 0
 
+using std::cout;
+using std::cerr;
+using std::endl;
+using ft::vector;
+
 // ? ***************************************************************************
 // ? *                       CONSTRUCTORS & DESTRUCTOR                         *
 // ? ***************************************************************************
@@ -80,7 +85,7 @@ void		vector<T, Allocator>::assign(size_t count, const T& value)
 template <typename T, typename Allocator>
 Allocator		vector<T, Allocator>::get_allocator() const
 {
-	
+	return (*_alloc);
 }
 
 // ? ***************************************************************************
@@ -148,13 +153,13 @@ bool	vector<T, Allocator>::empty(void) const
 template <typename T, typename Allocator>
 size_t	vector<T, Allocator>::size(void) const
 {
-	return static_cast<size_t>((_end - _begin) / sizeof(T));
+	return static_cast<size_t>(_end - _begin);
 }
 
 template <typename T, typename Allocator>
 size_t	vector<T, Allocator>::max_size(void) const
 {
-	return (std::numeric_limits<T>::max());
+	return std::numeric_limits<std::ptrdiff_t>::max() / sizeof(T);
 }
 
 template <typename T, typename Allocator>
@@ -176,7 +181,7 @@ size_t	vector<T, Allocator>::capacity(void) const
 template <typename T, typename Allocator>
 void		vector<T, Allocator>::clear(void)
 {
-
+	
 }
 
 // template <typename T, typename Allocator>

@@ -17,7 +17,7 @@
 using std::cout;
 using std::endl;
 
-template <typename T> void	test(vector<T> v);
+template <typename T> void	test(ft::vector<T> v);
 
 int main()
 {
@@ -26,16 +26,16 @@ int main()
 	cout << NORMAL;
 	{
 		// ? CONSTRUCTORS
-		//vector<int>				v1_int;
-		vector<int>				v2_int(500);
-		vector<int>				v3_int(0);
+		// vector<int>				v1_int;
+		ft::vector<int>				v2_int(500);
+		ft::vector<int>				v3_int(0);
 
 		//test(v1_int);
 		test(v2_int);
 		test(v3_int);
 
 		try {
-			vector<int>	v4_int(-1);
+			ft::vector<int>	v4_int(-1);
 		} catch (std::exception &e) {
 			 cout << ORANGE << "EXCEPTION: " << e.what() << endl << endl; 
 		}
@@ -85,7 +85,7 @@ int main()
 #define COLUMNS 10
 
 template <typename T>
-void	test(vector<T> v)
+void	test(ft::vector<T> v)
 {
 	static unsigned int	number = 1;
 
