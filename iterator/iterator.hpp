@@ -1,10 +1,18 @@
 #ifndef ITERATOR_HPP
 # define ITERATOR_HPP
 
+#include <cstddef> // ? <ptrdiff_t>
+
 namespace ft
 {
-	template <typename Category, typename T, typename Distance = ptrdiff_t,
-			  typename Pointer = T*, typename Reference = T&>
+	struct input_iterator_tag {};
+	struct output_iterator_tag {};
+	struct forward_iterator_tag {};
+	struct bidirectional_iterator_tag {};
+	struct random_access_iterator_tag {};
+
+	template <typename Category, typename T, typename Distance = std::ptrdiff_t,
+	typename Pointer = T*, typename Reference = T&>
 	struct iterator
 	{
 		typedef Category	iterator_category;
@@ -13,6 +21,38 @@ namespace ft
 		typedef Pointer		pointer;
 		typedef Reference	reference;
 	};
+
+	template <class Iterator>
+	class iterator_traits
+	{
+		typedef typename Iterator::iterator_category	iterator_category;
+		typedef typename Iterator::value_type			value_type;
+		typedef typename Iterator::difference_type		difference_type;
+		typedef typename Iterator::pointer				pointer;
+		typedef typename Iterator::reference			reference;
+	};
+
+	template <class T>
+	class iterator_traits<T*>
+	{
+		typedef typename random_access_iterator			iterator_category;
+		typedef typename T								value_type;
+		typedef typename std::ptrdiff_t					difference_type;
+		typedef typename T*								pointer;
+		typedef typename T&								reference;
+	};
+
+	template <class T>
+	class iterator_traits<const T*>
+	{
+		typedef typename random_access_iterator			iterator_category;
+		typedef typename T								value_type;
+		typedef typename std::ptrdiff_t					difference_type;
+		typedef const T*								pointer;
+		typedef const T&								reference;
+	};
 }
+
+#include "iterator.tpp"
 
 #endif // ITERATOR_HPP
