@@ -10,19 +10,27 @@ namespace ft {
 	template < typename T, typename Allocator = std::allocator<T> >
 	class vector
 	{
-		T*			_array;
-		T*			_begin;	// todo: uint_ptr
-		T*			_end;	// todo: uint_ptr
-		Allocator*	_alloc;
-		size_t		_capacity;
-
 	public:
-		// ? ***********************************************************************
-		// ?                              TYPEDEFS                                 *
-		// ? ***********************************************************************
+		typedef T											value_type;
+		typedef Allocator									allocator_type;
+		typedef typename allocator_type::reference			reference;
+		typedef typename allocator_type::const_reference	const_reference;
+		typedef typename allocator_type::pointer			pointer;
+		typedef typename allocator_type::const_pointer		const_pointer;
+		typedef typename allocator_type::size_type			size_type;
+		typedef typename allocator_type::difference_type	difference_type;
 
-		typedef ft::iterator		iterator;
-		typedef ft::const_iterator	const_iterator;
+		typedef typename ft::iterator<value_type>				iterator;
+		typedef typename ft::const_iterator<const value_type>	const_iterator;
+		typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
+		typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
+
+	private:
+		pointer				_array;
+		value_type*			_begin;
+		value_type*			_end;
+		allocator_type*		_alloc;
+		size_type			_capacity;
 
 		// ? ***********************************************************************
 		// ?                      CONSTRUCTORS & DESTRUCTOR                        *
@@ -30,16 +38,16 @@ namespace ft {
 
 		vector();
 		vector(const vector &other);
-		explicit vector(const Allocator &alloc);
-		explicit vector(size_t count, const T &value = T(), const Allocator &alloc = Allocator());
-		template <class InputIt> vector(InputIt first, InputIt last, const Allocator &alloc = Allocator());
+		explicit vector(const allocator_type &alloc);
+		explicit vector(size_type count, const value_type &value = value_type(), const allocator_type &alloc = allocator_type());
+		template <class InputIt> vector(InputIt first, InputIt last, const allocator_type &alloc = allocator_type());
 		~vector();
 
 		// ? ***********************************************************************
 		// ?                            MEMBER FUNCTIONS                           *
 		// ? ***********************************************************************
 
-		void		assign(size_t count, const T& value);
+		void		assign(size_type count, const value_type& value);
 		template <class InputIt> void	assign(InputIt first, InputIt last);
 		Allocator	get_allocator() const; // TODO: returns the allocator associated with the container
 
@@ -47,14 +55,14 @@ namespace ft {
 		// ?                             ELEMENT ACCESS                            *
 		// ? ***********************************************************************
 
-		T&			front(void);
-		const T&	front(void) const;
-		T&			back(void);
-		const T&	back(void) const;
-		T&			at(size_t pos); // TODO: returns _array[pos] with bounds checking
-		const T&	at(size_t pos) const;
-		T*			data(void); // TODO: returns a pointer to _array[0]
-		const T*	data(void) const;
+		value_type&			front(void);
+		const value_type&	front(void) const;
+		value_type&			back(void);
+		const value_type&	back(void) const;
+		value_type&			at(size_type pos); // TODO: returns _array[pos] with bounds checking
+		const value_type&	at(size_type pos) const;
+		value_type*			data(void); // TODO: returns a pointer to _array[0]
+		const value_type*	data(void) const;
 
 		// ? ***********************************************************************
 		// ?                               ITERATORS                               *
@@ -69,10 +77,10 @@ namespace ft {
 		// ? ***********************************************************************
 
 		bool	empty(void) const; // TODO: is empty
-		size_t	size(void) const; // TODO: returns the nbr of elems in the cont (std::distance)
-		size_t	max_size(void) const; // TODO: returns the max nbr of elems the cont is able to hold due system (std::distance)
-		void	reserve(size_t new_cap); // TODO: https://en.cppreference.com/w/cpp/container/vector/reserve
-		size_t	capacity(void) const; // TODO: returns the nbr of elems that the cont has currently allocated space for
+		size_type	size(void) const; // TODO: returns the nbr of elems in the cont (std::distance)
+		size_type	max_size(void) const; // TODO: returns the max nbr of elems the cont is able to hold due system (std::distance)
+		void	reserve(size_type new_cap); // TODO: https://en.cppreference.com/w/cpp/container/vector/reserve
+		size_type	capacity(void) const; // TODO: returns the nbr of elems that the cont has currently allocated space for
 
 		// ? ***********************************************************************
 		// ?                               MODIFIERS                               *
@@ -83,10 +91,10 @@ namespace ft {
 		// iterator<T>	erase(iterator<T> first, iterator<T> last); // TODO: Removes the elements in the range [first, last)
 		// void		push_back(const T& value); // TODO: The new element is initialized as a copy of value
 		// void		pop_back(void); // TODO: Removes the last element of the container
-		// void		resize(size_t count); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize
-		// void		resize(size_t count, T value = T()); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize
+		// void		resize(size_type count); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize
+		// void		resize(size_type count, T value = T()); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize
 		// void		swap(vector& other); // TODO: https://en.cppreference.com/w/cpp/container/vector/swap
-		//void		insert(iterator<T> pos, size_t count, const T& value); // TODO: inserts value before pos
+		//void		insert(iterator<T> pos, size_type count, const T& value); // TODO: inserts value before pos
 		// typename iterator<T>	insert(iterator<T> pos, const T& value); // TODO: inserts value before pos
 		// template<class InputIt> void insert( iterator<T> pos, InputIt first, InputIt last ); // TODO: https://en.cppreference.com/w/cpp/container/vector/insert
 
@@ -95,11 +103,11 @@ namespace ft {
 		// ? ***********************************************************************
 
 		vector&	operator = (const vector &other);
-		T&		operator [] (size_t pos) const;
+		value_type&		operator [] (size_type pos) const;
 
 	private:
-		T*		_get_array(void) const;
-		T*		_copy_array(T *data, const size_t size);
+		value_type*		_get_array(void) const;
+		value_type*		_copy_array(value_type *data, const size_type size);
 	};
 }
 

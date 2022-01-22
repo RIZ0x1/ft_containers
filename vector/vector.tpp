@@ -5,7 +5,6 @@
 
 #define EMPTY 0
 
-using std::cout;
 using std::cerr;
 using std::endl;
 using ft::vector;
@@ -14,24 +13,24 @@ using ft::vector;
 // ? *                       CONSTRUCTORS & DESTRUCTOR                         *
 // ? ***************************************************************************
 
-template <typename T, typename Allocator>
-vector<T, Allocator>::vector()
+template <typename value_type, typename allocator_type>
+vector<value_type, allocator_type>::vector()
 {
-	_alloc = new Allocator();
+	_alloc = new allocator_type();
 	_array = NULL;
 	_begin = _array;
 	_end = _array;
 	_capacity = EMPTY;
 }
 
-template <typename T, typename Allocator>
-vector<T, Allocator>::vector(const vector &other)
+template <typename value_type, typename allocator_type>
+vector<value_type, allocator_type>::vector(const vector &other)
 {
 	operator=(other);
 }
 
-template <typename T, typename Allocator>
-vector<T, Allocator>::vector(const Allocator &alloc)
+template <typename value_type, typename allocator_type>
+vector<value_type, allocator_type>::vector(const allocator_type &alloc)
 {
 	this->_alloc = alloc;
 	_array = NULL;
@@ -40,8 +39,8 @@ vector<T, Allocator>::vector(const Allocator &alloc)
 	_capacity = EMPTY;
 }
 
-template <typename T, typename Allocator>
-vector<T, Allocator>::vector(size_t count, const T& value, const Allocator& alloc)
+template <typename value_type, typename allocator_type>
+vector<value_type, allocator_type>::vector(size_type count, const value_type& value, const allocator_type& alloc)
 {
 	this->_alloc = new Allocator(alloc);
 	_array = this->_alloc->allocate(count);
@@ -54,14 +53,14 @@ vector<T, Allocator>::vector(size_t count, const T& value, const Allocator& allo
 	_capacity = i;
 }
 
-template <typename T, typename Allocator> template <typename InputIt>
-vector<T, Allocator>::vector(InputIt first, InputIt last, const Allocator &alloc)
+template <typename value_type, typename allocator_type> template <typename InputIt>
+vector<value_type, allocator_type>::vector(InputIt first, InputIt last, const allocator_type &alloc)
 {
 
 }
 
-template <typename T, typename Allocator>
-vector<T, Allocator>::~vector()
+template <typename value_type, typename allocator_type>
+vector<value_type, allocator_type>::~vector()
 {
 	_alloc->destroy(_get_array());
 }
