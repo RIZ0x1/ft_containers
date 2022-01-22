@@ -5,13 +5,13 @@
 
 #define EMPTY 0
 
-using std::cerr;
-using std::endl;
-using ft::vector;
-
 // ? ***************************************************************************
 // ? *                       CONSTRUCTORS & DESTRUCTOR                         *
 // ? ***************************************************************************
+
+using std::cerr;
+using std::endl;
+using ft::vector;
 
 template <typename value_type, typename allocator_type>
 vector<value_type, allocator_type>::vector()
@@ -69,20 +69,20 @@ vector<value_type, allocator_type>::~vector()
 // ? *                             MEMBER FUNCTIONS                            *
 // ? ***************************************************************************
 
-template <typename T, typename Allocator> template <typename InputIt>
-void	vector<T, Allocator>::assign(InputIt first, InputIt last)
+template <typename value_type, typename allocator_type> template <typename InputIt>
+void	vector<value_type, allocator_type>::assign(InputIt first, InputIt last)
 {
 
 }
 
-template <typename T, typename Allocator>
-void		vector<T, Allocator>::assign(size_t count, const T& value)
+template <typename value_type, typename allocator_type>
+void		vector<value_type, allocator_type>::assign(size_type count, const value_type& value)
 {
 
 }
 
-template <typename T, typename Allocator>
-Allocator		vector<T, Allocator>::get_allocator() const
+template <typename value_type, typename allocator_type>
+allocator_type	vector<value_type, allocator_type>::get_allocator() const
 {
 	return (*_alloc);
 }
@@ -91,50 +91,50 @@ Allocator		vector<T, Allocator>::get_allocator() const
 // ? *                              ELEMENT ACCESS                             *
 // ? ***************************************************************************
 
-template <typename T, typename Allocator>
-T&	vector<T, Allocator>::front(void)
+template <typename value_type, typename allocator_type>
+value_type&	vector<value_type, allocator_type>::front(void)
 {
 
 }
 
-template <typename T, typename Allocator>
-const T&	vector<T, Allocator>::front(void) const
+template <typename value_type, typename allocator_type>
+const value_type&	vector<value_type, allocator_type>::front(void) const
 {
 
 }
 
-template <typename T, typename Allocator>
-T&	vector<T, Allocator>::back(void)
+template <typename value_type, typename allocator_type>
+value_type&	vector<value_type, allocator_type>::back(void)
 {
 
 }
 
-template <typename T, typename Allocator>
-const T&	vector<T, Allocator>::back(void) const
+template <typename value_type, typename allocator_type>
+const value_type&	vector<value_type, allocator_type>::back(void) const
 {
 
 }
 
-template <typename T, typename Allocator>
-T&	vector<T, Allocator>::at(size_t pos)
+template <typename value_type, typename allocator_type>
+value_type&	vector<value_type, allocator_type>::at(size_type pos)
 {
 
 }
 
-template <typename T, typename Allocator>
-const T&	vector<T, Allocator>::at(size_t pos) const
+template <typename value_type, typename allocator_type>
+const value_type&	vector<value_type, allocator_type>::at(size_type pos) const
 {
 
 }
 
-template <typename T, typename Allocator>
-T*	vector<T, Allocator>::data(void)
+template <typename value_type, typename allocator_type>
+value_type*	vector<value_type, allocator_type>::data(void)
 {
 
 }
 
-template <typename T, typename Allocator>
-const T*	vector<T, Allocator>::data(void) const
+template <typename value_type, typename allocator_type>
+const value_type*	vector<value_type, allocator_type>::data(void) const
 {
 
 }
@@ -143,32 +143,32 @@ const T*	vector<T, Allocator>::data(void) const
 // ? *                                 CAPACITY                                *
 // ? ***************************************************************************
 
-template <typename T, typename Allocator>
-bool	vector<T, Allocator>::empty(void) const
+template <typename value_type, typename allocator_type>
+bool	vector<value_type, allocator_type>::empty(void) const
 {
 
 }
 
-template <typename T, typename Allocator>
-size_t	vector<T, Allocator>::size(void) const
+template <typename value_type, typename allocator_type>
+size_type	vector<value_type, allocator_type>::size(void) const
 {
 	return static_cast<size_t>(_end - _begin);
 }
 
-template <typename T, typename Allocator>
-size_t	vector<T, Allocator>::max_size(void) const
+template <typename value_type, typename allocator_type>
+size_t	vector<value_type, allocator_type>::max_size(void) const
 {
 	return std::numeric_limits<std::ptrdiff_t>::max() / sizeof(T);
 }
 
-template <typename T, typename Allocator>
-void	vector<T, Allocator>::reserve(size_t new_cap)
+template <typename value_type, typename allocator_type>
+void	vector<value_type, allocator_type>::reserve(size_t new_cap)
 {
 
 }
 
-template <typename T, typename Allocator>
-size_t	vector<T, Allocator>::capacity(void) const
+template <typename value_type, typename allocator_type>
+size_t	vector<value_type, allocator_type>::capacity(void) const
 {
 	return (_capacity);
 }
@@ -177,67 +177,67 @@ size_t	vector<T, Allocator>::capacity(void) const
 // ? *                                 MODIFIERS                               *
 // ? ***************************************************************************
 
-template <typename T, typename Allocator>
-void		vector<T, Allocator>::clear(void)
+template <typename value_type, typename allocator_type>
+void		vector<value_type, allocator_type>::clear(void)
 {
 	
 }
 
-// template <typename T, typename Allocator>
+// template <typename value_type, typename allocator_type>
 // iterator<T>	erase(iterator<T> pos)
 // {
 
 // }
 
-// template <typename T, typename Allocator>
+// template <typename value_type, typename allocator_type>
 // iterator<T>	erase(iterator<T> first, iterator<T> last)
 // {
 
 // }
 
-// template <typename T, typename Allocator>
-// void		push_back(const T& value)
+// template <typename value_type, typename allocator_type>
+// void		push_back(const value_type& value)
 // {
 
 // }
 
-// template <typename T, typename Allocator>
+// template <typename value_type, typename allocator_type>
 // void		pop_back(void)
 // {
 
 // }
 
-// template <typename T, typename Allocator>
+// template <typename value_type, typename allocator_type>
 // void		resize(size_t count)
 // {
 
 // }
 
-// template <typename T, typename Allocator>
+// template <typename value_type, typename allocator_type>
 // void		resize(size_t count, T value = T())
 // {
 
 // }
 
-// template <typename T, typename Allocator>
-// void		vector<T, Allocator>::swap(vector<T, Allocator> &other)
+// template <typename value_type, typename allocator_type>
+// void		vector<value_type, allocator_type>::swap(vector<T, Allocator> &other)
 // {
 
 // }
 
-// template <typename T, typename Allocator>
+// template <typename value_type, typename allocator_type>
 // iterator<T>	insert(iterator<T> pos, const T& value)
 // {
 
 // }
 
-// template <typename T, typename Allocator> template <typename InputIt>
-// void	vector<T, Allocator>::insert(iterator<T> pos, InputIt first, InputIt last)
+// template <typename value_type, typename allocator_type> template <typename InputIt>
+// void	vector<value_type, allocator_type>::insert(iterator<T> pos, InputIt first, InputIt last)
 // {
 
 // }
 
-// template <typename T, typename Allocator>
+// template <typename value_type, typename allocator_type>
 // void		insert(iterator<T> pos, size_t count, const T& value)
 // {
 
@@ -247,8 +247,8 @@ void		vector<T, Allocator>::clear(void)
 // ? *                               OPERATORS                                 *
 // ? ***************************************************************************
 
-template <typename T, typename Allocator>
-vector<T, Allocator>&	vector<T, Allocator>::operator = (const vector<T, Allocator> &other)
+template <typename value_type, typename allocator_type>
+vector<T, Allocator>&	vector<value_type, allocator_type>::operator = (const vector<T, Allocator> &other)
 {
 	this->_array = this->_copy_array(other._get_array(), other.size());
 	this->_begin = this->_array;
@@ -257,8 +257,8 @@ vector<T, Allocator>&	vector<T, Allocator>::operator = (const vector<T, Allocato
 	return (*this);
 }
 
-template <typename T, typename Allocator>
-T&	vector<T, Allocator>::operator [] (size_t pos) const
+template <typename value_type, typename allocator_type>
+T&	vector<value_type, allocator_type>::operator [] (size_t pos) const
 {
 	
 }
@@ -267,14 +267,14 @@ T&	vector<T, Allocator>::operator [] (size_t pos) const
 // ? *                            PRIVATE METHODS                              *
 // ? ***************************************************************************
 
-template <typename T, typename Allocator>
-T*	vector<T, Allocator>::_get_array(void) const
+template <typename value_type, typename allocator_type>
+T*	vector<value_type, allocator_type>::_get_array(void) const
 {
 	return (_array);
 }
 
-template <typename T, typename Allocator>
-T*	vector<T, Allocator>::_copy_array(T *array, const size_t size)
+template <typename value_type, typename allocator_type>
+T*	vector<value_type, allocator_type>::_copy_array(T *array, const size_t size)
 {
 	this->_alloc->destroy(this->_get_array());
 	this->_array = this->_alloc->allocate(size);

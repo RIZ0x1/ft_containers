@@ -76,10 +76,10 @@ namespace ft {
 		// ?                               CAPACITY                                *
 		// ? ***********************************************************************
 
-		bool	empty(void) const; // TODO: is empty
+		bool		empty(void) const; // TODO: is empty
 		size_type	size(void) const; // TODO: returns the nbr of elems in the cont (std::distance)
 		size_type	max_size(void) const; // TODO: returns the max nbr of elems the cont is able to hold due system (std::distance)
-		void	reserve(size_type new_cap); // TODO: https://en.cppreference.com/w/cpp/container/vector/reserve
+		void		reserve(size_type new_cap); // TODO: https://en.cppreference.com/w/cpp/container/vector/reserve
 		size_type	capacity(void) const; // TODO: returns the nbr of elems that the cont has currently allocated space for
 
 		// ? ***********************************************************************
@@ -102,8 +102,8 @@ namespace ft {
 		// ?                               OPERATORS                               *
 		// ? ***********************************************************************
 
-		vector&	operator = (const vector &other);
-		value_type&		operator [] (size_type pos) const;
+		vector&		operator = (const vector &other);
+		value_type&	operator [] (size_type pos) const;
 
 	private:
 		value_type*		_get_array(void) const;
