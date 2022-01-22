@@ -1,23 +1,18 @@
 #ifndef ITERATOR_HPP
 # define ITERATOR_HPP
 
-#include <iterator>
-
-namespace ft {
-	
-	class iterator;
-	typedef const iterator const_iterator;
-}
-
-template <typename T>
-class iterator : public std::iterator<std::input_iterator_tag, T>
+namespace ft
 {
-	T*	_p;
-public:
-	iterator();
-	iterator(const iterator &other);
-	
-
-};
+	template <typename Category, typename T, typename Distance = ptrdiff_t,
+			  typename Pointer = T*, typename Reference = T&>
+	struct iterator
+	{
+		typedef Category	iterator_category;
+		typedef T			value_type;
+		typedef Distance	difference_type;
+		typedef Pointer		pointer;
+		typedef Reference	reference;
+	};
+}
 
 #endif // ITERATOR_HPP
