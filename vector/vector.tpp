@@ -150,25 +150,25 @@ bool	vector<value_type, allocator_type>::empty(void) const
 }
 
 template <typename value_type, typename allocator_type>
-size_type	vector<value_type, allocator_type>::size(void) const
+ft::vector<value_type, allocator_type>::size_type	vector<value_type, allocator_type>::size(void) const
 {
 	return static_cast<size_t>(_end - _begin);
 }
 
 template <typename value_type, typename allocator_type>
-size_t	vector<value_type, allocator_type>::max_size(void) const
+ft::vector<value_type, allocator_type>::size_type	vector<value_type, allocator_type>::max_size(void) const
 {
 	return std::numeric_limits<std::ptrdiff_t>::max() / sizeof(T);
 }
 
 template <typename value_type, typename allocator_type>
-void	vector<value_type, allocator_type>::reserve(size_t new_cap)
+void	vector<value_type, allocator_type>::reserve(size_type new_cap)
 {
 
 }
 
 template <typename value_type, typename allocator_type>
-size_t	vector<value_type, allocator_type>::capacity(void) const
+ft::vector<value_type, allocator_type>::size_type	vector<value_type, allocator_type>::capacity(void) const
 {
 	return (_capacity);
 }
@@ -248,7 +248,7 @@ void		vector<value_type, allocator_type>::clear(void)
 // ? ***************************************************************************
 
 template <typename value_type, typename allocator_type>
-vector<T, Allocator>&	vector<value_type, allocator_type>::operator = (const vector<T, Allocator> &other)
+vector<value_type, allocator_type>&	vector<value_type, allocator_type>::operator = (const vector<value_type, allocator_type> &other)
 {
 	this->_array = this->_copy_array(other._get_array(), other.size());
 	this->_begin = this->_array;
@@ -258,7 +258,7 @@ vector<T, Allocator>&	vector<value_type, allocator_type>::operator = (const vect
 }
 
 template <typename value_type, typename allocator_type>
-T&	vector<value_type, allocator_type>::operator [] (size_t pos) const
+value_type&	vector<value_type, allocator_type>::operator [] (size_type pos) const
 {
 	
 }
@@ -268,13 +268,13 @@ T&	vector<value_type, allocator_type>::operator [] (size_t pos) const
 // ? ***************************************************************************
 
 template <typename value_type, typename allocator_type>
-T*	vector<value_type, allocator_type>::_get_array(void) const
+value_type*	vector<value_type, allocator_type>::_get_array(void) const
 {
 	return (_array);
 }
 
 template <typename value_type, typename allocator_type>
-T*	vector<value_type, allocator_type>::_copy_array(T *array, const size_t size)
+value_type*	vector<value_type, allocator_type>::_copy_array(value_type *array, const size_type size)
 {
 	this->_alloc->destroy(this->_get_array());
 	this->_array = this->_alloc->allocate(size);
