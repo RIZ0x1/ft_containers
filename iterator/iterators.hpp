@@ -19,10 +19,10 @@ namespace ft
 		pointer	_ptr;
 
 	public:
-		bool							operator == (const forward_iterator<value_type> &other) const;
-		value_type						operator *	(void) const;
-		value_type						operator ++ (void);
-		value_type						operator ++ (int);
+		bool			operator == (const forward_iterator<value_type> &other) const;
+		value_type		operator *	(void) const;
+		value_type		operator ++ (void);
+		value_type		operator ++ (int);
 	};
 
 	template <typename T>
@@ -31,15 +31,23 @@ namespace ft
 	public:
 		typedef typename forward_iterator<T>::value_type value_type;
 	public:
-		value_type			operator --(void);
-		value_type			operator --(int);
+		value_type			operator -- (void);
+		value_type			operator -- (int);
 	};
 
 	template <typename T>
 	class random_access_iterator : public random_access_iterator<T>
 	{
 	public:
-		
+		bool		operator < (const random_access_iterator &other);
+		bool		operator > (const random_access_iterator &other);
+		bool		operator <= (const random_access_iterator &other);
+		bool		operator >= (const random_access_iterator &other);
+
+		random_access_iterator	operator += (const iterator::difference_type);
+		random_access_iterator	operator -= (const iterator::difference_type);
+		random_access_iterator	operator - (const iterator::difference_type);
+
 	};
 }
 
