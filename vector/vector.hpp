@@ -4,7 +4,7 @@
 #include <memory>
 #include <limits>
 #include <iostream>
-#include "iterators_core.hpp"
+#include "iterators.hpp"
 
 namespace ft {
 	template < typename T, typename Allocator = std::allocator<T> >
@@ -20,8 +20,8 @@ namespace ft {
 		typedef typename allocator_type::size_type			size_type;
 		typedef typename allocator_type::difference_type	difference_type;
 
-		typedef typename ft::iterator<value_type>				iterator;
-		typedef typename ft::const_iterator<const value_type>	const_iterator;
+        typedef typename ft::random_access_iterator<value_type>				iterator;
+        typedef typename ft::const_random_access_iterator<const value_type>	const_iterator;
 		typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
 		typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
