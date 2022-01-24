@@ -15,11 +15,11 @@ namespace ft
 	typename Pointer = T*, typename Reference = T&>
 	struct iterator
 	{
-		typedef typename iterator<Category, T, Distance, Pointer, Reference>::Category	iterator_category;
-		typedef typename iterator<Category, T, Distance, Pointer, Reference>::T			value_type;
-		typedef typename iterator<Category, T, Distance, Pointer, Reference>::Distance	difference_type;
-		typedef typename iterator<Category, T, Distance, Pointer, Reference>::Pointer	pointer;
-		typedef typename iterator<Category, T, Distance, Pointer, Reference>::Reference	reference;
+        typedef Category	iterator_category;
+        typedef T			value_type;
+        typedef Distance	difference_type;
+        typedef Pointer     pointer;
+        typedef Reference	reference;
 	};
 
 	template <class Iterator>

@@ -36,19 +36,27 @@ namespace ft
 	};
 
 	template <typename T>
-	class random_access_iterator : public random_access_iterator<T>
+    class random_access_iterator : public bidirectional_iterator<T>
 	{
+    public:
+        typedef typename forward_iterator<T>::difference_type difference_type;
+
 	public:
 		bool		operator < (const random_access_iterator &other);
 		bool		operator > (const random_access_iterator &other);
 		bool		operator <= (const random_access_iterator &other);
 		bool		operator >= (const random_access_iterator &other);
 
-		random_access_iterator	operator += (const iterator::difference_type);
-		random_access_iterator	operator -= (const iterator::difference_type);
-		random_access_iterator	operator - (const iterator::difference_type);
-
+        random_access_iterator	operator += (const difference_type N);
+        random_access_iterator	operator -= (const difference_type N);
+        random_access_iterator	operator + (const difference_type N);
+        random_access_iterator	operator - (const difference_type N);
 	};
+
+    template <typename T>
+    class const_random_access_iterator : public random_access_iterator<const T>
+    {
+    };
 }
 
 #include "iterators.tpp"
