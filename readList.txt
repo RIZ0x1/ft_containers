@@ -1,6 +1,3 @@
-std::allocator
-iterators_traits
-reverse_iterator
 enable_if
 is_integral
 equal/lexicographical compare

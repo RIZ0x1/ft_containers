@@ -35,3 +35,7 @@
 .vscode
 ft_out.dSYM
 std_out.dSYM
+qt-creator-build
+cllion-build
+CMakeLists.txt.user
+.idea

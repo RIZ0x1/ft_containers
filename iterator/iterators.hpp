@@ -41,11 +41,16 @@ namespace ft
 		typedef typename forward_iterator<T>::value_type	value_type;
 		typedef bidirectional_iterator<T>					iterator;
 	public:
-		virtual iterator	operator -- (void);
-		virtual iterator	operator -- (int);
+		virtual iterator	    operator -- (void);
+		virtual const iterator	operator -- (int);
 	};
 
-	template <typename T>
+    template <typename T>
+    class const_bidirectional_iterator : public bidirectional_iterator<const T>
+    {
+    };
+
+    template <typename T>
 	class reverse_bidirectional_iterator : public bidirectional_iterator<T>
 	{
 	public:
@@ -56,11 +61,6 @@ namespace ft
 		virtual iterator	operator ++ (int);
 		virtual iterator	operator -- (void);
 		virtual iterator	operator -- (int);
-	};
-
-	template <typename T>
-	class const_bidirectional_iterator : public bidirectional_iterator<const T>
-	{
 	};
 
 	// ? ***************************************************************
