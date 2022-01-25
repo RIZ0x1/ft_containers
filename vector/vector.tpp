@@ -42,7 +42,7 @@ vector<value_type, allocator_type>::vector(const allocator_type &alloc)
 template <typename value_type, typename allocator_type>
 vector<value_type, allocator_type>::vector(size_type count, const value_type& value, const allocator_type& alloc)
 {
-	this->_alloc = new Allocator(alloc);
+    this->_alloc = new allocator_type(alloc);
 	_array = this->_alloc->allocate(count);
 	_begin = _array;
 

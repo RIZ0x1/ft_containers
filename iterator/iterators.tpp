@@ -13,13 +13,13 @@ bool	forward_iterator<value_type>::operator == (const forward_iterator<value_typ
 }
 
 template <typename value_type>
-forward_iterator<value_type>::value_type	forward_iterator<value_type>::operator * (void) const
+typename forward_iterator<value_type>::value_type	forward_iterator<value_type>::operator * (void) const
 {
 	return (*ptr);
 }
 
 template <typename value_type>
-forward_iterator<value_type>::value_type	forward_iterator<value_type>::operator ++ (void)
+typename forward_iterator<value_type>::value_type	forward_iterator<value_type>::operator ++ (void)
 {
 	pointer	tmp;
 
@@ -29,7 +29,7 @@ forward_iterator<value_type>::value_type	forward_iterator<value_type>::operator 
 }
 
 template <typename value_type>
-forward_iterator<value_type>::value_type	forward_iterator<value_type>::operator ++ (int)
+typename forward_iterator<value_type>::value_type	forward_iterator<value_type>::operator ++ (int)
 {
 	(_ptr++);
 	return (*_ptr);
@@ -42,13 +42,13 @@ forward_iterator<value_type>::value_type	forward_iterator<value_type>::operator 
 using ft::bidirectional_iterator;
 
 template <typename value_type>
-bidirectional_iterator<value_type>::value_type bidirectional_iterator<value_type>::operator -- (void)
+typename bidirectional_iterator<value_type>::value_type bidirectional_iterator<value_type>::operator -- (void)
 {
 
 }
 
 template <typename value_type>
-bidirectional_iterator<value_type>::value_type bidirectional_iterator<value_type>::operator -- (int)
+typename bidirectional_iterator<value_type>::value_type bidirectional_iterator<value_type>::operator -- (int)
 {
 	
 }
