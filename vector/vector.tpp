@@ -150,15 +150,15 @@ bool	vector<value_type, allocator_type>::empty(void) const
 }
 
 template <typename value_type, typename allocator_type>
-ft::vector<value_type, allocator_type>::size_type	vector<value_type, allocator_type>::size(void) const
+typename ft::vector<value_type, allocator_type>::size_type	vector<value_type, allocator_type>::size(void) const
 {
 	return static_cast<size_t>(_end - _begin);
 }
 
 template <typename value_type, typename allocator_type>
-ft::vector<value_type, allocator_type>::size_type	vector<value_type, allocator_type>::max_size(void) const
+typename ft::vector<value_type, allocator_type>::size_type	vector<value_type, allocator_type>::max_size(void) const
 {
-	return std::numeric_limits<std::ptrdiff_t>::max() / sizeof(T);
+	return std::numeric_limits<std::ptrdiff_t>::max() / sizeof(value_type);
 }
 
 template <typename value_type, typename allocator_type>
@@ -168,7 +168,7 @@ void	vector<value_type, allocator_type>::reserve(size_type new_cap)
 }
 
 template <typename value_type, typename allocator_type>
-ft::vector<value_type, allocator_type>::size_type	vector<value_type, allocator_type>::capacity(void) const
+typename ft::vector<value_type, allocator_type>::size_type	vector<value_type, allocator_type>::capacity(void) const
 {
 	return (_capacity);
 }
@@ -252,7 +252,7 @@ vector<value_type, allocator_type>&	vector<value_type, allocator_type>::operator
 {
 	this->_array = this->_copy_array(other._get_array(), other.size());
 	this->_begin = this->_array;
-	this->_end = this->_begin + (sizeof(T) * other.size());
+	this->_end = this->_begin + (sizeof(value_type) * other.size());
 
 	return (*this);
 }

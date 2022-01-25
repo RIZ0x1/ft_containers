@@ -21,9 +21,9 @@ namespace ft {
 		typedef typename allocator_type::difference_type	difference_type;
 
         typedef typename ft::random_access_iterator<value_type>				iterator;
-        typedef typename ft::const_random_access_iterator<const value_type>	const_iterator;
-		typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
-		typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
+		typedef typename ft::const_random_access_iterator<value_type>		const_iterator;
+		typedef typename ft::reverse_random_access_iterator<value_type>		reverse_iterator;
+		typedef typename ft::reverse_random_access_iterator<value_type>		const_reverse_iterator;
 
 	private:
 		pointer				_array;
@@ -35,7 +35,7 @@ namespace ft {
 		// ? ***********************************************************************
 		// ?                      CONSTRUCTORS & DESTRUCTOR                        *
 		// ? ***********************************************************************
-
+	public:
 		vector();
 		vector(const vector &other);
 		explicit vector(const allocator_type &alloc);
