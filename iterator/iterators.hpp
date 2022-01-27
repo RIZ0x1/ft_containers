@@ -6,11 +6,11 @@
 namespace ft
 {
 	// ? ***************************************************************
-	// ? *                          FORWARD                            *
+	// ? *                       VECTOR ITERATOR                       *
 	// ? ***************************************************************
 
 	template <typename T>
-	class forward_iterator : public iterator<forward_iterator_tag, T>
+	class contiguous_iterator : public iterator_traits< iterator<random_access_iterator_tag, T> >
 	{
 	public:
 		typedef typename iterator<forward_iterator_tag, T>::Category		iterator_category;
@@ -18,24 +18,38 @@ namespace ft
 		typedef typename iterator<forward_iterator_tag, T>::difference_type	difference_type;
 		typedef typename iterator<forward_iterator_tag, T>::pointer			pointer;
 		typedef typename iterator<forward_iterator_tag, T>::reference		reference;
-		typedef forward_iterator<T>											iterator;
+		typedef contiguous_iterator<T>										iterator;
 
 	protected:
-		pointer	_ptr;
-
+		pointer _ptr;
 	public:
-		bool					operator == (const forward_iterator<value_type> &other) const;
-		value_type				operator *	(void) const;
-		virtual iterator		operator ++ (void);
+		contiguous_iterator();
+		contiguous_iterator(const iterator& other);
+		~contiguous_iterator();
+
+		bool						operator == (const iterator &other) const;
+		value_type					operator *	(void) const;
+		bool						operator < (const iterator &other);
+		bool						operator > (const iterator &other);
+		bool						operator <= (const iterator &other);
+		bool						operator >= (const iterator &other);
+		virtual iterator			operator + (const difference_type N);
+		virtual iterator			operator - (const difference_type N);
+		virtual iterator			operator ++ (void);
 		virtual const iterator		operator ++ (int);
+		virtual iterator			operator -- (void);
+		virtual const iterator		operator -- (int);
+		virtual iterator			operator += (const difference_type N);
+		virtual iterator			operator -= (const difference_type N);
 	};
 
-	// ? ***************************************************************
-	// ? *                       BIDIRECTIONAL                         *
-	// ? ***************************************************************
+	template <typename T>
+	class const_contiguous_iterator : public contiguous_iterator<const T>
+	{
+	};
 
 	template <typename T>
-	class bidirectional_iterator : public forward_iterator<T>
+	class reverse_contiguous_iterator : public contiguous_iterator<T>
 	{
 	public:
 		typedef typename iterator<forward_iterator_tag, T>::Category		iterator_category;
@@ -43,81 +57,27 @@ namespace ft
 		typedef typename iterator<forward_iterator_tag, T>::difference_type	difference_type;
 		typedef typename iterator<forward_iterator_tag, T>::pointer			pointer;
 		typedef typename iterator<forward_iterator_tag, T>::reference		reference;
-		typedef bidirectional_iterator<T>									iterator;
-	public:
-		virtual iterator	    operator -- (void);
-		virtual const iterator	operator -- (int);
-	};
+		typedef reverse_contiguous_iterator								    iterator;
 
-    template <typename T>
-	class reverse_bidirectional_iterator : public bidirectional_iterator<T>
-	{
 	public:
-		typedef typename iterator<forward_iterator_tag, T>::Category		iterator_category;
-		typedef typename iterator<forward_iterator_tag, T>::value_type		value_type;
-		typedef typename iterator<forward_iterator_tag, T>::difference_type	difference_type;
-		typedef typename iterator<forward_iterator_tag, T>::pointer			pointer;
-		typedef typename iterator<forward_iterator_tag, T>::reference		reference;
-		typedef reverse_bidirectional_iterator<T>							iterator;
-	public:
-		iterator		operator ++ (void);
-		const iterator	operator ++ (int);
-		iterator		operator -- (void);
-		const iterator	operator -- (int);
+		reverse_contiguous_iterator();
+		reverse_contiguous_iterator(const iterator& other);
+		~reverse_contiguous_iterator();
+
+		iterator			operator + (const difference_type N);
+		iterator			operator - (const difference_type N);
+		iterator			operator ++ (void);
+		const iterator		operator ++ (int);
+		iterator			operator -- (void);
+		const iterator		operator -- (int);
+		iterator			operator += (const difference_type N);
+		iterator			operator -= (const difference_type N);
 	};
 
 	template <typename T>
-	class const_bidirectional_iterator : public bidirectional_iterator<const T>
+	class const_reverse_contiguous_iterator : public reverse_contiguous_iterator<const T>
 	{
 	};
-
-	// ? ***************************************************************
-	// ? *                       RANDOM ACCESS                         *
-	// ? ***************************************************************
-
-	template <typename T>
-    class random_access_iterator : public bidirectional_iterator<T>
-	{
-    public:
-		typedef typename iterator<forward_iterator_tag, T>::Category		iterator_category;
-		typedef typename iterator<forward_iterator_tag, T>::value_type		value_type;
-		typedef typename iterator<forward_iterator_tag, T>::difference_type	difference_type;
-		typedef typename iterator<forward_iterator_tag, T>::pointer			pointer;
-		typedef typename iterator<forward_iterator_tag, T>::reference		reference;
-		typedef random_access_iterator<T>									iterator;
-	public:
-		bool				operator < (const iterator &other);
-		bool				operator > (const iterator &other);
-		bool				operator <= (const iterator &other);
-		bool				operator >= (const iterator &other);
-		virtual iterator	operator + (const difference_type N);
-		virtual iterator	operator - (const difference_type N);
-		virtual iterator	operator += (const difference_type N);
-		virtual iterator	operator -= (const difference_type N);
-	};
-
-	template <typename T>
-	class reverse_random_access_iterator : public random_access_iterator<T>, public reverse_bidirectional_iterator<T>
-	{
-	public:
-		typedef typename iterator<forward_iterator_tag, T>::Category		iterator_category;
-		typedef typename iterator<forward_iterator_tag, T>::value_type		value_type;
-		typedef typename iterator<forward_iterator_tag, T>::difference_type	difference_type;
-		typedef typename iterator<forward_iterator_tag, T>::pointer			pointer;
-		typedef typename iterator<forward_iterator_tag, T>::reference		reference;
-		typedef reverse_random_access_iterator								iterator;
-	public:
-
-		iterator	operator + (const difference_type N);
-		iterator	operator - (const difference_type N);
-		iterator	operator += (const difference_type N);
-		iterator	operator -= (const difference_type N);
-	};
-
-    template <typename T>
-    class const_random_access_iterator : public random_access_iterator<const T>
-    {
-    };
 }
 
 #include "iterators.tpp"
