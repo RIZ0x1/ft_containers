@@ -20,10 +20,10 @@ namespace ft {
 		typedef typename allocator_type::size_type			size_type;
 		typedef typename allocator_type::difference_type	difference_type;
 
-        typedef typename ft::random_access_iterator<value_type>				iterator;
-		typedef typename ft::const_random_access_iterator<value_type>		const_iterator;
-		typedef typename ft::reverse_random_access_iterator<value_type>		reverse_iterator;
-		typedef typename ft::reverse_random_access_iterator<value_type>		const_reverse_iterator;
+        typedef typename ft::contiguous_iterator<value_type>				iterator;
+		typedef typename ft::const_contiguous_iterator<value_type>			const_iterator;
+		typedef typename ft::reverse_contiguous_iterator<value_type>		reverse_iterator;
+		typedef typename ft::const_reverse_contiguous_iterator<value_type>	const_reverse_iterator;
 
 	private:
 		pointer				_array;
