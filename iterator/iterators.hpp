@@ -28,13 +28,14 @@ namespace ft
 		~contiguous_iterator();
 
 		bool						operator == (const iterator &other) const;
+		bool						operator != (const iterator &other) const;
+		bool						operator < (const iterator &other) const;
+		bool						operator > (const iterator &other) const;
+		bool						operator <= (const iterator &other) const;
+		bool						operator >= (const iterator &other) const;
 		value_type					operator *	(void) const;
-		bool						operator < (const iterator &other);
-		bool						operator > (const iterator &other);
-		bool						operator <= (const iterator &other);
-		bool						operator >= (const iterator &other);
-		virtual iterator			operator + (const difference_type N);
-		virtual iterator			operator - (const difference_type N);
+		virtual iterator			operator + (const difference_type N) const;
+		virtual iterator			operator - (const difference_type N) const;
 		virtual iterator			operator ++ (void);
 		virtual const iterator		operator ++ (int);
 		virtual iterator			operator -- (void);
