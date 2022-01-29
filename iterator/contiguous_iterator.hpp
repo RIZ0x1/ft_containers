@@ -34,6 +34,7 @@ namespace ft
 		bool						operator <= (const iterator &other) const;
 		bool						operator >= (const iterator &other) const;
 		value_type					operator *	(void) const;
+		value_type					operator -> (void) const;
 		virtual iterator			operator + (const difference_type N) const;
 		virtual iterator			operator - (const difference_type N) const;
 		virtual iterator			operator ++ (void);
@@ -42,6 +43,9 @@ namespace ft
 		virtual const iterator		operator -- (int);
 		virtual iterator			operator += (const difference_type N);
 		virtual iterator			operator -= (const difference_type N);
+
+	protected:
+		inline pointer	get_pointer(void) const;
 	};
 
 	template <typename T>
@@ -81,6 +85,6 @@ namespace ft
 	};
 }
 
-#include "iterators.tpp"
+#include "contiguous_iterator.tpp"
 
 #endif // FORWARD_ITERATOR_TPP
