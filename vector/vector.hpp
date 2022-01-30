@@ -4,7 +4,7 @@
 #include <memory>
 #include <limits>
 #include <iostream>
-#include "iterators.hpp"
+#include "contiguous_iterator.hpp"
 
 namespace ft {
 	template < typename T, typename Allocator = std::allocator<T> >
@@ -87,16 +87,16 @@ namespace ft {
 		// ? ***********************************************************************
 
 		void		clear(void); // TODO: Erases all elements from the container. After this call, size() returns zero
-		// iterator<T>	erase(iterator<T> pos); // TODO: Removes the element at pos
-		// iterator<T>	erase(iterator<T> first, iterator<T> last); // TODO: Removes the elements in the range [first, last)
-		// void		push_back(const T& value); // TODO: The new element is initialized as a copy of value
-		// void		pop_back(void); // TODO: Removes the last element of the container
-		// void		resize(size_type count); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize
-		// void		resize(size_type count, T value = T()); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize
-		// void		swap(vector& other); // TODO: https://en.cppreference.com/w/cpp/container/vector/swap
-		//void		insert(iterator<T> pos, size_type count, const T& value); // TODO: inserts value before pos
-		// typename iterator<T>	insert(iterator<T> pos, const T& value); // TODO: inserts value before pos
-		// template<class InputIt> void insert( iterator<T> pos, InputIt first, InputIt last ); // TODO: https://en.cppreference.com/w/cpp/container/vector/insert
+		iterator	erase(iterator pos); // TODO: Removes the element at pos
+		iterator	erase(iterator first, iterator last); // TODO: Removes the elements in the range [first, last)
+		void		push_back(const T& value); // TODO: The new element is initialized as a copy of value
+		void		pop_back(void); // TODO: Removes the last element of the container
+		void		resize(size_type count); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize
+		void		resize(size_type count, T value = T()); // TODO: https://en.cppreference.com/w/cpp/container/vector/resize
+		void		swap(vector& other); // TODO: https://en.cppreference.com/w/cpp/container/vector/swap
+		void		insert(iterator pos, size_type count, const T& value); // TODO: inserts value before pos
+		iterator	insert(iterator pos, const value_type& value); // TODO: inserts value before pos
+		template<class InputIt> void insert( iterator pos, InputIt first, InputIt last ); // TODO: https://en.cppreference.com/w/cpp/container/vector/insert
 
 		// ? ***********************************************************************
 		// ?                               OPERATORS                               *
@@ -107,7 +107,10 @@ namespace ft {
 
 	private:
 		value_type*		_get_array(void) const;
-		value_type*		_copy_array(value_type *data, const size_type size);
+		value_type*		_copy_array(pointer data, const size_type size);
+		void			_set_capacity(size_type new_capacity);
+		void			_set_size(size_type new_size);
+		bool			_reallocate(size_type new_capacity);
 	};
 }
 
