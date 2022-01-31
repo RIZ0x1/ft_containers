@@ -45,12 +45,12 @@ namespace ft
 		virtual iterator			operator -= (const difference_type N);
 
 	protected:
-		ContiguousIterator(pointer ptr);
+		ContiguousIterator(pointer p_elem);
 		inline pointer	_get_pointer(void) const;
 	};
 
 	template <typename T>
-	class const_ContiguousIterator : public ContiguousIterator<const T>
+	class ConstContiguousIterator : public ContiguousIterator<const T>
 	{
 	};
 
@@ -81,7 +81,7 @@ namespace ft
 	};
 
 	template <typename T>
-	class const_ReverseContiguousIterator : public ReverseContiguousIterator<const T>
+	class ConstReverseContiguousIterator : public ReverseContiguousIterator<const T>
 	{
 	};
 }
