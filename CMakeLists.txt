@@ -8,12 +8,12 @@ set(SRCS ${ROOT_DIR}/tests/ft_main.cpp)
 set(HDRS
     ${ROOT_DIR}/vector/vector.hpp
     ${ROOT_DIR}/iterator/iterators_core.hpp
-    ${ROOT_DIR}/iterator/contiguous_iterator.hpp
+    ${ROOT_DIR}/iterator/ContiguousIterator.hpp
 )
 
 set(TPPS
     ${ROOT_DIR}/vector/vector.tpp
-    ${ROOT_DIR}/iterator/contiguous_iterator.tpp
+    ${ROOT_DIR}/iterator/ContiguousIterator.tpp
 )
 
 add_executable(ft_containers
@@ -26,3 +26,6 @@ target_include_directories(ft_containers PUBLIC
     ${ROOT_DIR}/vector/
     ${ROOT_DIR}/iterator/
 )
+
+set_property(TARGET ft_containers PROPERTY CXX_STANDARD 98)
+
