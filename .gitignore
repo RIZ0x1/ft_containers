@@ -40,4 +40,5 @@ qt-creator-build/*
 cllion-build
 build
 CMakeLists.txt.user
+cmake-build-debug
 .idea

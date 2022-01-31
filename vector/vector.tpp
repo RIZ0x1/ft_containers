@@ -244,7 +244,7 @@ void		insert(typename vector<value_type>::iterator pos, size_t count, const valu
 template <typename value_type, typename allocator_type>
 vector<value_type, allocator_type>&	vector<value_type, allocator_type>::operator = (const vector<value_type, allocator_type> &other)
 {
-	this->_array = this->_copy_array(other._get_array(), other.size());
+	this->_copy_array(other._get_array(), other.size());
 	this->_begin = this->_array;
 	this->_end = this->_begin + (sizeof(value_type) * other.size());
 
@@ -262,13 +262,13 @@ value_type&	vector<value_type, allocator_type>::operator [] (size_type pos) cons
 // ? ***************************************************************************
 
 template <typename value_type, typename allocator_type>
-value_type*	vector<value_type, allocator_type>::_get_array(void) const
+typename vector<value_type, allocator_type>::pointer	vector<value_type, allocator_type>::_get_array(void) const
 {
 	return (_array);
 }
 
 template <typename value_type, typename allocator_type>
-value_type*	vector<value_type, allocator_type>::_copy_array(pointer array, const size_type size)
+void	vector<value_type, allocator_type>::_copy_array(pointer array, const size_type size)
 {
 	this->_alloc->destroy(this->_get_array());
 	this->_array = this->_alloc->allocate(size);

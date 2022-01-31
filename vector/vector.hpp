@@ -4,7 +4,7 @@
 #include <memory>
 #include <limits>
 #include <iostream>
-#include "contiguous_iterator.hpp"
+#include "ContiguousIterator.hpp"
 
 namespace ft {
 	template < typename T, typename Allocator = std::allocator<T> >
@@ -20,10 +20,10 @@ namespace ft {
 		typedef typename allocator_type::size_type			size_type;
 		typedef typename allocator_type::difference_type	difference_type;
 
-        typedef typename ft::contiguous_iterator<value_type>				iterator;
-		typedef typename ft::const_contiguous_iterator<value_type>			const_iterator;
-		typedef typename ft::reverse_contiguous_iterator<value_type>		reverse_iterator;
-		typedef typename ft::const_reverse_contiguous_iterator<value_type>	const_reverse_iterator;
+        typedef typename ft::ContiguousIterator<value_type>				iterator;
+		typedef typename ft::ConstContiguousIterator<value_type>			const_iterator;
+		typedef typename ft::ReverseContiguousIterator<value_type>		reverse_iterator;
+		typedef typename ft::ConstReverseContiguousIterator<value_type>	const_reverse_iterator;
 
 	private:
 		pointer				_array;
@@ -106,11 +106,11 @@ namespace ft {
 		value_type&	operator [] (size_type pos) const;
 
 	private:
-		value_type*		_get_array(void) const;
-		value_type*		_copy_array(pointer data, const size_type size);
-		void			_set_capacity(size_type new_capacity);
-		void			_set_size(size_type new_size);
-		bool			_reallocate(size_type new_capacity);
+		pointer		_get_array(void) const;
+		void		_copy_array(pointer data, size_type size);
+		void		_set_capacity(size_type new_capacity);
+		void		_set_size(size_type new_size);
+		bool		_reallocate(size_type new_capacity);
 	};
 }
 
