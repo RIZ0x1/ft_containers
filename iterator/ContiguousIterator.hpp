@@ -10,22 +10,22 @@ namespace ft
 	// ? ***************************************************************
 
 	template <typename T>
-	class contiguous_iterator : public iterator_traits< iterator<random_access_iterator_tag, T> >
+	class ContiguousIterator : public iterator<random_access_iterator_tag, T>
 	{
 	public:
-		typedef typename iterator<forward_iterator_tag, T>::Category		iterator_category;
-		typedef typename iterator<forward_iterator_tag, T>::value_type		value_type;
-		typedef typename iterator<forward_iterator_tag, T>::difference_type	difference_type;
-		typedef typename iterator<forward_iterator_tag, T>::pointer			pointer;
-		typedef typename iterator<forward_iterator_tag, T>::reference		reference;
-		typedef contiguous_iterator<T>										iterator;
+		typedef ContiguousIterator<T>									iterator;
+		typedef typename iterator_traits<iterator>::iterator_category	iterator_category;
+		typedef typename iterator_traits<iterator>::value_type			value_type;
+		typedef typename iterator_traits<iterator>::difference_type		difference_type;
+		typedef typename iterator_traits<iterator>::pointer				pointer;
+		typedef typename iterator_traits<iterator>::reference			reference;
 
 	protected:
 		pointer _ptr;
 	public:
-		contiguous_iterator();
-		contiguous_iterator(const iterator& other);
-		~contiguous_iterator();
+		ContiguousIterator();
+		ContiguousIterator(const iterator& other);
+		~ContiguousIterator();
 
 		bool						operator == (const iterator &other) const;
 		bool						operator != (const iterator &other) const;
@@ -45,32 +45,33 @@ namespace ft
 		virtual iterator			operator -= (const difference_type N);
 
 	protected:
-		inline pointer	get_pointer(void) const;
+		ContiguousIterator(pointer ptr);
+		inline pointer	_get_pointer(void) const;
 	};
 
 	template <typename T>
-	class const_contiguous_iterator : public contiguous_iterator<const T>
+	class const_ContiguousIterator : public ContiguousIterator<const T>
 	{
 	};
 
 	template <typename T>
-	class reverse_contiguous_iterator : public contiguous_iterator<T>
+	class ReverseContiguousIterator : public ContiguousIterator<T>
 	{
 	public:
-		typedef typename iterator<forward_iterator_tag, T>::Category		iterator_category;
-		typedef typename iterator<forward_iterator_tag, T>::value_type		value_type;
-		typedef typename iterator<forward_iterator_tag, T>::difference_type	difference_type;
-		typedef typename iterator<forward_iterator_tag, T>::pointer			pointer;
-		typedef typename iterator<forward_iterator_tag, T>::reference		reference;
-		typedef reverse_contiguous_iterator								    iterator;
+		typedef ReverseContiguousIterator								iterator;
+		typedef typename iterator_traits<iterator>::iterator_category	iterator_category;
+		typedef typename iterator_traits<iterator>::value_type			value_type;
+		typedef typename iterator_traits<iterator>::difference_type		difference_type;
+		typedef typename iterator_traits<iterator>::pointer				pointer;
+		typedef typename iterator_traits<iterator>::reference			reference;
 
 	public:
-		reverse_contiguous_iterator();
-		reverse_contiguous_iterator(const iterator& other);
-		~reverse_contiguous_iterator();
+		ReverseContiguousIterator();
+		ReverseContiguousIterator(const iterator& other);
+		~ReverseContiguousIterator();
 
-		iterator			operator + (const difference_type N);
-		iterator			operator - (const difference_type N);
+		iterator			operator + (const difference_type N) const;
+		iterator			operator - (const difference_type N) const;
 		iterator			operator ++ (void);
 		const iterator		operator ++ (int);
 		iterator			operator -- (void);
@@ -80,11 +81,11 @@ namespace ft
 	};
 
 	template <typename T>
-	class const_reverse_contiguous_iterator : public reverse_contiguous_iterator<const T>
+	class const_ReverseContiguousIterator : public ReverseContiguousIterator<const T>
 	{
 	};
 }
 
-#include "contiguous_iterator.tpp"
+#include "ContiguousIterator.tpp"
 
 #endif // FORWARD_ITERATOR_TPP
