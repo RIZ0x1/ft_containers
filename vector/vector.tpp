@@ -1,8 +1,11 @@
 #ifndef VECTOR_TPP
 # define VECTOR_TPP
 
-#include "vector.hpp"
+#ifndef VECTOR_HPP
+#error __FILE__ should only be included from vector.hpp
+#endif // VECTOR_HPP
 
+#define TC_VECTOR vector<value_type, allocator_type>
 #define EMPTY 0
 
 // ? ***************************************************************************
@@ -14,47 +17,44 @@ using std::cerr;
 using std::endl;
 
 template <typename value_type, typename allocator_type>
-vector<value_type, allocator_type>::vector()
+TC_VECTOR::vector()
 {
-	_alloc = new allocator_type();
+	_alloc = allocator_type();
 	_array = NULL;
-	_begin = _array;
 	_end = _array;
 	_capacity = EMPTY;
 }
 
 template <typename value_type, typename allocator_type>
-vector<value_type, allocator_type>::vector(const vector &other)
+TC_VECTOR::vector(const vector &other)
 {
 	operator=(other);
 }
 
 template <typename value_type, typename allocator_type>
-vector<value_type, allocator_type>::vector(const allocator_type &alloc)
+TC_VECTOR::vector(const allocator_type &alloc)
 {
 	this->_alloc = alloc;
 	_array = NULL;
-	_begin = _array;
 	_end = _array;
 	_capacity = EMPTY;
 }
 
 template <typename value_type, typename allocator_type>
-vector<value_type, allocator_type>::vector(size_type count, const value_type& value, const allocator_type& alloc)
+TC_VECTOR::vector(size_type count, const value_type& value, const allocator_type& alloc)
 {
-    this->_alloc = new allocator_type(alloc);
-	_array = this->_alloc->allocate(count);
-	_begin = _array;
+    this->_alloc = alloc;
+	_array = this->_alloc.allocate(count);
+	_capacity = count;
 
 	size_type i = 0;
 	for (i = 0; i < count; i++)
 		_array[i] = value;
 	_end = &_array[i];
-	_capacity = i;
 }
 
 template <typename value_type, typename allocator_type> template <typename InputIt>
-vector<value_type, allocator_type>::vector(InputIt first, InputIt last, const allocator_type &alloc)
+TC_VECTOR::vector(InputIt first, InputIt last, const allocator_type &alloc)
 {
 	this->_alloc = alloc;
 
@@ -63,9 +63,10 @@ vector<value_type, allocator_type>::vector(InputIt first, InputIt last, const al
 }
 
 template <typename value_type, typename allocator_type>
-vector<value_type, allocator_type>::~vector()
+TC_VECTOR::~vector()
 {
-	_alloc->destroy(_get_array());
+	if (_array)
+		_alloc.destroy(_array);
 }
 
 // ? ***************************************************************************
@@ -73,21 +74,21 @@ vector<value_type, allocator_type>::~vector()
 // ? ***************************************************************************
 
 template <typename value_type, typename allocator_type> template <typename InputIt>
-void	vector<value_type, allocator_type>::assign(InputIt first, InputIt last)
+void	TC_VECTOR::assign(InputIt first, InputIt last)
 {
 
 }
 
 template <typename value_type, typename allocator_type>
-void		vector<value_type, allocator_type>::assign(size_type count, const value_type& value)
+void	TC_VECTOR::assign(size_type count, const value_type& value)
 {
 
 }
 
 template <typename value_type, typename allocator_type>
-allocator_type	vector<value_type, allocator_type>::get_allocator() const
+allocator_type	TC_VECTOR::get_allocator() const
 {
-	return (*_alloc);
+	return (_alloc);
 }
 
 // ? ***************************************************************************
@@ -95,49 +96,75 @@ allocator_type	vector<value_type, allocator_type>::get_allocator() const
 // ? ***************************************************************************
 
 template <typename value_type, typename allocator_type>
-value_type&	vector<value_type, allocator_type>::front(void)
+typename TC_VECTOR::reference	TC_VECTOR::front(void)
+{
+	return ( static_cast<const_reference>(*_array) );
+}
+
+template <typename value_type, typename allocator_type>
+typename TC_VECTOR::const_reference	TC_VECTOR::front(void) const
+{
+	return ( static_cast<const_reference>(*_array) );
+}
+
+template <typename value_type, typename allocator_type>
+typename TC_VECTOR::reference	TC_VECTOR::back(void)
+{
+	return ( static_cast<const_reference>(*_end) );
+}
+
+template <typename value_type, typename allocator_type>
+typename TC_VECTOR::const_reference	TC_VECTOR::back(void) const
+{
+	return ( static_cast<const_reference>(*_end) );
+}
+
+template <typename value_type, typename allocator_type>
+typename TC_VECTOR::reference	TC_VECTOR::at(const size_type pos)
+{
+	if (pos >= size())
+		throw std::out_of_range("ERROR: Index is out of range");
+	return (_array[pos]);
+}
+
+template <typename value_type, typename allocator_type>
+typename TC_VECTOR::const_reference	TC_VECTOR::at(size_type pos) const
+{
+	if (pos >= size())
+		throw std::out_of_range("ERROR: Index is out of range");
+	return (_array[pos]);
+}
+
+template <typename value_type, typename allocator_type>
+typename TC_VECTOR::pointer	TC_VECTOR::data(void)
+{
+	return (_array);
+}
+
+template <typename value_type, typename allocator_type>
+typename TC_VECTOR::const_pointer	TC_VECTOR::data(void) const
+{
+	return (static_cast<const_pointer>(_array));
+}
+
+// ? ***************************************************************************
+// ? *                                ITERATORS                                *
+// ? ***************************************************************************
+
+template <typename value_type, typename allocator_type>
+typename TC_VECTOR::iterator	TC_VECTOR::begin(void)
 {
 
 }
 
 template <typename value_type, typename allocator_type>
-const value_type&	vector<value_type, allocator_type>::front(void) const
+typename TC_VECTOR::iterator	TC_VECTOR::end(void)
 {
 
 }
 
 template <typename value_type, typename allocator_type>
-value_type&	vector<value_type, allocator_type>::back(void)
-{
-
-}
-
-template <typename value_type, typename allocator_type>
-const value_type&	vector<value_type, allocator_type>::back(void) const
-{
-
-}
-
-template <typename value_type, typename allocator_type>
-value_type&	vector<value_type, allocator_type>::at(size_type pos)
-{
-
-}
-
-template <typename value_type, typename allocator_type>
-const value_type&	vector<value_type, allocator_type>::at(size_type pos) const
-{
-
-}
-
-template <typename value_type, typename allocator_type>
-value_type*	vector<value_type, allocator_type>::data(void)
-{
-
-}
-
-template <typename value_type, typename allocator_type>
-const value_type*	vector<value_type, allocator_type>::data(void) const
+typename TC_VECTOR::const_iterator	TC_VECTOR::end(void) const
 {
 
 }
@@ -147,25 +174,25 @@ const value_type*	vector<value_type, allocator_type>::data(void) const
 // ? ***************************************************************************
 
 template <typename value_type, typename allocator_type>
-bool	vector<value_type, allocator_type>::empty(void) const
+bool	TC_VECTOR::empty(void) const
 {
-
+	return ( size() == EMPTY );
 }
 
 template <typename value_type, typename allocator_type>
-typename ft::vector<value_type, allocator_type>::size_type	vector<value_type, allocator_type>::size(void) const
+typename TC_VECTOR::size_type	TC_VECTOR::size(void) const
 {
-	return static_cast<size_t>(_end - _begin);
+	return static_cast<size_t>(_end - _array);
 }
 
 template <typename value_type, typename allocator_type>
-typename ft::vector<value_type, allocator_type>::size_type	vector<value_type, allocator_type>::max_size(void) const
+typename TC_VECTOR::size_type	TC_VECTOR::max_size(void) const
 {
 	return std::numeric_limits<std::ptrdiff_t>::max() / sizeof(value_type);
 }
 
 template <typename value_type, typename allocator_type>
-void	vector<value_type, allocator_type>::reserve(size_type new_cap)
+void	TC_VECTOR::reserve(size_type new_cap)
 {
 	if (new_cap > max_size())
 		throw std::runtime_error("ERROR: New capacity value in invalid [ vector::reserve() ]");
@@ -174,7 +201,7 @@ void	vector<value_type, allocator_type>::reserve(size_type new_cap)
 }
 
 template <typename value_type, typename allocator_type>
-typename ft::vector<value_type, allocator_type>::size_type	vector<value_type, allocator_type>::capacity(void) const
+typename TC_VECTOR::size_type	TC_VECTOR::capacity(void) const
 {
 	return (_capacity);
 }
@@ -184,56 +211,61 @@ typename ft::vector<value_type, allocator_type>::size_type	vector<value_type, al
 // ? ***************************************************************************
 
 template <typename value_type, typename allocator_type>
-void		vector<value_type, allocator_type>::clear(void)
-{
-	
-}
-
-template <typename value_type, typename allocator_type>
-typename vector<value_type>::iterator	erase(typename vector<value_type>::iterator pos)
+void		TC_VECTOR::clear(void)
 {
 
 }
 
 template <typename value_type, typename allocator_type>
-typename vector<value_type>::iterator	erase(typename vector<value_type>::iterator first, typename vector<value_type>::iterator last)
+typename TC_VECTOR::iterator	TC_VECTOR::erase(iterator pos)
 {
 
 }
 
 template <typename value_type, typename allocator_type>
-void		push_back(const value_type& value)
+typename TC_VECTOR::iterator	TC_VECTOR::erase(iterator first, iterator last)
 {
 
 }
 
 template <typename value_type, typename allocator_type>
-void		pop_back(void)
+void	TC_VECTOR::push_back(const_reference value)
 {
+
 }
+
 template <typename value_type, typename allocator_type>
-void		resize(size_t count)
+void	TC_VECTOR::pop_back(void)
 {
 }
+
 template <typename value_type, typename allocator_type>
-void		resize(size_t count, value_type value = value_type())
+void	TC_VECTOR::resize(size_type count)
 {
 }
+
 template <typename value_type, typename allocator_type>
-void		vector<value_type, allocator_type>::swap(vector<value_type, allocator_type> &other)
+void	TC_VECTOR::resize(size_type count, value_type value)
 {
 }
+
 template <typename value_type, typename allocator_type>
-typename vector<value_type>::iterator	insert(typename vector<value_type>::iterator pos, const value_type& value)
+void		TC_VECTOR::swap(TC_VECTOR &other)
 {
 }
+
+template <typename value_type, typename allocator_type>
+typename TC_VECTOR::iterator	TC_VECTOR::insert(iterator pos, const_reference value)
+{
+}
+
 template <typename value_type, typename allocator_type> template <typename InputIt>
-void	vector<value_type, allocator_type>::insert(iterator pos, InputIt first, InputIt last)
+void	TC_VECTOR::insert(iterator pos, InputIt first, InputIt last)
 {
 }
 
 template <typename value_type, typename allocator_type>
-void		insert(typename vector<value_type>::iterator pos, size_t count, const value_type& value)
+void	TC_VECTOR::insert(iterator pos, size_type count, const_reference value)
 {
 }
 
@@ -242,19 +274,21 @@ void		insert(typename vector<value_type>::iterator pos, size_t count, const valu
 // ? ***************************************************************************
 
 template <typename value_type, typename allocator_type>
-vector<value_type, allocator_type>&	vector<value_type, allocator_type>::operator = (const vector<value_type, allocator_type> &other)
+TC_VECTOR&	TC_VECTOR::operator = (const TC_VECTOR &other)
 {
-	this->_copy_array(other._get_array(), other.size());
-	this->_begin = this->_array;
-	this->_end = this->_begin + (sizeof(value_type) * other.size());
+	if (this->capacity() < other.size())
+		this->_reallocate(other.size());
+
+	this->_copy_array(other._array, other._end, _array);
+	this->_end = this->_array + other.size();
 
 	return (*this);
 }
 
 template <typename value_type, typename allocator_type>
-value_type&	vector<value_type, allocator_type>::operator [] (size_type pos) const
+value_type&	TC_VECTOR::operator [] (size_type pos) const
 {
-	
+	return (_array[pos]);
 }
 
 // ? ***************************************************************************
@@ -262,49 +296,47 @@ value_type&	vector<value_type, allocator_type>::operator [] (size_type pos) cons
 // ? ***************************************************************************
 
 template <typename value_type, typename allocator_type>
-typename vector<value_type, allocator_type>::pointer	vector<value_type, allocator_type>::_get_array(void) const
+void	TC_VECTOR::_copy_array(const pointer start, const_pointer end, pointer result)
 {
-	return (_array);
+	if (start == result)
+		return ;
+	for (pointer i = start; i != end; i++)
+		*(result++) = *i;
 }
 
 template <typename value_type, typename allocator_type>
-void	vector<value_type, allocator_type>::_copy_array(pointer array, const size_type size)
+void	TC_VECTOR::_set_capacity(size_type new_capacity)
 {
-	this->_alloc->destroy(this->_get_array());
-	this->_array = this->_alloc->allocate(size);
-
-	for (size_t i = 0; i < size; i++)
-		this->_array[i] = array[i];
+	_capacity = new_capacity;
 }
 
 template <typename value_type, typename allocator_type>
-bool	vector<value_type, allocator_type>::_reallocate(size_type new_capacity)
+bool	TC_VECTOR::_reallocate(size_type new_capacity)
 {
 	bool	ret;
 
-	ret = (new_capacity <= 0);
+	ret = (new_capacity == 0);
 
 	if (ret)
 	{
 		const size_type	old_size = size();
-		pointer			tmp = _alloc->allocate(new_capacity);
+		pointer			tmp = _alloc.allocate(new_capacity);
 
 		try {
 			for (size_type i = 0; i < size(); i++)
-				_alloc->construct(&tmp[i], _array[i]);
+				_alloc.construct(&tmp[i], _array[i]);
 		} catch (std::exception &e)
 		{
-			_alloc->deallocate(tmp, new_capacity);
+			_alloc.deallocate(tmp, new_capacity);
 			throw std::runtime_error("ERROR: Allocation failed [ vector::_reallocate() ]");
 		}
 
 		for (size_type i = 0; i < size(); i++)
-			_alloc->destroy(&_array[i]);
+			_alloc.destroy(&_array[i]);
 		if (capacity() != 0)
-			_alloc->deallocate(_array, capacity());
+			_alloc.deallocate(_array, capacity());
 
 		this->_set_capacity(new_capacity);
-		this->_set_size(old_size);
 		this->_array = tmp;
 	}
 	return (ret);
