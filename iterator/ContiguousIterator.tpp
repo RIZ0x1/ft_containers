@@ -62,15 +62,15 @@ bool	ContiguousIterator<value_type>::operator >= (const iterator &other) const
 }
 
 template <typename value_type>
-typename ContiguousIterator<value_type>::value_type	ContiguousIterator<value_type>::operator * () const
+typename ContiguousIterator<value_type>::reference	ContiguousIterator<value_type>::operator * () const
 {
 	return ( *_get_pointer() );
 }
 
 template <typename value_type>
-typename ContiguousIterator<value_type>::value_type	ContiguousIterator<value_type>::operator -> () const
+typename ContiguousIterator<value_type>::pointer	ContiguousIterator<value_type>::operator -> () const
 {
-	return ( &(this->operator*) );
+	return ( _get_pointer() );
 }
 
 template <typename value_type>

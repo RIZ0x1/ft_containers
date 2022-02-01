@@ -33,8 +33,8 @@ namespace ft
 		bool						operator > (const iterator &other) const;
 		bool						operator <= (const iterator &other) const;
 		bool						operator >= (const iterator &other) const;
-		value_type					operator *	(void) const;
-		value_type					operator -> (void) const;
+		reference					operator *	(void) const;
+		pointer						operator -> (void) const;
 		virtual iterator			operator + (const difference_type N) const;
 		virtual iterator			operator - (const difference_type N) const;
 		virtual iterator			operator ++ (void);
