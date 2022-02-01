@@ -29,4 +29,3 @@ target_include_directories(ft_containers PUBLIC
 
 add_compile_options(-Wall -Wextra -Werror)
 set_property(TARGET ft_containers PROPERTY CXX_STANDARD 98)
-
