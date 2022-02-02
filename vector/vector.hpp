@@ -7,6 +7,10 @@
 # include <stdexcept>
 # include "ContiguousIterator.hpp"
 
+# ifdef __unix
+#  include <cstring>
+# endif
+
 namespace ft {
 	template < typename T, typename Allocator = std::allocator<T> >
 	class vector
