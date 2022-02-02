@@ -66,6 +66,7 @@ namespace ft {
 		// ? ***********************************************************************
 
 		iterator			begin(void);
+		const_iterator		begin(void) const;
 		iterator 			end(void);
 		const_iterator		end(void) const;
 
@@ -104,7 +105,7 @@ namespace ft {
 
 	private:
 		void		_copy_array(const pointer start, const_pointer end, pointer result);
-		void		_set_capacity(size_type new_capacity);
+		pointer		_allocate_array(size_type capacity);
 		bool		_reallocate(size_type new_capacity);
 	};
 }
