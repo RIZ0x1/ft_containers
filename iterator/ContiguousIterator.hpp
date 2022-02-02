@@ -1,14 +1,10 @@
-#ifndef FORWARD_ITERATOR_TPP
-# define FORWARD_ITERATOR_TPP
+#ifndef CONTIGUOUS_ITERATOR_HPP
+# define CONTIGUOUS_ITERATOR_HPP
 
 #include "iterators_core.hpp"
 
 namespace ft
 {
-	// ? ***************************************************************
-	// ? *                       VECTOR ITERATOR                       *
-	// ? ***************************************************************
-
 	template <typename T>
 	class ContiguousIterator : public iterator<random_access_iterator_tag, T>
 	{
@@ -24,6 +20,7 @@ namespace ft
 		pointer _ptr;
 	public:
 		ContiguousIterator();
+		ContiguousIterator(pointer ptr);
 		ContiguousIterator(const iterator& other);
 		~ContiguousIterator();
 
@@ -45,13 +42,19 @@ namespace ft
 		virtual iterator			operator -= (const difference_type N);
 
 	protected:
-		ContiguousIterator(pointer p_elem);
 		inline pointer	_get_pointer(void) const;
 	};
 
 	template <typename T>
 	class ConstContiguousIterator : public ContiguousIterator<const T>
 	{
+	public:
+		typedef ConstContiguousIterator<T>						iterator;
+		typedef typename iterator_traits<iterator>::pointer		pointer;
+	public:
+		ConstContiguousIterator() : ContiguousIterator<const T>() {};
+		ConstContiguousIterator(pointer ptr) : ContiguousIterator<const T>(ptr) {};
+		ConstContiguousIterator(const ConstContiguousIterator& other) : ContiguousIterator<const T>::_ptr(other._get_pointer()) {};
 	};
 
 	template <typename T>
@@ -67,6 +70,7 @@ namespace ft
 
 	public:
 		ReverseContiguousIterator();
+		ReverseContiguousIterator(pointer ptr);
 		ReverseContiguousIterator(const iterator& other);
 		~ReverseContiguousIterator();
 
@@ -83,9 +87,16 @@ namespace ft
 	template <typename T>
 	class ConstReverseContiguousIterator : public ReverseContiguousIterator<const T>
 	{
+	public:
+		typedef ConstContiguousIterator<T>						iterator;
+		typedef typename iterator_traits<iterator>::pointer		pointer;
+	public:
+		ConstReverseContiguousIterator() : ReverseContiguousIterator<const T>() {};
+		ConstReverseContiguousIterator(pointer ptr) : ReverseContiguousIterator<const T>(ptr) {};
+		ConstReverseContiguousIterator(const ConstReverseContiguousIterator& other) : ReverseContiguousIterator<const T>::_ptr(other._get_pointer()) {};
 	};
 }
 
 #include "ContiguousIterator.tpp"
 
-#endif // FORWARD_ITERATOR_TPP
+#endif // CONTIGUOUS_ITERATOR_HPP

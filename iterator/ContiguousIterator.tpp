@@ -1,4 +1,9 @@
-#include "ContiguousIterator.hpp"
+#ifndef CONTIGUOUS_ITERATOR_TPP
+# define CONTIGUOUS_ITERATOR_TPP
+
+# ifndef CONTIGUOUS_ITERATOR_HPP
+#  error __FILE__ should be included only from ContiguousIterator.hpp
+# endif
 
 // ? ***************************************************************************
 // ? *                          CONTIGUOUS ITERATOR                            *
@@ -10,6 +15,11 @@ using ft::ContiguousIterator;
 
 template <typename value_type>
 ContiguousIterator<value_type>::ContiguousIterator() : _ptr(NULL)
+{
+}
+
+template <typename value_type>
+ContiguousIterator<value_type>::ContiguousIterator(pointer ptr) : _ptr(ptr)
 {
 }
 
@@ -134,11 +144,6 @@ typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>
 // ? ************************** PROTECTED METHODS ******************************
 
 template <typename value_type>
-ContiguousIterator<value_type>::ContiguousIterator(pointer p_elem) : _ptr(p_elem)
-{
-}
-
-template <typename value_type>
 typename ContiguousIterator<value_type>::pointer ContiguousIterator<value_type>::_get_pointer() const
 {
 	return (_ptr);
@@ -154,6 +159,11 @@ using ft::ReverseContiguousIterator;
 
 template <typename value_type>
 ReverseContiguousIterator<value_type>::ReverseContiguousIterator() : ReverseContiguousIterator()
+{
+}
+
+template <typename value_type>
+ReverseContiguousIterator<value_type>::ReverseContiguousIterator(pointer ptr) : ReverseContiguousIterator(ptr)
 {
 }
 
@@ -227,3 +237,5 @@ typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterat
 	this->_ptr -= N;
 	return (*this);
 }
+
+#endif // CONTIGUOUS_ITERATOR_TPP
