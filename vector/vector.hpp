@@ -110,7 +110,9 @@ namespace ft {
 	private:
 		void		_copy_array(const pointer start, const_pointer end, pointer result);
 		pointer		_allocate_array(size_type capacity);
+		void		_destroy_array(iterator start, iterator end);
 		bool		_reallocate(size_type new_capacity);
+		bool		_reallocate(size_type new_capacity, pointer copy_start_point, pointer copy_end_point);
 	};
 }
 

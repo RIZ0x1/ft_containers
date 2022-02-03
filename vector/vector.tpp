@@ -348,6 +348,31 @@ void		TC_VECTOR::swap(TC_VECTOR &other)
 template <typename value_type, typename allocator_type>
 typename TC_VECTOR::iterator	TC_VECTOR::insert(iterator pos, const_reference value)
 {
+	if (pos < end())
+	{
+		*this[pos - 1] = value;
+	}
+	else
+	{
+		pointer 	array_second_part = _allocate_array(_end - pos);
+		_copy_array(pos, _end, array_second_part);
+
+		pointer 	new_array = _allocate_array(size() + 1);
+		_copy_array(begin(), pos, new_array);
+
+		size_type	n_pos = ( pos - begin() );
+
+		_destroy_array(begin(), end());
+		_array = new_array;
+
+		pos = (_array + n_pos);
+		_end = (pos + 1);
+		push_back(value);
+		_end = (new_array + size() + 1);
+		_copy_array((pos + 1), _end, new_array);
+		(_capacity++);
+	}
+	return (pos);
 }
 
 template <typename value_type, typename allocator_type> template <typename InputIt>
@@ -410,7 +435,20 @@ typename TC_VECTOR::pointer	TC_VECTOR::_allocate_array(size_type capacity)
 }
 
 template <typename value_type, typename allocator_type>
+void	TC_VECTOR::_destroy_array(iterator start, iterator end)
+{
+	for (; start != end; start++)
+		_alloc.destroy(&(*start));
+}
+
+template <typename value_type, typename allocator_type>
 bool	TC_VECTOR::_reallocate(size_type new_capacity)
+{
+	return ( _reallocate(new_capacity, _array, _end) );
+}
+
+template <typename value_type, typename allocator_type>
+bool	TC_VECTOR::_reallocate(size_type new_capacity, pointer copy_start_point, pointer copy_end_point)
 {
 	bool	ret = (new_capacity == 0);
 
@@ -418,7 +456,7 @@ bool	TC_VECTOR::_reallocate(size_type new_capacity)
 	{
 		pointer	tmp = _allocate_array(new_capacity);
 
-		_copy_array(_array, _end, tmp);
+		_copy_array(copy_start_point, copy_end_point, tmp);
 		clear();
 		this->_array = tmp;
 		this->_end = ( this->_array + this->size() );
