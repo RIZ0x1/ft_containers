@@ -1,6 +1,8 @@
 #ifndef VECTOR_TPP
 # define VECTOR_TPP
 
+#include "vector.hpp" // No need
+
 # ifndef VECTOR_HPP
 #  error __FILE__ should only be included from vector.hpp
 # endif
@@ -76,13 +78,26 @@ TC_VECTOR::~vector()
 template <typename value_type, typename allocator_type> template <typename InputIt>
 void	TC_VECTOR::assign(InputIt first, InputIt last)
 {
+	clear();
 
+	const size_type new_capacity = (last - first);
+	_array = _alloc.allocate(new_capacity);
+	_capacity = new_capacity;
+
+	_copy_array(first, last, _array);
 }
 
 template <typename value_type, typename allocator_type>
 void	TC_VECTOR::assign(size_type count, const_reference value)
 {
+	clear();
+	_array = this->_alloc.allocate(count);
+	_capacity = count;
 
+	size_type i = 0;
+	for (; i < count; i++)
+		_array[i] = value;
+	_end = &_array[i];
 }
 
 template <typename value_type, typename allocator_type>
@@ -268,7 +283,7 @@ void	TC_VECTOR::push_back(const_reference value)
 	}
 	else
 	{
-		_reallocate(capacity() + 1);
+		_reallocate(size() + 1);
 		iterator tmp(_end - 1);
 		*tmp = value;
 	}
@@ -348,9 +363,9 @@ void		TC_VECTOR::swap(TC_VECTOR &other)
 template <typename value_type, typename allocator_type>
 typename TC_VECTOR::iterator	TC_VECTOR::insert(iterator pos, const_reference value)
 {
-	if (pos < end())
+	if (capacity() > size() && pos >= end())
 	{
-		*this[pos - 1] = value;
+		*pos = value;
 	}
 	else
 	{
@@ -378,11 +393,66 @@ typename TC_VECTOR::iterator	TC_VECTOR::insert(iterator pos, const_reference val
 template <typename value_type, typename allocator_type> template <typename InputIt>
 void	TC_VECTOR::insert(iterator pos, InputIt first, InputIt last)
 {
+	if (capacity() >= (size() + (last - first)) && pos >= end())
+	{
+		for (iterator it = pos; first != last; first++, it++)
+			std::memcpy(&(*it), &(*first), sizeof(value_type));
+	}
+	else
+	{
+		pointer 	array_second_part = _allocate_array(_end - pos);
+		_copy_array(pos, _end, array_second_part);
+
+		pointer 	new_array = _allocate_array(size() + 1);
+		_copy_array(begin(), pos, new_array);
+
+		size_type	n_pos = ( pos - begin() );
+
+		_destroy_array(begin(), end());
+		_array = new_array;
+
+		pos = (_array + n_pos);
+		_end = (pos + 1);
+		_copy_array(first, last, pos);
+		_end = (new_array + size() + 1);
+		_copy_array((pos + 1), _end, new_array);
+		(_capacity++);
+	}
+	return (pos);
 }
 
 template <typename value_type, typename allocator_type>
 void	TC_VECTOR::insert(iterator pos, size_type count, const_reference value)
 {
+	if (capacity() >= ( size() + count ) && pos >= end())
+	{
+		for (iterator it = pos; count > 0; count--, it++)
+			*it = value;
+	}
+	else
+	{
+		pointer 	array_second_part = _allocate_array(_end - pos);
+		_copy_array(pos, _end, array_second_part);
+
+		pointer 	new_array = _allocate_array(size() + 1);
+		_copy_array(begin(), pos, new_array);
+
+		size_type	n_pos = ( pos - begin() );
+
+		_destroy_array(begin(), end());
+		_array = new_array;
+
+		pos = (_array + n_pos);
+		_end = (pos + 1);
+
+		for (iterator it = pos; count > 0; count--, it++)
+			*it = value;
+
+		_end = (new_array + size() + 1);
+		_copy_array((pos + 1), _end, new_array);
+		(_capacity++);
+	}
+	return (pos);
 }
 
 // ? ***************************************************************************
