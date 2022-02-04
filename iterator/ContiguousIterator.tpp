@@ -1,6 +1,8 @@
 #ifndef CONTIGUOUS_ITERATOR_TPP
 # define CONTIGUOUS_ITERATOR_TPP
 
+#include "ContiguousIterator.hpp"
+
 # ifndef CONTIGUOUS_ITERATOR_HPP
 #  error __FILE__ should be included only from ContiguousIterator.hpp
 # endif
@@ -38,37 +40,37 @@ ContiguousIterator<value_type>::~ContiguousIterator()
 template <typename value_type>
 bool	ContiguousIterator<value_type>::operator == (const iterator &other) const
 {
-	return ( this->_get_pointer() == other.get_pointer() );
+	return ( this->_get_pointer() == other._get_pointer() );
 }
 
 template <typename value_type>
 bool	ContiguousIterator<value_type>::operator != (const iterator &other) const
 {
-	return ( this->_get_pointer() != other.get_pointer() );
+	return ( this->_get_pointer() != other._get_pointer() );
 }
 
 template <typename value_type>
 bool	ContiguousIterator<value_type>::operator < (const iterator &other) const
 {
-	return ( this->_get_pointer() < other.get_pointer() );
+	return ( this->_get_pointer() < other._get_pointer() );
 }
 
 template <typename value_type>
 bool	ContiguousIterator<value_type>::operator > (const iterator &other) const
 {
-	return ( this->_get_pointer() > other.get_pointer() );
+	return ( this->_get_pointer() > other._get_pointer() );
 }
 
 template <typename value_type>
 bool	ContiguousIterator<value_type>::operator <= (const iterator &other) const
 {
-	return ( this->_get_pointer() <= other.get_pointer() );
+	return ( this->_get_pointer() <= other._get_pointer() );
 }
 
 template <typename value_type>
 bool	ContiguousIterator<value_type>::operator >= (const iterator &other) const
 {
-	return ( this->_get_pointer() >= other.get_pointer() );
+	return ( this->_get_pointer() >= other._get_pointer() );
 }
 
 template <typename value_type>
