@@ -28,7 +28,7 @@ TC_VECTOR::vector()
 }
 
 template <typename value_type, typename allocator_type>
-TC_VECTOR::vector(const vector &other)
+TC_VECTOR::vector(const vector &other) : _capacity(EMPTY), _array(NULL), _end(_array)
 {
 	operator=(other);
 }
@@ -234,9 +234,11 @@ typename TC_VECTOR::size_type	TC_VECTOR::capacity() const
 template <typename value_type, typename allocator_type>
 void		TC_VECTOR::clear()
 {
-	if (capacity() > 0)
+	size_type	size_value = size();
+
+	if (size_value > 0)
 	{
-		for (size_type i = 0; i < size(); i++)
+		for (size_type i = 0; i < size_value; i++)
 			_alloc.destroy(&_array[i]);
 	}
 }
@@ -274,18 +276,19 @@ typename TC_VECTOR::iterator	TC_VECTOR::erase(iterator first, iterator last)
 }
 
 template <typename value_type, typename allocator_type>
-void	TC_VECTOR::push_back(const_reference value)
+void	TC_VECTOR::push_back(const value_type& value)
 {
 	if (size() < capacity())
 	{
-		iterator tmp(_end - 1);
-		*tmp = value;
+		*_end = value;
+		(_end++);
 	}
 	else
 	{
-		_reallocate(size() + 1);
-		iterator tmp(_end - 1);
-		*tmp = value;
+		const size_type new_capacity = (size() + 1);
+		_reallocate(new_capacity);
+		_end = (_array + new_capacity);
+		*(_end - 1) = value;
 	}
 }
 
@@ -462,12 +465,10 @@ void	TC_VECTOR::insert(iterator pos, size_type count, const_reference value)
 template <typename value_type, typename allocator_type>
 TC_VECTOR&	TC_VECTOR::operator = (const TC_VECTOR &other)
 {
-	if (this->capacity() < other.size())
-		this->_reallocate(other.size());
-
-	this->_copy_array(other._array, other._end, _array);
-	this->_end = ( this->_array + other.size() );
-
+	if (this != &other)
+	{
+		this->_reallocate(other.size(), other._array, other._end);
+	}
 	return (*this);
 }
 
@@ -486,18 +487,17 @@ void	TC_VECTOR::_copy_array(const pointer start, const_pointer end, pointer resu
 {
 	if (start == result)
 		return ;
-	for (pointer i = start; i != end; i++)
-		std::memcpy(result, i, sizeof(value_type));
+	for (pointer p = start; p != end; p++)
+		std::memcpy(result, p, sizeof(value_type));
 }
 
 template <typename value_type, typename allocator_type>
 typename TC_VECTOR::pointer	TC_VECTOR::_allocate_array(size_type capacity)
 {
-	pointer	ret;
+	pointer	ret = NULL;
 
 	try {
 		ret = _alloc.allocate(capacity);
-		this->_capacity = capacity;
 	} catch (const std::bad_alloc &e) {
 		throw std::runtime_error("ERROR: Memory allocation failed [ vector::_allocate_array() ]");
 	}
@@ -520,16 +520,17 @@ bool	TC_VECTOR::_reallocate(size_type new_capacity)
 template <typename value_type, typename allocator_type>
 bool	TC_VECTOR::_reallocate(size_type new_capacity, pointer copy_start_point, pointer copy_end_point)
 {
-	bool	ret = (new_capacity == 0);
+	bool	ret = (new_capacity != 0);
 
 	if (ret)
 	{
-		pointer	tmp = _allocate_array(new_capacity);
-
-		_copy_array(copy_start_point, copy_end_point, tmp);
 		clear();
+
+		pointer	tmp = _allocate_array(new_capacity);
+		_copy_array(copy_start_point, copy_end_point, tmp);
+		this->_capacity = new_capacity;
 		this->_array = tmp;
-		this->_end = ( this->_array + this->size() );
+		this->_end = ( this->_array + (copy_end_point - copy_start_point) );
 	}
 	return (ret);
 }
