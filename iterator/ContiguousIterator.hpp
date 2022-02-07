@@ -9,12 +9,13 @@ namespace ft
 	class ContiguousIterator : public iterator<random_access_iterator_tag, T>
 	{
 	public:
+		typedef typename ft::iterator<random_access_iterator_tag, T>	traits;
+		typedef typename iterator_traits<traits>::iterator_category		iterator_category;
+		typedef typename iterator_traits<traits>::value_type			value_type;
+		typedef typename iterator_traits<traits>::difference_type		difference_type;
+		typedef typename iterator_traits<traits>::pointer				pointer;
+		typedef typename iterator_traits<traits>::reference				reference;
 		typedef ContiguousIterator<T>									iterator;
-		typedef typename iterator_traits<iterator>::iterator_category	iterator_category;
-		typedef typename iterator_traits<iterator>::value_type			value_type;
-		typedef typename iterator_traits<iterator>::difference_type		difference_type;
-		typedef typename iterator_traits<iterator>::pointer				pointer;
-		typedef typename iterator_traits<iterator>::reference			reference;
 
 	protected:
 		pointer _ptr;
