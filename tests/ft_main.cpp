@@ -23,7 +23,7 @@ template <typename T> void	print_info(vector<T> v);
 
 int main()
 {
-	ft::vector<int>		v(10);
+	ft::vector<int>		v(5);
 
 	v.push_back(69);
 	v.push_back(70);

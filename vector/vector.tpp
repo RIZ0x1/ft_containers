@@ -7,16 +7,16 @@
 #  error __FILE__ should only be included from vector.hpp
 # endif
 
-# define TC_VECTOR vector<value_type, allocator_type>	// TEMPLATE CLASS VECTOR
-# define EMPTY 0U										// EMPTY SIZE
-
-// ? ***************************************************************************
-// ? *                       CONSTRUCTORS & DESTRUCTOR                         *
-// ? ***************************************************************************
+# define TC_VECTOR	vector<value_type, allocator_type>	// TEMPLATE CLASS VECTOR
+# define EMPTY		0U
 
 using ft::vector;
 using std::cerr;
 using std::endl;
+
+// ? ***************************************************************************
+// ? *                       CONSTRUCTORS & DESTRUCTOR                         *
+// ? ***************************************************************************
 
 template <typename value_type, typename allocator_type>
 TC_VECTOR::vector()
@@ -487,8 +487,8 @@ void	TC_VECTOR::_copy_array(const pointer start, const_pointer end, pointer resu
 {
 	if (start == result)
 		return ;
-	for (pointer p = start; p != end; p++)
-		std::memcpy(result, p, sizeof(value_type));
+	for (pointer p = start; p != end; p++, result++)
+		_alloc.construct(result, value_type(*p));
 }
 
 template <typename value_type, typename allocator_type>
@@ -512,17 +512,15 @@ void	TC_VECTOR::_destroy_array(iterator start, iterator end)
 }
 
 template <typename value_type, typename allocator_type>
-bool	TC_VECTOR::_reallocate(size_type new_capacity)
+void	TC_VECTOR::_reallocate(size_type new_capacity)
 {
-	return ( _reallocate(new_capacity, _array, _end) );
+	_reallocate(new_capacity, _array, _end);
 }
 
 template <typename value_type, typename allocator_type>
-bool	TC_VECTOR::_reallocate(size_type new_capacity, pointer copy_start_point, pointer copy_end_point)
+void	TC_VECTOR::_reallocate(size_type new_capacity, pointer copy_start_point, pointer copy_end_point)
 {
-	bool	ret = (new_capacity != 0);
-
-	if (ret)
+	if (new_capacity != 0)
 	{
 		clear();
 
@@ -532,7 +530,6 @@ bool	TC_VECTOR::_reallocate(size_type new_capacity, pointer copy_start_point, po
 		this->_array = tmp;
 		this->_end = ( this->_array + (copy_end_point - copy_start_point) );
 	}
-	return (ret);
 }
 
 #endif // VECTOR_TPP
