@@ -100,33 +100,33 @@ typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>
 template <typename value_type>
 typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>::operator ++ ()
 {
-	iterator ret(*this);
-
 	(this->_ptr)++;
-	return (ret);
+	return (*this);
 }
 
 template <typename value_type>
 const typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>::operator ++ (int)
 {
+	iterator ret(*this);
+
 	(this->_ptr)++;
-	return (*this);
+	return (ret);
 }
 
 template <typename value_type>
 typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>::operator -- ()
 {
-	iterator ret(*this);
-
 	(this->_ptr)--;
-	return (ret);
+	return (*this);
 }
 
 template <typename value_type>
 const typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>::operator -- (int)
 {
+	iterator ret(*this);
+
 	(this->_ptr)--;
-	return (*this);
+	return (ret);
 }
 
 template <typename value_type>
@@ -197,33 +197,33 @@ typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterat
 template <typename value_type>
 typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator -- ()
 {
-	iterator ret(*this);
-
 	(this->_ptr)++;
-	return (ret);
+	return (*this);
 }
 
 template <typename value_type>
 const typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator -- (int)
 {
+	iterator ret(*this);
+
 	(this->_ptr)++;
-	return (*this);
+	return (ret);
 }
 
 template <typename value_type>
 typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator ++ ()
 {
-	iterator ret(*this);
-
 	(this->_ptr)--;
-	return (ret);
+	return (*this);
 }
 
 template <typename value_type>
 const typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator ++ (int)
 {
+	iterator ret(*this);
+
 	(this->_ptr)--;
-	return (*this);
+	return (ret);
 }
 
 template <typename value_type>
