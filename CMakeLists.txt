@@ -14,6 +14,8 @@ set(HDRS
 set(TPPS
     ${ROOT_DIR}/vector/vector.tpp
     ${ROOT_DIR}/iterator/ContiguousIterator.tpp
+    ${ROOT_DIR}/ft_utils/enable_if.tpp
+    ${ROOT_DIR}/ft_utils/is_integral.tpp
 )
 
 add_executable(ft_containers
