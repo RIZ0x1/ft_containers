@@ -17,9 +17,7 @@
 using std::cout;
 using std::endl;
 
-#include <vector>
-
-template <typename T> void	print_info(vector<T> v);
+template <typename T> void	print_info(vector<T> &v);
 
 int main()
 {
@@ -27,7 +25,11 @@ int main()
 
 	v.push_back(69);
 	v.push_back(70);
-
+	v.erase((v.end() - 1));
+	print_info(v);
+	v.erase((v.begin()));
+	print_info(v);
+	v.assign(static_cast<ft::vector<int>::size_type>(10), static_cast<int>(69));
 	print_info(v);
 
 	return (0);
@@ -36,7 +38,7 @@ int main()
 #define COLUMNS 10
 
 template <typename T>
-void	print_info(ft::vector<T> v)
+void	print_info(ft::vector<T> &v)
 {
 	static short number = 1;
 
