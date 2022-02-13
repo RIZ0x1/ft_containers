@@ -31,7 +31,6 @@ namespace ft {
 		typedef typename iterator_traits<iterator>::reference				const_reference;
 		typedef typename iterator_traits<iterator>::pointer					const_pointer;
 
-
 	private:
 		pointer				_array;
 		pointer				_end;
@@ -46,7 +45,7 @@ namespace ft {
 		template <class InputIt> vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type());
 		~vector();
 
-		void				assign(size_type count, const_reference value);
+		void				assign(size_type count, const value_type& value);
 		allocator_type		get_allocator() const;
 		template <class InputIt> void assign(InputIt first, InputIt last);
 

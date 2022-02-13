@@ -60,35 +60,22 @@ TC_VECTOR::vector(InputIt first, InputIt last, const allocator_type &alloc)
 {
 	this->_alloc = alloc;
 
-	for (; first != last; first++)
+	for (; first != last; first++) // it is bad
 		push_back(*first);
 }
 
 template <typename value_type, typename allocator_type>
 TC_VECTOR::~vector()
 {
-	if (_array)
-		_alloc.destroy(_array);
+	clear();
 }
 
 // ? ***************************************************************************
 // ? *                             MEMBER FUNCTIONS                            *
 // ? ***************************************************************************
 
-template <typename value_type, typename allocator_type> template <typename InputIt>
-void	TC_VECTOR::assign(InputIt first, InputIt last)
-{
-	clear();
-
-	const size_type new_capacity = (last - first);
-	_array = _alloc.allocate(new_capacity);
-	_capacity = new_capacity;
-
-	_copy_array(first, last, _array);
-}
-
 template <typename value_type, typename allocator_type>
-void	TC_VECTOR::assign(size_type count, const_reference value)
+void	TC_VECTOR::assign(size_type count, const value_type& value)
 {
 	clear();
 	_array = this->_alloc.allocate(count);
@@ -98,6 +85,19 @@ void	TC_VECTOR::assign(size_type count, const_reference value)
 	for (; i < count; i++)
 		_array[i] = value;
 	_end = &_array[i];
+}
+
+template <typename value_type, typename allocator_type>
+template <typename InputIt>
+void	TC_VECTOR::assign(InputIt first, InputIt last)
+{
+	clear();
+
+	const size_type new_capacity = (last - first);
+	_array = _alloc.allocate(new_capacity);
+	_capacity = new_capacity;
+
+	_copy_array(&(*first), &(*last), _array);
 }
 
 template <typename value_type, typename allocator_type>
@@ -252,9 +252,9 @@ typename TC_VECTOR::iterator	TC_VECTOR::erase(iterator pos)
 	{
 		_alloc.destroy(&(*pos));
 		if ((pos + 1) != end())
-			std::memcpy(&(*pos), &(*pos + 1), sizeof(value_type));
+			_alloc.construct(&(*pos), *(pos + 1));
 	}
-	_end = &(*pos);
+	(_end--);
 
 	return (ret);
 }
