@@ -21,16 +21,22 @@ template <typename T> void	print_info(vector<T> &v);
 
 int main()
 {
-	ft::vector<int>		v(5);
+	ft::vector<int>			v0;
+	print_info(v0);
 
-	v.push_back(69);
-	v.push_back(70);
-	v.erase((v.end() - 1));
-	print_info(v);
-	v.erase((v.begin()));
-	print_info(v);
-	v.assign(static_cast<ft::vector<int>::size_type>(10), static_cast<int>(69));
-	print_info(v);
+	std::allocator<char>	alloc0;
+	ft::vector<char>		v1(alloc0);
+	print_info(v1);
+
+	std::allocator<char>	alloc1;
+	ft::vector<char>		v2(8, '8', alloc1);
+	print_info(v2);
+
+	v0.assign(7, 77);
+	print_info(v0);
+
+	ft::vector<char>::iterator	it0 = v2.begin();
+	v1.assign(it0, v2.end());
 
 	return (0);
 }
@@ -40,15 +46,13 @@ int main()
 template <typename T>
 void	print_info(ft::vector<T> &v)
 {
-	static short number = 1;
-
-	cout << CYAN << "TEST #" << number++ << " {" << endl;
+	cout << CYAN << "TEST  {" << endl;
 		cout << GREEN	<< TAB << "size: " << v.size() << endl;
 		cout << BLUE	<< TAB << "max_size: " << v.max_size() << endl;
 		cout << NORMAL	<< TAB << "capacity: " << v.capacity() << endl;
 
-		unsigned int			i;
-		ft::vector<int>::iterator	it;
+		unsigned int						i;
+		typename ft::vector<T>::iterator	it;
 
 		cout << TAB << MAGENTA << "elements: {" << endl;
 		it = v.begin();
