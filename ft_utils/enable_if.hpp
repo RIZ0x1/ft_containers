@@ -1,5 +1,5 @@
-#ifndef ENABLE_IF_TPP
-# define ENABLE_IF_TPP
+#ifndef ENABLE_IF_HPP
+# define ENABLE_IF_HPP
 
 namespace ft {
 
@@ -14,4 +14,4 @@ namespace ft {
 
 }
 
-#endif // ENABLE_IF_TPP
+#endif // ENABLE_IF_HPP

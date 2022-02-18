@@ -1,5 +1,5 @@
-#ifndef IS_INTEGRAL_TPP
-# define IS_INTEGRAL_TPP
+#ifndef IS_INTEGRAL_HPP
+# define IS_INTEGRAL_HPP
 
 namespace ft {
 
@@ -29,4 +29,4 @@ namespace ft {
 
 }
 
-#endif // IS_INTEGRAL_TPP
+#endif // IS_INTEGRAL_HPP
