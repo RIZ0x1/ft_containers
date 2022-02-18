@@ -56,11 +56,11 @@ TC_VECTOR::vector(size_type count, const value_type& value, const allocator_type
 }
 
 template <typename value_type, typename allocator_type> template <typename InputIt>
-TC_VECTOR::vector(InputIt first, InputIt last, const allocator_type &alloc)
+TC_VECTOR::vector(InputIt first, InputIt last, const allocator_type &alloc, typename ft::enable_if<!is_integral<InputIt>::value>::type*)
 {
 	this->_alloc = alloc;
 
-	for (; first != last; first++) // it is bad
+	for (; first != last; first++) // this is bad
 		push_back(*first);
 }
 
@@ -89,7 +89,7 @@ void	TC_VECTOR::assign(size_type count, const value_type& value)
 
 template <typename value_type, typename allocator_type>
 template <typename InputIt>
-void	TC_VECTOR::assign(InputIt first, InputIt last)
+void	TC_VECTOR::assign(InputIt first, InputIt last, typename ft::enable_if<!is_integral<InputIt>::value>::type*)
 {
 	clear();
 

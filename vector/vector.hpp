@@ -6,6 +6,8 @@
 # include <iostream>
 # include <stdexcept>
 # include "ContiguousIterator.hpp"
+# include "enable_if.hpp"
+# include "is_integral.hpp"
 
 # ifdef __unix
 #  include <cstring>
@@ -42,12 +44,12 @@ namespace ft {
 		vector(const vector &other);
 		explicit vector(const allocator_type &alloc);
 		explicit vector(size_type count, const value_type& value = value_type(), const allocator_type& alloc = allocator_type());
-		template <class InputIt> vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type());
+		template <class InputIt> vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!is_integral<InputIt>::value>::type* = 0);
 		~vector();
 
 		void				assign(size_type count, const value_type& value);
 		allocator_type		get_allocator() const;
-		template <class InputIt> void assign(InputIt first, InputIt last);
+		template <class InputIt> void assign(InputIt first, InputIt last, typename ft::enable_if<!is_integral<InputIt>::value>::type* = 0);
 
 		reference			front(void);
 		const_reference 	front(void) const;
