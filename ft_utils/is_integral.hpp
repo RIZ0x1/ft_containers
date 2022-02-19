@@ -14,7 +14,9 @@ namespace ft {
 	struct true_type : public integral_constant<bool, true> {};
 	struct false_type : public integral_constant<bool, false> {};
 
-	template <typename T> struct is_integral;
+	template<typename T> struct is_integral : public false_type {};
+	template<typename T> struct is_integral<const T> : public false_type {};
+
 	template<> struct is_integral<bool> : public true_type {};
 	template<> struct is_integral<char> : public true_type {};
 	template<> struct is_integral<unsigned char> : public true_type {};
