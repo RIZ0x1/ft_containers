@@ -1,6 +1,10 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
+# ifdef __unix
+#  include <cstring>
+# endif
+
 # include <memory>
 # include <limits>
 # include <iostream>
@@ -8,10 +12,6 @@
 # include "ContiguousIterator.hpp"
 # include "enable_if.hpp"
 # include "is_integral.hpp"
-
-# ifdef __unix
-#  include <cstring>
-# endif
 
 namespace ft {
 	template < typename T, typename Allocator = std::allocator<T> >
@@ -44,12 +44,12 @@ namespace ft {
 		vector(const vector &other);
 		explicit vector(const allocator_type &alloc);
 		explicit vector(size_type count, const value_type& value = value_type(), const allocator_type& alloc = allocator_type());
-		template <class InputIt> vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!is_integral<InputIt>::value>::type* = 0);
+		template <class InputIt> vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
 		~vector();
 
 		void				assign(size_type count, const value_type& value);
+		template <class InputIt> void assign(InputIt first, InputIt last, typename ft::enable_if<!is_integral<InputIt>::value, InputIt>::type* = NULL);
 		allocator_type		get_allocator() const;
-		template <class InputIt> void assign(InputIt first, InputIt last, typename ft::enable_if<!is_integral<InputIt>::value>::type* = 0);
 
 		reference			front(void);
 		const_reference 	front(void) const;
@@ -60,10 +60,14 @@ namespace ft {
 		pointer				data(void);
 		const_pointer 		data(void) const;
 
-		iterator			begin(void);
-		const_iterator		begin(void) const;
-		iterator 			end(void);
-		const_iterator		end(void) const;
+		iterator				begin(void);
+		const_iterator			begin(void) const;
+		reverse_iterator		rbegin(void);
+		const_reverse_iterator	rbegin(void) const;
+		iterator 				end(void);
+		const_iterator			end(void) const;
+		reverse_iterator 		rend(void);
+		const_reverse_iterator	rend(void) const;
 
 		bool				empty(void) const;
 		size_type			size(void) const;
@@ -97,4 +101,4 @@ namespace ft {
 
 # include "vector.tpp"
 
-#endif // * VECTOR_HPP
+#endif // VECTOR_HPP

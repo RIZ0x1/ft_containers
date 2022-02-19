@@ -1,11 +1,11 @@
 #ifndef VECTOR_TPP
 # define VECTOR_TPP
 
-#include "vector.hpp" // No need
-
 # ifndef VECTOR_HPP
 #  error __FILE__ should only be included from vector.hpp
 # endif
+
+#include "vector.hpp" // No need
 
 # define TC_VECTOR	vector<value_type, allocator_type>	// TEMPLATE CLASS VECTOR
 # define EMPTY		0U
@@ -56,7 +56,7 @@ TC_VECTOR::vector(size_type count, const value_type& value, const allocator_type
 }
 
 template <typename value_type, typename allocator_type> template <typename InputIt>
-TC_VECTOR::vector(InputIt first, InputIt last, const allocator_type &alloc, typename ft::enable_if<!is_integral<InputIt>::value>::type*)
+TC_VECTOR::vector(InputIt first, InputIt last, const allocator_type &alloc, typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type*)
 {
 	this->_alloc = alloc;
 
@@ -89,15 +89,13 @@ void	TC_VECTOR::assign(size_type count, const value_type& value)
 
 template <typename value_type, typename allocator_type>
 template <typename InputIt>
-void	TC_VECTOR::assign(InputIt first, InputIt last, typename ft::enable_if<!is_integral<InputIt>::value>::type*)
+void	TC_VECTOR::assign(InputIt first, InputIt last, typename ft::enable_if<!is_integral<InputIt>::value, InputIt>::type*)
 {
 	clear();
+	const size_type new_capacity = (&(*last) - &(*first));
 
-	const size_type new_capacity = (last - first);
-	_array = _alloc.allocate(new_capacity);
-	_capacity = new_capacity;
-
-	_copy_array(&(*first), &(*last), _array);
+	//_copy_array(&(*first), &(*last), _array);
+	_reallocate(new_capacity, &(*first), &(*last));
 }
 
 template <typename value_type, typename allocator_type>
@@ -179,6 +177,18 @@ typename TC_VECTOR::const_iterator	TC_VECTOR::begin() const
 }
 
 template <typename value_type, typename allocator_type>
+typename TC_VECTOR::reverse_iterator	TC_VECTOR::rbegin()
+{
+	return ( reverse_iterator(_end) );
+}
+
+template <typename value_type, typename allocator_type>
+typename TC_VECTOR::const_reverse_iterator	TC_VECTOR::rbegin() const
+{
+	return ( const_reverse_iterator(_end) );
+}
+
+template <typename value_type, typename allocator_type>
 typename TC_VECTOR::iterator	TC_VECTOR::end()
 {
 	return ( iterator(_end) );
@@ -188,6 +198,18 @@ template <typename value_type, typename allocator_type>
 typename TC_VECTOR::const_iterator	TC_VECTOR::end() const
 {
 	return ( const_iterator(_end) );
+}
+
+template <typename value_type, typename allocator_type>
+typename TC_VECTOR::reverse_iterator	TC_VECTOR::rend()
+{
+	return ( reverse_iterator(_array) );
+}
+
+template <typename value_type, typename allocator_type>
+typename TC_VECTOR::const_reverse_iterator	TC_VECTOR::rend() const
+{
+	return ( const_reverse_iterator(_array) );
 }
 
 // ? ***************************************************************************
@@ -268,7 +290,7 @@ typename TC_VECTOR::iterator	TC_VECTOR::erase(iterator first, iterator last)
 	{
 		_alloc.destroy(&(*it));
 		*it = *last;
-		std::memcpy(&(*it), &(*last), sizeof(value_type));
+		_alloc.construct(&(*it), value_type(*it));
 	}
 	_end = &(*(it + 1));
 
@@ -399,7 +421,7 @@ void	TC_VECTOR::insert(iterator pos, InputIt first, InputIt last)
 	if (capacity() >= (size() + (last - first)) && pos >= end())
 	{
 		for (iterator it = pos; first != last; first++, it++)
-			std::memcpy(&(*it), &(*first), sizeof(value_type));
+			_alloc.construct(&(*it), value_type(*it));
 	}
 	else
 	{
