@@ -35,8 +35,20 @@ int main()
 	v0.assign(7, 77);
 	print_info(v0);
 
-	ft::vector<char>::iterator	it0 = v2.begin();
-	v1.assign(it0, v2.end());
+	v1.assign<ft::vector<char>::iterator>(v2.begin(), v2.end());
+	print_info(v1);
+
+	char c = '0';
+	for (ft::vector<char>::iterator it = v1.begin(); it != v1.end(); it++, c++)
+		*it = c;
+
+	try {
+		for (int i = 0; i < 10; i++)
+			cout << "[" << v1.at(i) << "] ";
+	}
+	catch (std::logic_error &e) {
+		cout << e.what() << "] " << endl;
+	}
 
 	return (0);
 }
