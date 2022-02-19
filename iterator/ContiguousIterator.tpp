@@ -1,11 +1,11 @@
 #ifndef CONTIGUOUS_ITERATOR_TPP
 # define CONTIGUOUS_ITERATOR_TPP
 
-#include "ContiguousIterator.hpp"
-
 # ifndef CONTIGUOUS_ITERATOR_HPP
 #  error __FILE__ should be included only from ContiguousIterator.hpp
 # endif
+
+#include "ContiguousIterator.hpp"
 
 // ? ***************************************************************************
 // ? *                          CONTIGUOUS ITERATOR                            *

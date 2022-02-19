@@ -21,7 +21,7 @@ namespace ft
 		pointer _ptr;
 	public:
 		ContiguousIterator();
-		ContiguousIterator(pointer ptr);
+		explicit ContiguousIterator(pointer ptr);
 		ContiguousIterator(const iterator& other);
 		~ContiguousIterator();
 
@@ -54,7 +54,7 @@ namespace ft
 		typedef typename iterator_traits<iterator>::pointer		pointer;
 	public:
 		ConstContiguousIterator() : ContiguousIterator<const T>() {};
-		ConstContiguousIterator(pointer ptr) : ContiguousIterator<const T>(ptr) {};
+		explicit ConstContiguousIterator(pointer ptr) : ContiguousIterator<const T>(ptr) {};
 		ConstContiguousIterator(const ConstContiguousIterator& other) : ContiguousIterator<const T>::_ptr(other._get_pointer()) {};
 	};
 
@@ -71,7 +71,7 @@ namespace ft
 
 	public:
 		ReverseContiguousIterator();
-		ReverseContiguousIterator(pointer ptr);
+		explicit ReverseContiguousIterator(pointer ptr);
 		ReverseContiguousIterator(const iterator& other);
 		~ReverseContiguousIterator();
 
@@ -93,7 +93,7 @@ namespace ft
 		typedef typename iterator_traits<iterator>::pointer		pointer;
 	public:
 		ConstReverseContiguousIterator() : ReverseContiguousIterator<const T>() {};
-		ConstReverseContiguousIterator(pointer ptr) : ReverseContiguousIterator<const T>(ptr) {};
+		explicit ConstReverseContiguousIterator(pointer ptr) : ReverseContiguousIterator<const T>(ptr) {};
 		ConstReverseContiguousIterator(const ConstReverseContiguousIterator& other) : ReverseContiguousIterator<const T>::_ptr(other._get_pointer()) {};
 	};
 }
