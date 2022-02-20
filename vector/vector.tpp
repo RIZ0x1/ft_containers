@@ -324,47 +324,23 @@ void	TC_VECTOR::pop_back()
 }
 
 template <typename value_type, typename allocator_type>
-void	TC_VECTOR::resize(size_type count)
-{
-	if (count > capacity())
-		reserve(count);
-
-	const_iterator	new_end = ( begin() + count );
-
-	if (count > size())
-	{
-		iterator		it = new_end;
-
-		for (; it != end(); it++)
-			_alloc.construct(&(*it), value_type());
-		_end = &(*new_end);
-	}
-	else if (count < size())
-	{
-		erase(new_end, _end);
-	}
-}
-
-template <typename value_type, typename allocator_type>
 void	TC_VECTOR::resize(size_type count, value_type value)
 {
-	if (count > capacity())
-		reserve(count);
-
-	const_iterator	new_end = ( begin() + count );
-
-	if (count > size())
+	try
 	{
-		iterator		it = new_end;
-
-		for (; it != end(); it++)
-			_alloc.construct(&(*it), value_type(value));
-		_end = &(*new_end);
+		if (size() > count)
+		{
+			_reallocate(size());
+		}
+		else
+		{
+			if (capacity() != count)
+				_reallocate(count);
+			for (size_type i = size(); i < count; i++)
+				push_back(value);
+		}
 	}
-	else if (count < size())
-	{
-		erase(new_end, _end);
-	}
+	catch (std::length_error &e) { }
 }
 
 template <typename value_type, typename allocator_type>

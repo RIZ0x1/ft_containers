@@ -80,7 +80,6 @@ namespace ft {
 		iterator			erase(iterator first, iterator last);
 		void				push_back(const value_type& value);
 		void				pop_back(void);
-		void				resize(size_type count);
 		void				resize(size_type count, value_type value = value_type());
 		void				swap(vector& other);
 		void				insert(iterator pos, size_type count, const_reference value);
