@@ -137,7 +137,7 @@ typename TC_VECTOR::reference	TC_VECTOR::at(const size_type pos)
 {
 	if (pos >= size())
 		throw std::out_of_range("ERROR: Index is out of range");
-	return (_array[pos]);
+	return ( _array[pos] );
 }
 
 template <typename value_type, typename allocator_type>
@@ -145,7 +145,7 @@ typename TC_VECTOR::const_reference	TC_VECTOR::at(size_type pos) const
 {
 	if (pos >= size())
 		throw std::out_of_range("ERROR: Index is out of range");
-	return (_array[pos]);
+	return ( _array[pos] );
 }
 
 template <typename value_type, typename allocator_type>
@@ -235,12 +235,12 @@ typename TC_VECTOR::size_type	TC_VECTOR::max_size() const
 }
 
 template <typename value_type, typename allocator_type>
-void	TC_VECTOR::reserve(size_type new_cap)
+void	TC_VECTOR::reserve(size_type new_capacity)
 {
-	if (new_cap > max_size())
+	if (new_capacity > max_size())
 		throw std::length_error("ERROR: New capacity value is too high [ vector::reserve() ]");
-	if (new_cap > capacity())
-		_reallocate(new_cap);
+	if (new_capacity > capacity())
+		_reallocate(new_capacity);
 }
 
 template <typename value_type, typename allocator_type>
@@ -292,8 +292,7 @@ typename TC_VECTOR::iterator	TC_VECTOR::erase(iterator first, iterator last)
 		*it = *last;
 		_alloc.construct(&(*it), value_type(*it));
 	}
-	_end = &(*(it + 1));
-
+	_end = &(*(it));
 	return (first);
 }
 
@@ -317,8 +316,11 @@ void	TC_VECTOR::push_back(const value_type& value)
 template <typename value_type, typename allocator_type>
 void	TC_VECTOR::pop_back()
 {
-	_alloc.destroy(_end - 1);
-	_end--;
+	if (_end != _array)
+	{
+		_alloc.destroy(_end - 1);
+		(_end--);
+	}
 }
 
 template <typename value_type, typename allocator_type>
