@@ -82,9 +82,9 @@ namespace ft {
 		void				pop_back(void);
 		void				resize(size_type count, value_type value = value_type());
 		void				swap(vector& other);
-		void				insert(iterator pos, size_type count, const_reference value);
-		iterator			insert(iterator pos, const_reference value);
-		template<class InputIt> void insert( iterator pos, InputIt first, InputIt last );
+		void				insert(iterator pos, size_type count, const_reference value);	// todo: I dont want to test this right now
+		iterator			insert(iterator pos, const_reference value);	// todo: damn
+		template<class InputIt> void insert( iterator pos, InputIt first, InputIt last , typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);	// todo: curse you!
 
 		vector&				operator = (const vector &other);
 		value_type&			operator [] (size_type pos) const;

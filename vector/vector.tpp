@@ -372,29 +372,24 @@ typename TC_VECTOR::iterator	TC_VECTOR::insert(iterator pos, const_reference val
 	}
 	else
 	{
-		pointer 	array_second_part = _allocate_array(_end - pos);
-		_copy_array(pos, _end, array_second_part);
+		pointer new_array = _alloc.allocate(size());
+		pointer p_pos_a = &(*pos);
 
-		pointer 	new_array = _allocate_array(size() + 1);
-		_copy_array(begin(), pos, new_array);
+		_copy_array(_array, p_pos_a, new_array);
 
-		size_type	n_pos = ( pos - begin() );
+		pointer	p_pos_b = ( new_array + (p_pos_a - _array) );
 
-		_destroy_array(begin(), end());
+		*p_pos_b = value;
+		_copy_array(p_pos_a, _end, p_pos_b + 1);
+		_capacity = ( size() + 1 );
 		_array = new_array;
-
-		pos = (_array + n_pos);
-		_end = (pos + 1);
-		push_back(value);
-		_end = (new_array + size() + 1);
-		_copy_array((pos + 1), _end, new_array);
-		(_capacity++);
+		_end = (new_array + _capacity);
 	}
 	return (pos);
 }
 
 template <typename value_type, typename allocator_type> template <typename InputIt>
-void	TC_VECTOR::insert(iterator pos, InputIt first, InputIt last)
+void	TC_VECTOR::insert(iterator pos, InputIt first, InputIt last, typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type*)
 {
 	if (capacity() >= (size() + (last - first)) && pos >= end())
 	{
