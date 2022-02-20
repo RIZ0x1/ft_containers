@@ -32,6 +32,7 @@
 *.app
 
 # Added by RIZ0x1
+.DS_Store
 .vscode
 ft_out.dSYM
 std_out.dSYM
