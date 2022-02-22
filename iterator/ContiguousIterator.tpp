@@ -8,12 +8,12 @@
 #include "ContiguousIterator.hpp"
 
 // ? ***************************************************************************
+// ? ***************************************************************************
 // ? *                          CONTIGUOUS ITERATOR                            *
+// ? ***************************************************************************
 // ? ***************************************************************************
 
 using ft::ContiguousIterator;
-
-// ? ************************** CONSTRUCTORS & DESTRUCTOR **********************
 
 template <typename value_type>
 ContiguousIterator<value_type>::ContiguousIterator() : _ptr(NULL)
@@ -35,7 +35,9 @@ ContiguousIterator<value_type>::~ContiguousIterator()
 {
 }
 
-// ? ************************** OPERATOR OVERLOADS *****************************
+// ? ***************************************************************************
+// ? *                           OPERATOR OVERLOADS                            *
+// ? ***************************************************************************
 
 template <typename value_type>
 bool	ContiguousIterator<value_type>::operator == (const iterator &other) const
@@ -77,6 +79,12 @@ template <typename value_type>
 typename ContiguousIterator<value_type>::reference	ContiguousIterator<value_type>::operator * () const
 {
 	return ( *_get_pointer() );
+}
+
+template <typename value_type>
+typename ContiguousIterator<value_type>::reference	ContiguousIterator<value_type>::operator [] (const size_type pos) const
+{
+	return ( *(_get_pointer() + pos) );
 }
 
 template <typename value_type>
@@ -143,7 +151,9 @@ typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>
 	return (*this);
 }
 
-// ? ************************** PROTECTED METHODS ******************************
+// ? ***************************************************************************
+// ? *                            PROTECTED METHODS                            *
+// ? ***************************************************************************
 
 template <typename value_type>
 typename ContiguousIterator<value_type>::pointer ContiguousIterator<value_type>::_get_pointer() const
@@ -152,12 +162,16 @@ typename ContiguousIterator<value_type>::pointer ContiguousIterator<value_type>:
 }
 
 // ? ***************************************************************************
-// ? *                         REVERSE CONTIGUOUS ITERATOR                     *
+// ? ***************************************************************************
+// ? *                      REVERSE CONTIGUOUS ITERATOR                        *
+// ? ***************************************************************************
+// ? ***************************************************************************
+
+// ? ***************************************************************************
+// ? *                        CONSTRUCTORS & DESTRUCTOR                        *
 // ? ***************************************************************************
 
 using ft::ReverseContiguousIterator;
-
-// ? ************************** CONSTRUCTORS & DESTRUCTOR **********************
 
 template <typename value_type>
 ReverseContiguousIterator<value_type>::ReverseContiguousIterator() : ReverseContiguousIterator()
@@ -180,7 +194,9 @@ ReverseContiguousIterator<value_type>::~ReverseContiguousIterator()
 {
 }
 
-// ? ************************** OPERATOR OVERLOADS *****************************
+// ? ***************************************************************************
+// ? *                           OPERATOR OVERLOADS                            *
+// ? ***************************************************************************
 
 template <typename value_type>
 typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator - (const difference_type N) const

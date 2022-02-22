@@ -16,6 +16,7 @@ namespace ft
 		typedef typename iterator_traits<traits>::pointer				pointer;
 		typedef typename iterator_traits<traits>::reference				reference;
 		typedef ContiguousIterator<T>									iterator;
+		typedef unsigned long											size_type;
 
 	protected:
 		pointer _ptr;
@@ -32,6 +33,7 @@ namespace ft
 		bool						operator <= (const iterator &other) const;
 		bool						operator >= (const iterator &other) const;
 		reference					operator *	(void) const;
+		reference					operator [] (const size_type pos) const;
 		pointer						operator -> (void) const;
 		virtual iterator			operator + (const difference_type N) const;
 		virtual iterator			operator - (const difference_type N) const;
