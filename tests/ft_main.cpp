@@ -32,69 +32,73 @@ int main()
 	ft::vector<char>		v2(8, '8', alloc1);
 	print_info(v2);
 
-	v0.assign(70, 77);
-	print_info(v0);
-
-	v1.assign<ft::vector<char>::iterator>(v2.begin(), v2.end());
+	v0.assign(70, 77);                                           // // ASSIGN
+	print_info(v0);                                              //
+	v1.assign<ft::vector<char>::iterator>(v2.begin(), v2.end()); //
 	print_info(v1);
 
-	char c = '0';
-	for (ft::vector<char>::iterator it = v1.begin(); it != v1.end(); it++, c++)
-		*it = c;
+	char c = '0';                                                                // // ITERATOR
+	for (ft::vector<char>::iterator it = v1.begin(); it != v1.end(); it++, c++)  //
+		*it = c;                                                                 //
 
-	try {
-		for (int i = 0; i < 10; i++)
-			cout << "[" << v1.at(i) << "] ";
-	}
-	catch (std::logic_error &e) {
-		cout << e.what() << "] ";
-	}
-	cout << endl;
+	try {                                      // // AT
+		for (int i = 0; i < 10; i++)           //
+			cout << "[" << v1.at(i) << "] ";   //
+	}                                          //
+	catch (std::logic_error &e) {              //
+		cout << e.what() << "] ";              //
+	}                                          //
+	cout << endl;                              //
 
-	ft::vector<char>::pointer 	p = v1.data();
-	for (; p != &(*v1.end()); p++)
-		cout << '[' << *p << "] ";
-	cout << endl;
+	ft::vector<char>::pointer 	p = v1.data(); // // DATA
+	for (; p != &(*v1.end()); p++)             //
+		cout << '[' << *p << "] ";             //
+	cout << endl;                              //
 
 	v1.reserve(50);
 	print_info(v1);
 
-	ft::vector<char>::iterator	it = v1.begin();
-	for (size_t i = 0; i < 4; i++)
-		(it++);
-	v1.erase(it);
-	print_info(v1);
-	it = v1.begin();
-	for (size_t i = 0; i < 4; i++)
-		(it++);
-	v1.erase(v1.begin(), it);
-	print_info(v1);
+	ft::vector<char>::iterator	it = v1.begin();  // // ERASE
+	for (size_t i = 0; i < 4; i++)                //
+		(it++);                                   //
+	v1.erase(it);                                 //
+	print_info(v1);                               //
+	it = v1.begin();                              //
+	for (size_t i = 0; i < 4; i++)                //
+		(it++);                                   //
+	v1.erase(v1.begin(), it);                     //
+	print_info(v1);                               //
 
-	v1.pop_back();			// 5 6 [7]
-	print_info(v1);		//
-	v1.pop_back();			// 5 [6]
-	v1.pop_back();			// [5]
-	print_info(v1);		//
-	v1.pop_back();			// empty
-	print_info(v1);		//
+	v1.pop_back();      // 5 6 [7]   // POP_BACK
+	print_info(v1);     //
+	v1.pop_back();      // 5 [6]
+	v1.pop_back();      // [5]
+	print_info(v1);     //
+	v1.pop_back();      // empty
+	print_info(v1);     //
 
-	v0.assign(40, 69);
-	print_info(v0);
-	v0.resize(69, 70);
-	print_info(v0);
-	v0.resize(-1);
+	v0.assign(40, 69);        // // RESIZE
+	print_info(v0);           //
+	v0.resize(69, 70);        //
+	print_info(v0, "RESIZE"); //
+	v0.resize(-1);            //
 
-	ft::vector<int>		new_v0;
-	v0.swap(new_v0);
-	print_info(v0, "V0");
-	print_info(new_v0, "NEW_V0");
+	ft::vector<int>		new_v0;    // // SWAP
+	v0.swap(new_v0);               //
+	print_info(v0, "V0");          //
+	print_info(new_v0, "NEW_V0");  //
 
-	ft::vector<int>::iterator	iit = new_v0.begin();
-	for (size_t i = 0; i < 10; i++)
-		(iit++);
-	int x = 50;
-	new_v0.insert(iit, x);
-	print_info(new_v0);
+	ft::vector<int>::iterator	iit = new_v0.begin();  // // INSERT
+	for (size_t i = 0; i < 10; i++)                    //
+		(iit++);                                       //
+	int x = 50;                                        //
+	new_v0.insert(iit, x);                             //
+	print_info(new_v0, "INSERT");                      //
+
+	iit = new_v0.begin();                       // // iterator::operator []
+	for (size_t i = 0; i < new_v0.size(); i++)  //
+		cout << iit[i] << TAB;                  //
+	cout << endl;                               //
 
 	return (0);
 }
