@@ -7,6 +7,9 @@
 
 #include "ContiguousIterator.hpp"
 
+# define TC_CONT_ITER ContiguousIterator<value_type>
+# define TC_REV_CONT_ITER ReverseContiguousIterator<value_type>
+
 // ? ***************************************************************************
 // ? ***************************************************************************
 // ? *                          CONTIGUOUS ITERATOR                            *
@@ -16,22 +19,22 @@
 using ft::ContiguousIterator;
 
 template <typename value_type>
-ContiguousIterator<value_type>::ContiguousIterator() : _ptr(NULL)
+TC_CONT_ITER::ContiguousIterator() : _ptr(NULL)
 {
 }
 
 template <typename value_type>
-ContiguousIterator<value_type>::ContiguousIterator(pointer ptr) : _ptr(ptr)
+TC_CONT_ITER::ContiguousIterator(pointer ptr) : _ptr(ptr)
 {
 }
 
 template <typename value_type>
-ContiguousIterator<value_type>::ContiguousIterator(const iterator& other) : _ptr(other._get_pointer())
+TC_CONT_ITER::ContiguousIterator(const iterator& other) : _ptr(other._get_pointer())
 {
 }
 
 template <typename value_type>
-ContiguousIterator<value_type>::~ContiguousIterator()
+TC_CONT_ITER::~ContiguousIterator()
 {
 }
 
@@ -40,80 +43,80 @@ ContiguousIterator<value_type>::~ContiguousIterator()
 // ? ***************************************************************************
 
 template <typename value_type>
-bool	ContiguousIterator<value_type>::operator == (const iterator &other) const
+bool	TC_CONT_ITER::operator == (const iterator &other) const
 {
 	return ( this->_get_pointer() == other._get_pointer() );
 }
 
 template <typename value_type>
-bool	ContiguousIterator<value_type>::operator != (const iterator &other) const
+bool	TC_CONT_ITER::operator != (const iterator &other) const
 {
 	return ( this->_get_pointer() != other._get_pointer() );
 }
 
 template <typename value_type>
-bool	ContiguousIterator<value_type>::operator < (const iterator &other) const
+bool	TC_CONT_ITER::operator < (const iterator &other) const
 {
 	return ( this->_get_pointer() < other._get_pointer() );
 }
 
 template <typename value_type>
-bool	ContiguousIterator<value_type>::operator > (const iterator &other) const
+bool	TC_CONT_ITER::operator > (const iterator &other) const
 {
 	return ( this->_get_pointer() > other._get_pointer() );
 }
 
 template <typename value_type>
-bool	ContiguousIterator<value_type>::operator <= (const iterator &other) const
+bool	TC_CONT_ITER::operator <= (const iterator &other) const
 {
 	return ( this->_get_pointer() <= other._get_pointer() );
 }
 
 template <typename value_type>
-bool	ContiguousIterator<value_type>::operator >= (const iterator &other) const
+bool	TC_CONT_ITER::operator >= (const iterator &other) const
 {
 	return ( this->_get_pointer() >= other._get_pointer() );
 }
 
 template <typename value_type>
-typename ContiguousIterator<value_type>::reference	ContiguousIterator<value_type>::operator * () const
+typename TC_CONT_ITER::reference	TC_CONT_ITER::operator * () const
 {
 	return ( *_get_pointer() );
 }
 
 template <typename value_type>
-typename ContiguousIterator<value_type>::reference	ContiguousIterator<value_type>::operator [] (const size_type pos) const
+typename TC_CONT_ITER::reference	TC_CONT_ITER::operator [] (const size_type pos) const
 {
 	return ( *(_get_pointer() + pos) );
 }
 
 template <typename value_type>
-typename ContiguousIterator<value_type>::pointer	ContiguousIterator<value_type>::operator -> () const
+typename TC_CONT_ITER::pointer	TC_CONT_ITER::operator -> () const
 {
 	return ( _get_pointer() );
 }
 
 template <typename value_type>
-typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>::operator + (const difference_type N) const
+typename TC_CONT_ITER::iterator	TC_CONT_ITER::operator + (const difference_type N) const
 {
 	return ( iterator(_get_pointer() + N) );
 }
 
 template <typename value_type>
-typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>::operator - (const difference_type N) const
+typename TC_CONT_ITER::iterator	TC_CONT_ITER::operator - (const difference_type N) const
 {
 	return ( iterator(_get_pointer() - N) );
 }
 
 template <typename value_type>
-typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>::operator ++ ()
+typename TC_CONT_ITER::iterator	TC_CONT_ITER::operator ++ ()
 {
 	(this->_ptr)++;
 	return (*this);
 }
 
 template <typename value_type>
-const typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>::operator ++ (int)
+const typename TC_CONT_ITER::iterator	TC_CONT_ITER::operator ++ (int)
 {
 	iterator ret(*this);
 
@@ -122,14 +125,14 @@ const typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value
 }
 
 template <typename value_type>
-typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>::operator -- ()
+typename TC_CONT_ITER::iterator	TC_CONT_ITER::operator -- ()
 {
 	(this->_ptr)--;
 	return (*this);
 }
 
 template <typename value_type>
-const typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>::operator -- (int)
+const typename TC_CONT_ITER::iterator	TC_CONT_ITER::operator -- (int)
 {
 	iterator ret(*this);
 
@@ -138,14 +141,14 @@ const typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value
 }
 
 template <typename value_type>
-typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>::operator += (const difference_type N)
+typename TC_CONT_ITER::iterator	TC_CONT_ITER::operator += (const difference_type N)
 {
 	this->_ptr += N;
 	return (*this);
 }
 
 template <typename value_type>
-typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>::operator -= (const difference_type N)
+typename TC_CONT_ITER::iterator	TC_CONT_ITER::operator -= (const difference_type N)
 {
 	this->_ptr -= N;
 	return (*this);
@@ -156,7 +159,7 @@ typename ContiguousIterator<value_type>::iterator	ContiguousIterator<value_type>
 // ? ***************************************************************************
 
 template <typename value_type>
-typename ContiguousIterator<value_type>::pointer ContiguousIterator<value_type>::_get_pointer() const
+typename TC_CONT_ITER::pointer TC_CONT_ITER::_get_pointer() const
 {
 	return (_ptr);
 }
@@ -174,23 +177,23 @@ typename ContiguousIterator<value_type>::pointer ContiguousIterator<value_type>:
 using ft::ReverseContiguousIterator;
 
 template <typename value_type>
-ReverseContiguousIterator<value_type>::ReverseContiguousIterator() : ReverseContiguousIterator()
+TC_REV_CONT_ITER::ReverseContiguousIterator() : ReverseContiguousIterator()
 {
 }
 
 template <typename value_type>
-ReverseContiguousIterator<value_type>::ReverseContiguousIterator(pointer ptr) : ReverseContiguousIterator(ptr)
+TC_REV_CONT_ITER::ReverseContiguousIterator(pointer ptr) : ReverseContiguousIterator(ptr)
 {
 }
 
 template <typename value_type>
-ReverseContiguousIterator<value_type>::ReverseContiguousIterator(const ReverseContiguousIterator& other)
+TC_REV_CONT_ITER::ReverseContiguousIterator(const ReverseContiguousIterator& other)
 {
 	this->_ptr = other._get_pointer();
 }
 
 template <typename value_type>
-ReverseContiguousIterator<value_type>::~ReverseContiguousIterator()
+TC_REV_CONT_ITER::~ReverseContiguousIterator()
 {
 }
 
@@ -199,26 +202,26 @@ ReverseContiguousIterator<value_type>::~ReverseContiguousIterator()
 // ? ***************************************************************************
 
 template <typename value_type>
-typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator - (const difference_type N) const
+typename TC_REV_CONT_ITER::iterator	TC_REV_CONT_ITER::operator - (const difference_type N) const
 {
 	return ( iterator(this->_get_pointer() + N) );
 }
 
 template <typename value_type>
-typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator + (const difference_type N) const
+typename TC_REV_CONT_ITER::iterator	TC_REV_CONT_ITER::operator + (const difference_type N) const
 {
 	return ( iterator(this->_get_pointer() - N) );
 }
 
 template <typename value_type>
-typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator -- ()
+typename TC_REV_CONT_ITER::iterator	TC_REV_CONT_ITER::operator -- ()
 {
 	(this->_ptr)++;
 	return (*this);
 }
 
 template <typename value_type>
-const typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator -- (int)
+const typename TC_REV_CONT_ITER::iterator	TC_REV_CONT_ITER::operator -- (int)
 {
 	iterator ret(*this);
 
@@ -227,14 +230,14 @@ const typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguous
 }
 
 template <typename value_type>
-typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator ++ ()
+typename TC_REV_CONT_ITER::iterator	TC_REV_CONT_ITER::operator ++ ()
 {
 	(this->_ptr)--;
 	return (*this);
 }
 
 template <typename value_type>
-const typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator ++ (int)
+const typename TC_REV_CONT_ITER::iterator	TC_REV_CONT_ITER::operator ++ (int)
 {
 	iterator ret(*this);
 
@@ -243,14 +246,14 @@ const typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguous
 }
 
 template <typename value_type>
-typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator -= (const difference_type N)
+typename TC_REV_CONT_ITER::iterator	TC_REV_CONT_ITER::operator -= (const difference_type N)
 {
 	this->_ptr += N;
 	return (*this);
 }
 
 template <typename value_type>
-typename ReverseContiguousIterator<value_type>::iterator	ReverseContiguousIterator<value_type>::operator += (const difference_type N)
+typename TC_REV_CONT_ITER::iterator	TC_REV_CONT_ITER::operator += (const difference_type N)
 {
 	this->_ptr -= N;
 	return (*this);

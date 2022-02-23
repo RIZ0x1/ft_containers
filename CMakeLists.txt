@@ -20,7 +20,6 @@ set(TPPS
 add_executable(ft_containers
     ${SRCS}
     ${HDRS}
-    ${TPPS}
 )
 
 target_include_directories(ft_containers PUBLIC
