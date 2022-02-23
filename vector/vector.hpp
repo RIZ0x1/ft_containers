@@ -44,11 +44,13 @@ namespace ft {
 		vector(const vector &other);
 		explicit vector(const allocator_type &alloc);
 		explicit vector(size_type count, const value_type& value = value_type(), const allocator_type& alloc = allocator_type());
-		template <class InputIt> vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
+		template <class InputIt>
+			vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
 		~vector();
 
-		void				assign(size_type count, const value_type& value);
-		template <class InputIt> void assign(InputIt first, InputIt last, typename ft::enable_if<!is_integral<InputIt>::value, InputIt>::type* = NULL);
+		void	assign(size_type count, const value_type& value);
+		template <class InputIt>
+			void	assign(InputIt first, InputIt last, typename ft::enable_if<!is_integral<InputIt>::value, InputIt>::type* = NULL);
 		allocator_type		get_allocator() const;
 
 		reference			front(void);
@@ -82,9 +84,10 @@ namespace ft {
 		void				pop_back(void);
 		void				resize(size_type count, value_type value = value_type());
 		void				swap(vector& other);
-		void				insert(iterator pos, size_type count, const_reference value);	// todo: I dont want to test this right now
-		iterator			insert(iterator pos, const_reference value);	// todo: damn
-		template<class InputIt> void insert( iterator pos, InputIt first, InputIt last , typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);	// todo: curse you!
+		void				insert(iterator pos, size_type count, const_reference value);
+		iterator			insert(iterator pos, const_reference value);
+		template<class InputIt>
+				void insert( iterator pos, InputIt first, InputIt last , typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);	// todo: curse you!
 
 		vector&				operator = (const vector &other);
 		value_type&			operator [] (size_type pos) const;

@@ -7,12 +7,9 @@
 
 #include "vector.hpp" // No need
 
-# define TC_VECTOR	vector<value_type, allocator_type>	// TEMPLATE CLASS VECTOR
-# define EMPTY		0U
+# define TC_VECTOR	vector<value_type, allocator_type>	// Template Class 'vector'
 
 using ft::vector;
-using std::cerr;
-using std::endl;
 
 // ? ***************************************************************************
 // ? *                       CONSTRUCTORS & DESTRUCTOR                         *
@@ -24,11 +21,11 @@ TC_VECTOR::vector()
 	_alloc = allocator_type();
 	_array = NULL;
 	_end = _array;
-	_capacity = EMPTY;
+	_capacity = 0;
 }
 
 template <typename value_type, typename allocator_type>
-TC_VECTOR::vector(const vector &other) : _capacity(EMPTY), _array(NULL), _end(_array)
+TC_VECTOR::vector(const vector &other) : _capacity(0), _array(NULL), _end(_array)
 {
 	operator=(other);
 }
@@ -39,7 +36,7 @@ TC_VECTOR::vector(const allocator_type &alloc)
 	this->_alloc = alloc;
 	_array = NULL;
 	_end = _array;
-	_capacity = EMPTY;
+	_capacity = 0;
 }
 
 template <typename value_type, typename allocator_type>
