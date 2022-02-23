@@ -68,6 +68,7 @@ template <typename value_type, typename allocator_type>
 TC_VECTOR::~vector()
 {
 	clear();
+	delete _array;
 }
 
 // ? ***************************************************************************
@@ -366,13 +367,15 @@ void		TC_VECTOR::swap(TC_VECTOR &other)
 template <typename value_type, typename allocator_type>
 typename TC_VECTOR::iterator	TC_VECTOR::insert(iterator pos, const_reference value)
 {
-	if (capacity() > size() && pos >= end())
+	size_type	new_size = ( size() + 1 );
+
+	if ( capacity() > size() && pos >= end() )
 	{
 		*pos = value;
 	}
 	else
 	{
-		pointer new_array = _alloc.allocate(size());
+		pointer new_array = _alloc.allocate(new_size);
 		pointer p_pos_a = &(*pos);
 
 		_copy_array(_array, p_pos_a, new_array);
@@ -381,9 +384,12 @@ typename TC_VECTOR::iterator	TC_VECTOR::insert(iterator pos, const_reference val
 
 		*p_pos_b = value;
 		_copy_array(p_pos_a, _end, p_pos_b + 1);
-		_capacity = ( size() + 1 );
+
+		clear();
+		delete _array;
 		_array = new_array;
-		_end = (new_array + _capacity);
+		_capacity = new_size;
+		_end = (_array + _capacity);
 	}
 	return (pos);
 }
@@ -391,30 +397,33 @@ typename TC_VECTOR::iterator	TC_VECTOR::insert(iterator pos, const_reference val
 template <typename value_type, typename allocator_type> template <typename InputIt>
 void	TC_VECTOR::insert(iterator pos, InputIt first, InputIt last, typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type*)
 {
-	if (capacity() >= (size() + (last - first)) && pos >= end())
+	const size_type	new_size = (size() + ( &(*last) - &(*first) ));
+
+	if ( capacity() >= new_size && pos >= end() )
 	{
-		for (iterator it = pos; first != last; first++, it++)
-			_alloc.construct(&(*it), value_type(*it));
+		for (; first != last; first++)
+			push_back(*first);
 	}
 	else
 	{
-		pointer 	array_second_part = _allocate_array(_end - pos);
+		const pointer	second_part_size = _end - &(*pos);
+		pointer			array_second_part = _allocate_array(second_part_size);
 		_copy_array(pos, _end, array_second_part);
 
-		pointer 	new_array = _allocate_array(size() + 1);
+		pointer	new_array = _allocate_array(new_size);
 		_copy_array(begin(), pos, new_array);
 
-		size_type	n_pos = ( pos - begin() );
+		size_type n_pos = ( &(*pos) - &(*begin()) );
+		for (; first != last; first++, n_pos++)
+			*(new_array + n_pos) = *first;
 
-		_destroy_array(begin(), end());
+		_copy_array( array_second_part, (array_second_part + second_part_size), (new_array + n_pos) );
+
+		clear();
+		delete _array;
 		_array = new_array;
-
-		pos = (_array + n_pos);
-		_end = (pos + 1);
-		_copy_array(first, last, pos);
-		_end = (new_array + size() + 1);
-		_copy_array((pos + 1), _end, new_array);
-		(_capacity++);
+		_capacity = new_size;
+		_end = (_array + new_size);
 	}
 	return (pos);
 }
@@ -422,33 +431,32 @@ void	TC_VECTOR::insert(iterator pos, InputIt first, InputIt last, typename ft::e
 template <typename value_type, typename allocator_type>
 void	TC_VECTOR::insert(iterator pos, size_type count, const_reference value)
 {
-	if (capacity() >= ( size() + count ) && pos >= end())
+	const size_type	new_size = ( size() + count );
+
+	if ( capacity() >= new_size && pos >= end() )
 	{
-		for (iterator it = pos; count > 0; count--, it++)
-			*it = value;
+		for (size_type i = 0; i < count; i++, pos++)
+			push_back(*pos);
 	}
 	else
 	{
-		pointer 	array_second_part = _allocate_array(_end - pos);
+		const pointer	second_part_size = _end - &(*pos);
+		pointer			array_second_part = _allocate_array(second_part_size);
 		_copy_array(pos, _end, array_second_part);
 
-		pointer 	new_array = _allocate_array(size() + 1);
+		pointer	new_array = _allocate_array(new_size);
 		_copy_array(begin(), pos, new_array);
 
-		size_type	n_pos = ( pos - begin() );
+		size_type n_pos = ( &(*pos) - &(*begin()) );
+		for (size_type i = 0; i < count; i++)
+			*(new_array + n_pos) = value;
+		_copy_array( array_second_part, (array_second_part + second_part_size), (new_array + n_pos) );
 
-		_destroy_array(begin(), end());
+		clear();
+		delete _array;
 		_array = new_array;
-
-		pos = (_array + n_pos);
-		_end = (pos + 1);
-
-		for (iterator it = pos; count > 0; count--, it++)
-			*it = value;
-
-		_end = (new_array + size() + 1);
-		_copy_array((pos + 1), _end, new_array);
-		(_capacity++);
+		_capacity = new_size;
+		_end = (_array + new_size);
 	}
 	return (pos);
 }
