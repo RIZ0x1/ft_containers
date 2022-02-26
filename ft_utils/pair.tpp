@@ -1,11 +1,11 @@
 #ifndef PAIR_TPP
 # define PAIR_TPP
 
+#include "pair.hpp" // no need
+
 # ifndef PAIR_HPP
 #  error __FILE__ should only be included from pair.hpp
 # endif
-
-#include "pair.hpp"
 
 #define TC_PAIR pair<first_type, second_type> // Template Class 'pair'
 

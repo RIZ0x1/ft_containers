@@ -1,11 +1,11 @@
 #ifndef VECTOR_TPP
 # define VECTOR_TPP
 
+#include "vector.hpp" // No need
+
 # ifndef VECTOR_HPP
 #  error __FILE__ should only be included from vector.hpp
 # endif
-
-#include "vector.hpp" // No need
 
 # define TC_VECTOR	vector<value_type, allocator_type>	// Template Class 'vector'
 
