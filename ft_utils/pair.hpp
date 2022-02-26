@@ -22,6 +22,12 @@ namespace ft
 		~pair();
 
 		pair&	operator = (const pair& other);
+		bool	operator == (const pair& other);
+		bool	operator != (const pair& other);
+		bool	operator < (const pair& other);
+		bool	operator <= (const pair& other);
+		bool	operator > (const pair& other);
+		bool	operator >= (const pair& other);
 	};
 
 	template <typename T1, typename T2>

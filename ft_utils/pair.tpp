@@ -1,3 +1,4 @@
+
 #ifndef PAIR_TPP
 # define PAIR_TPP
 
@@ -41,14 +42,63 @@ TC_PAIR::pair(const pair<U1, U2> &other)
 template <typename first_type, typename second_type>
 TC_PAIR::~pair()
 {
-
 }
+
+// ? ***************************************************************************
+// ? *                       CONSTRUCTORS & DESTRUCTOR                         *
+// ? ***************************************************************************
 
 template <typename first_type, typename second_type>
 TC_PAIR& TC_PAIR::operator = (const pair& other)
 {
-
+	this->t = other.t;
+	this->u = other.u;
 }
 
+template <typename first_type, typename second_type>
+bool TC_PAIR::operator == (const pair& other)
+{
+	return (this->t == other.t && this->u == other.u);
+}
+
+template <typename first_type, typename second_type>
+bool TC_PAIR::operator != (const pair& other)
+{
+	return (this->t != other.t && this->u != other.u);
+}
+
+template <typename first_type, typename second_type>
+bool TC_PAIR::operator < (const pair& other)
+{
+	return (this->t >= other.t) ? false : (this->u < other.u);
+}
+
+template <typename first_type, typename second_type>
+bool TC_PAIR::operator <= (const pair& other)
+{
+	return (this->t > other.t ? false : (this->u <= other.u));
+}
+
+template <typename first_type, typename second_type>
+bool TC_PAIR::operator > (const pair& other)
+{
+	return (this->t <= other.t) ? false : (this->u > other.u);
+}
+
+template <typename first_type, typename second_type>
+bool TC_PAIR::operator >= (const pair& other)
+{
+	return (this->t < other.t) ? false : (this->u >= other.u);
+}
+
+// ? ***************************************************************************
+// ? *                              MAKE_PAIR                                  *
+// ? ***************************************************************************
+
+template <typename T1, typename T2>
+pair<T1, T2> make_pair(T1 t, T2 u)
+{
+	return ( ft::pair<T1, T2>(t, u) );
+}
 
 #endif // PAIR_TPP
