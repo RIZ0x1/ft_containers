@@ -8,7 +8,7 @@ set(HDRS
     ${ROOT_DIR}/vector/vector.hpp
     ${ROOT_DIR}/iterator/iterators_core.hpp
     ${ROOT_DIR}/iterator/ContiguousIterator.hpp
-    ${ROOT_DIR}/pair/pair.hpp
+    ${ROOT_DIR}/ft_utils/pair.hpp
     ${ROOT_DIR}/ft_utils/enable_if.hpp
     ${ROOT_DIR}/ft_utils/is_integral.hpp
 )
@@ -16,7 +16,7 @@ set(HDRS
 set(TPPS
     ${ROOT_DIR}/vector/vector.tpp
     ${ROOT_DIR}/iterator/ContiguousIterator.tpp
-    ${ROOT_DIR}/pair/pair.tpp
+    ${ROOT_DIR}/ft_utils/pair.tpp
 )
 
 add_executable(ft_containers
@@ -28,7 +28,6 @@ add_executable(ft_containers
 target_include_directories(ft_containers PUBLIC
     ${ROOT_DIR}/vector/
     ${ROOT_DIR}/iterator/
-    ${ROOT_DIR}/pair/
     ${ROOT_DIR}/ft_utils/
 )
 

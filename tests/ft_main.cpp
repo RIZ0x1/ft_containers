@@ -77,11 +77,12 @@ int main()
 	v1.pop_back();      // empty
 	print_info(v1);     //
 
-	v0.assign(40, 69);        // // RESIZE
-	print_info(v0);           //
-	v0.resize(69, 70);        //
-	print_info(v0, "RESIZE"); //
-	v0.resize(-1);            //
+	v0.assign(40, 69);            // // RESIZE
+	print_info(v0);               //
+	v0.resize(69, 70);            //
+	print_info(v0, "RESIZE");     //
+	try { v0.resize(-1); }        //
+	catch (std::exception &e) { } //
 
 	ft::vector<int>		new_v0;    // // SWAP
 	v0.swap(new_v0);               //

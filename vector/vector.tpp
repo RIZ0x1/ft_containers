@@ -217,7 +217,7 @@ typename TC_VECTOR::const_reverse_iterator	TC_VECTOR::rend() const
 template <typename value_type, typename allocator_type>
 bool	TC_VECTOR::empty() const
 {
-	return ( size() == EMPTY );
+	return ( size() == 0 );
 }
 
 template <typename value_type, typename allocator_type>
@@ -499,7 +499,7 @@ typename TC_VECTOR::pointer	TC_VECTOR::_allocate_array(size_type capacity)
 	try {
 		ret = _alloc.allocate(capacity);
 	} catch (const std::bad_alloc &e) {
-		throw std::runtime_error("ERROR: Memory allocation failed [ vector::_allocate_array() ]");
+		throw std::length_error("ERROR: Memory allocation failed [ vector::_allocate_array() ]");
 	}
 	return (ret);
 }
