@@ -4,6 +4,7 @@
 # include <memory>
 # include <stdexcept>
 # include <functional>
+# include <pair.hpp>
 
 namespace ft
 {
@@ -12,7 +13,12 @@ namespace ft
 			  typename Allocator = std::allocator<ft::pair<const Key, T> > >
 	class map
 	{
-
+	public:
+		typedef Key										key_type;
+		typedef T										value_type;
+		typedef Compare									key_compare;
+		typedef Allocator								allocator_type;
+		typedef ft::pair<const key_type, value_type>	node_type;
 	};
 }
 
