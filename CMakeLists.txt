@@ -32,6 +32,7 @@ add_executable(ft_containers
 
 target_include_directories(ft_containers PUBLIC
     ${ROOT_DIR}/vector/
+    ${ROOT_DIR}/map/
     ${ROOT_DIR}/iterator/
     ${ROOT_DIR}/ft_utils/
 )
