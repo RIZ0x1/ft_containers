@@ -42,6 +42,8 @@ TC_VECTOR::vector(const allocator_type &alloc)
 template <typename value_type, typename allocator_type>
 TC_VECTOR::vector(size_type count, const value_type& value, const allocator_type& alloc)
 {
+	if ( count > max_size() ) throw std::length_error("vector");
+
     this->_alloc = alloc;
 	_array = this->_alloc.allocate(count);
 	_capacity = count;
