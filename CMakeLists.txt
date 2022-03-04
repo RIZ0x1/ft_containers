@@ -9,6 +9,7 @@ set(SRCS
 
 set(HDRS
     ${ROOT_DIR}/vector/vector.hpp
+    ${ROOT_DIR}/vector/stack.hpp
     ${ROOT_DIR}/map/map.hpp
     ${ROOT_DIR}/iterator/iterators_core.hpp
     ${ROOT_DIR}/iterator/ContiguousIterator.hpp
@@ -32,6 +33,7 @@ add_executable(ft_containers
 
 target_include_directories(ft_containers PUBLIC
     ${ROOT_DIR}/vector/
+    ${ROOT_DIR}/stack/
     ${ROOT_DIR}/map/
     ${ROOT_DIR}/iterator/
     ${ROOT_DIR}/ft_utils/
