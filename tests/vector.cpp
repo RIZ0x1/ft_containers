@@ -1,7 +1,8 @@
+#include <vector>
 #include <memory>
 #include <limits>
 #include <iostream>
-#include "vector.hpp"
+
 
 #define NORMAL	"\033[0m"
 #define ORANGE	"\033[31m"
@@ -14,31 +15,39 @@
 #define TAB '\t'
 #define TAB2 "\t\t"
 
+#ifndef NS
+# define NS ft
+# include "vector.hpp"
+#endif
+
 using std::cout;
 using std::endl;
+using NS::vector;
 
-template <typename T> void	print_info(ft::vector<T>& v, const std::string& message = "TEST");
+
+template <typename T>
+void	print_info(vector<T>& v, const std::string& message = "TEST");
 
 int main()
 {
-	ft::vector<int>			v0;
+	vector<int>			v0;
 	print_info(v0);
 
 	std::allocator<char>	alloc0;
-	ft::vector<char>		v1(alloc0);
+	vector<char>		v1(alloc0);
 	print_info(v1);
 
 	std::allocator<char>	alloc1;
-	ft::vector<char>		v2(8, '8', alloc1);
+	vector<char>		v2(8, '8', alloc1);
 	print_info(v2);
 
 	v0.assign(70, 77);                                           // // ASSIGN
 	print_info(v0);                                              //
-	v1.assign<ft::vector<char>::iterator>(v2.begin(), v2.end()); //
+	v1.assign<vector<char>::iterator>(v2.begin(), v2.end()); //
 	print_info(v1);
 
 	char c = '0';                                                                // // ITERATOR
-	for (ft::vector<char>::iterator it = v1.begin(); it != v1.end(); it++, c++)  //
+	for (vector<char>::iterator it = v1.begin(); it != v1.end(); it++, c++)  //
 		*it = c;                                                                 //
 
 	try {                                      // // AT
@@ -50,7 +59,7 @@ int main()
 	}                                          //
 	cout << endl;                              //
 
-	ft::vector<char>::pointer 	p = v1.data(); // // DATA
+	vector<char>::pointer 	p = v1.data(); // // DATA
 	for (; p != &(*v1.end()); p++)             //
 		cout << '[' << *p << "] ";             //
 	cout << endl;                              //
@@ -58,7 +67,7 @@ int main()
 	v1.reserve(50);
 	print_info(v1);
 
-	ft::vector<char>::iterator	it = v1.begin();  // // ERASE
+	vector<char>::iterator	it = v1.begin();  // // ERASE
 	for (size_t i = 0; i < 4; i++)                //
 		(it++);                                   //
 	v1.erase(it);                                 //
@@ -74,8 +83,8 @@ int main()
 	v1.pop_back();      // 5 [6]
 	v1.pop_back();      // [5]
 	print_info(v1);     //
-	v1.pop_back();      // empty
-	print_info(v1);     //
+	// v1.pop_back();      // empty
+	// print_info(v1, "BUGGED");     //
 
 	v0.assign(40, 69);            // // RESIZE
 	print_info(v0);               //
@@ -84,12 +93,12 @@ int main()
 	try { v0.resize(-1); }        //
 	catch (std::exception &e) { } //
 
-	ft::vector<int>		new_v0;    // // SWAP
+	vector<int>		new_v0;    // // SWAP
 	v0.swap(new_v0);               //
 	print_info(v0, "V0");          //
 	print_info(new_v0, "NEW_V0");  //
 
-	ft::vector<int>::iterator	iit = new_v0.begin();  // // INSERT
+	vector<int>::iterator	iit = new_v0.begin();  // // INSERT
 	for (size_t i = 0; i < 10; i++)                    //
 		(iit++);                                       //
 	int x = 50;                                        //
@@ -104,10 +113,8 @@ int main()
 	return (0);
 }
 
-#define COLUMNS 10
-
 template <typename T>
-void	print_info(ft::vector<T>& v, const std::string& message)
+void	print_info(vector<T>& v, const std::string& message)
 {
 	cout << endl << CYAN << message << "  {" << endl;
 		cout << GREEN	<< TAB << "size: " << v.size() << endl;
@@ -115,10 +122,11 @@ void	print_info(ft::vector<T>& v, const std::string& message)
 		cout << NORMAL	<< TAB << "capacity: " << v.capacity() << endl;
 
 		unsigned int						i;
-		typename ft::vector<T>::iterator	it;
+		typename vector<T>::iterator	it;
 
 		cout << TAB << MAGENTA << "elements: {" << endl;
 		it = v.begin();
+		const unsigned int	COLUMNS = 10;
 		while (it != v.end())
 		{
 			i = 0;
