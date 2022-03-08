@@ -93,7 +93,7 @@ typename TC_CONT_ITER::reference	TC_CONT_ITER::operator [] (const size_type pos)
 template <typename value_type>
 typename TC_CONT_ITER::pointer	TC_CONT_ITER::operator -> () const
 {
-	return ( _get_pointer() );
+	return ( &(operator*()) );
 }
 
 template <typename value_type>
