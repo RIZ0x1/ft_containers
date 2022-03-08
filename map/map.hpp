@@ -5,6 +5,8 @@
 # include <stdexcept>
 # include <functional>
 # include <pair.hpp>
+# include "BidirectionalIterator.hpp"
+# include "BinaryTreeNode.hpp"
 
 namespace ft
 {
@@ -14,11 +16,24 @@ namespace ft
 	class map
 	{
 	public:
-		typedef Key										key_type;
-		typedef T										value_type;
-		typedef Compare									key_compare;
-		typedef Allocator								allocator_type;
+		typedef unsigned long int										size_type;
+		typedef typename iterator_traits<iterator>::reference			reference;
+		typedef typename iterator_traits<iterator>::pointer				pointer;
+		typedef typename iterator_traits<iterator>::difference_type		difference_type;
+		typedef typename iterator_traits<iterator>::reference			const_reference;
+		typedef typename iterator_traits<iterator>::pointer				const_pointer;
+		typedef Compare													key_compare;
+		typedef Allocator												allocator_type;
 		typedef ft::pair<const key_type, value_type>	node_type;
+
+	public:
+		map();
+		map(const map& other);
+		explicit map(const key_compare& comp, const allocator_type& alloc = allocator_type());
+		~map();
+
+
+
 	};
 }
 
