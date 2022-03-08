@@ -26,18 +26,18 @@ namespace ft {
 		typedef typename ft::ReverseContiguousIterator<value_type>			reverse_iterator;
 		typedef typename ft::ConstReverseContiguousIterator<value_type>		const_reverse_iterator;
 
-		typedef unsigned long int											size_type;
-		typedef typename iterator_traits<iterator>::reference				reference;
-		typedef typename iterator_traits<iterator>::pointer					pointer;
-		typedef typename iterator_traits<iterator>::difference_type			difference_type;
-		typedef typename iterator_traits<iterator>::reference				const_reference;
-		typedef typename iterator_traits<iterator>::pointer					const_pointer;
+		typedef unsigned long int					size_type;
+		typedef typename iterator::reference		reference;
+		typedef typename iterator::pointer			pointer;
+		typedef typename iterator::difference_type	difference_type;
+		typedef typename iterator::reference		const_reference;
+		typedef typename iterator::pointer			const_pointer;
 
 	private:
-		pointer				_array;
-		pointer				_end;
-		allocator_type		_alloc;
-		size_type			_capacity;
+		pointer			_array;
+		pointer			_end;
+		allocator_type	_alloc;
+		size_type		_capacity;
 
 	public:
 		vector();
@@ -45,7 +45,8 @@ namespace ft {
 		explicit vector(const allocator_type &alloc);
 		explicit vector(size_type count, const value_type& value = value_type(), const allocator_type& alloc = allocator_type());
 		template <class InputIt>
-			vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
+			vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(),
+				typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
 		~vector();
 
 		void	assign(size_type count, const value_type& value);
@@ -87,7 +88,8 @@ namespace ft {
 		void				insert(iterator pos, size_type count, const_reference value);
 		iterator			insert(iterator pos, const_reference value);
 		template<class InputIt>
-				void insert( iterator pos, InputIt first, InputIt last , typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);	// todo: curse you!
+				void insert( iterator pos, InputIt first, InputIt last ,
+					typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
 
 		vector&				operator = (const vector &other);
 		value_type&			operator [] (size_type pos) const;
