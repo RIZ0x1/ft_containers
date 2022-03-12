@@ -45,6 +45,18 @@ TC_BIN_TREE_NODE::~BinaryTreeNode()
 // ? ***************************************************************************
 
 template <typename key_type, typename value_type>
+TC_BIN_TREE_NODE*	TC_BIN_TREE_NODE::left() const
+{
+	return (_left_node);
+}
+
+template <typename key_type, typename value_type>
+TC_BIN_TREE_NODE*	TC_BIN_TREE_NODE::right() const
+{
+	return (_right_node);
+}
+
+template <typename key_type, typename value_type>
 const key_type	TC_BIN_TREE_NODE::get_key() const
 {
 	return (_key);
@@ -66,18 +78,6 @@ template <typename key_type, typename value_type>
 void	TC_BIN_TREE_NODE::set_value(const value_type& value)
 {
 	this->_value = value;
-}
-
-template <typename key_type, typename value_type>
-TC_BIN_TREE_NODE*	TC_BIN_TREE_NODE::left()
-{
-	return (_left_node);
-}
-
-template <typename key_type, typename value_type>
-TC_BIN_TREE_NODE*	TC_BIN_TREE_NODE::right()
-{
-	return (_right_node);
 }
 
 // ? ***************************************************************************

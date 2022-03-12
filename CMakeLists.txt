@@ -12,10 +12,10 @@ set(HDRS
     ${ROOT_DIR}/stack/stack.hpp
     ${ROOT_DIR}/map/map.hpp
     ${ROOT_DIR}/map/BinaryTreeNode.hpp
+    ${ROOT_DIR}/map/pair.hpp
     ${ROOT_DIR}/iterator/iterators_core.hpp
     ${ROOT_DIR}/iterator/ContiguousIterator.hpp
     ${ROOT_DIR}/iterator/BidirectionalIterator.hpp
-    ${ROOT_DIR}/ft_utils/pair.hpp
     ${ROOT_DIR}/ft_utils/enable_if.hpp
     ${ROOT_DIR}/ft_utils/is_integral.hpp
     ${ROOT_DIR}/ft_utils/lexicographical_compare.hpp
@@ -25,9 +25,9 @@ set(TPPS
     ${ROOT_DIR}/vector/vector.tpp
     ${ROOT_DIR}/map/map.tpp
     ${ROOT_DIR}/map/BinaryTreeNode.tpp
+    ${ROOT_DIR}/map/pair.tpp
     ${ROOT_DIR}/iterator/ContiguousIterator.tpp
     ${ROOT_DIR}/iterator/BidirectionalIterator.tpp
-    ${ROOT_DIR}/ft_utils/pair.tpp
 )
 
 add_executable(ft_containers

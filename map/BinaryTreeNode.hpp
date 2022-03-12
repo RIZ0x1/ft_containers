@@ -22,8 +22,8 @@ namespace ft
 		explicit BinaryTreeNode(const key_type& key, const value_type& value);
 		~BinaryTreeNode();
 
-		BinaryTreeNode*		left(void);
-		BinaryTreeNode*		right(void);
+		BinaryTreeNode*		left(void) const;
+		BinaryTreeNode*		right(void) const;
 		void				set_key(const key_type& key);
 		void				set_value(const value_type& value);
 		const key_type		get_key(void) const;

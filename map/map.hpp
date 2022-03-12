@@ -24,7 +24,8 @@ namespace ft
 		typedef typename iterator_traits<iterator>::pointer				const_pointer;
 		typedef Compare													key_compare;
 		typedef Allocator												allocator_type;
-		typedef ft::pair<const key_type, value_type>	node_type;
+		typedef T														mapped_type;
+		typedef ft::pair<const key_type, mapped_type>					value_type;
 
 	public:
 		map();
