@@ -45,7 +45,7 @@ TC_PAIR::~pair()
 }
 
 // ? ***************************************************************************
-// ? *                       CONSTRUCTORS & DESTRUCTOR                         *
+// ? *                         OPERATOR OVERLOADS                              *
 // ? ***************************************************************************
 
 template <typename first_type, typename second_type>
@@ -55,40 +55,44 @@ TC_PAIR& TC_PAIR::operator = (const pair& other)
 	this->u = other.u;
 }
 
+// ? ***************************************************************************
+// ? *                    NON-MEMBER OPERATOR OVERLOADS                        *
+// ? ***************************************************************************
+
 template <typename first_type, typename second_type>
-bool TC_PAIR::operator == (const pair& other)
+bool operator == (const TC_PAIR& left, const TC_PAIR& right)
 {
-	return (this->t == other.t && this->u == other.u);
+	return (left->t == right.t && left->u == right.u);
 }
 
 template <typename first_type, typename second_type>
-bool TC_PAIR::operator != (const pair& other)
+bool operator != (const TC_PAIR& left, const TC_PAIR& right)
 {
-	return (this->t != other.t && this->u != other.u);
+	return (left->t != right.t && left->u != right.u);
 }
 
 template <typename first_type, typename second_type>
-bool TC_PAIR::operator < (const pair& other)
+bool operator < (const TC_PAIR& left, const TC_PAIR& right)
 {
-	return (this->t >= other.t) ? false : (this->u < other.u);
+	return (left->t >= right.t) ? false : (left->u < right.u);
 }
 
 template <typename first_type, typename second_type>
-bool TC_PAIR::operator <= (const pair& other)
+bool operator <= (const TC_PAIR& left, const TC_PAIR& right)
 {
-	return (this->t > other.t ? false : (this->u <= other.u));
+	return (left->t > right.t ? false : (left->u <= right.u));
 }
 
 template <typename first_type, typename second_type>
-bool TC_PAIR::operator > (const pair& other)
+bool operator > (const TC_PAIR& left, const TC_PAIR& right)
 {
-	return (this->t <= other.t) ? false : (this->u > other.u);
+	return (left->t <= right.t) ? false : (left->u > right.u);
 }
 
 template <typename first_type, typename second_type>
-bool TC_PAIR::operator >= (const pair& other)
+bool operator >= (const TC_PAIR& left, const TC_PAIR& right)
 {
-	return (this->t < other.t) ? false : (this->u >= other.u);
+	return (left->t < right.t) ? false : (left->u >= right.u);
 }
 
 // ? ***************************************************************************
