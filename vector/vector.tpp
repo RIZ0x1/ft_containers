@@ -94,7 +94,6 @@ void	TC_VECTOR::assign(InputIt first, InputIt last, typename ft::enable_if<!is_i
 	clear();
 	const size_type new_capacity = (&(*last) - &(*first));
 
-	//_copy_array(&(*first), &(*last), _array);
 	_reallocate(new_capacity, &(*first), &(*last));
 }
 
@@ -532,6 +531,74 @@ void	TC_VECTOR::_reallocate(size_type new_capacity, pointer copy_start_point, po
 		this->_array = tmp;
 		this->_end = ( this->_array + (copy_end_point - copy_start_point) );
 	}
+}
+
+// ? ***************************************************************************
+// ? *                            PRIVATE METHODS                              *
+// ? ***************************************************************************
+
+template <typename T, class Alloc>
+bool	operator == (const vector<T, Alloc> lhs, const vector<T, Alloc> rhs)
+{
+	typename vector<T>::iterator	l_it = lhs.begin();
+	typename vector<T>::iterator	r_it = rhs.begin();
+
+	for (; l_it != lhs.end() || r_it != rhs.end(); l_it++, r_it++)
+	{
+		if (*l_it != *r_it)
+			return (false);
+	}
+	return ( l_it == lhs.end() && r_it == rhs.end() );
+}
+
+template <typename T, class Alloc>
+bool	operator != (const vector<T, Alloc> lhs, const vector<T, Alloc> rhs)
+{
+	return ( !operator==(lhs, rhs) );
+}
+
+template <typename T, class Alloc>
+bool	operator < (const vector<T, Alloc> lhs, const vector<T, Alloc> rhs)
+{
+	typedef typename ft::vector<T>::iterator	iterator;
+	typedef bool (*comp)(T, T);
+
+	return ( ft::lexicographical_compare<iterator, iterator, comp>( lhs.begin(), lhs.end(),
+																	rhs.begin(), rhs.end(),
+																	&ft::less) );
+}
+
+template <typename T, class Alloc>
+bool	operator <= (const vector<T, Alloc> lhs, const vector<T, Alloc> rhs)
+{
+	typedef typename ft::vector<T>::iterator	iterator;
+	typedef bool (*comp)(T, T);
+
+	return ( ft::lexicographical_compare<iterator, iterator, comp>( lhs.begin(), lhs.end(),
+																	rhs.begin(), rhs.end(),
+																	&ft::less_or_equal) );
+}
+
+template <typename T, class Alloc>
+bool	operator > (const vector<T, Alloc> lhs, const vector<T, Alloc> rhs)
+{
+	typedef typename ft::vector<T>::iterator	iterator;
+	typedef bool (*comp)(T, T);
+
+	return ( ft::lexicographical_compare<iterator, iterator, comp>( lhs.begin(), lhs.end(),
+																	rhs.begin(), rhs.end(),
+																	&ft::greater) );
+}
+
+template <typename T, class Alloc>
+bool	operator >= (const vector<T, Alloc> lhs, const vector<T, Alloc> rhs)
+{
+	typedef typename ft::vector<T>::iterator	iterator;
+	typedef bool (*comp)(T, T);
+
+	return ( ft::lexicographical_compare<iterator, iterator, comp>( lhs.begin(), lhs.end(),
+																	rhs.begin(), rhs.end(),
+																	&ft::greater_or_equal) );
 }
 
 #endif // VECTOR_TPP

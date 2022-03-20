@@ -4,7 +4,7 @@ project(ft_containers)
 set(ROOT_DIR ${CMAKE_SOURCE_DIR})
 
 set(SRCS
-    ${ROOT_DIR}/tests/map.cpp
+    ${ROOT_DIR}/tests/vector.cpp
 )
 
 set(HDRS

@@ -12,6 +12,7 @@
 # include "ContiguousIterator.hpp"
 # include "enable_if.hpp"
 # include "is_integral.hpp"
+# include "lexicographical_compare.hpp"
 
 namespace ft {
 	template < typename T, typename Allocator = std::allocator<T> >
@@ -91,7 +92,7 @@ namespace ft {
 				void insert( iterator pos, InputIt first, InputIt last ,
 					typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
 
-		vector&				operator = (const vector &other);
+		vector&				operator = (const vector& other);
 		value_type&			operator [] (size_type pos) const;
 
 	private:
@@ -101,6 +102,19 @@ namespace ft {
 		void		_reallocate(size_type new_capacity);
 		void		_reallocate(size_type new_capacity, pointer copy_start_point, pointer copy_end_point);
 	};
+
+	template <typename T, class Alloc>
+	bool	operator == (const vector<T, Alloc> lhs, const vector<T, Alloc> rhs);
+	template <typename T, class Alloc>
+	bool	operator != (const vector<T, Alloc> lhs, const vector<T, Alloc> rhs);
+	template <typename T, class Alloc>
+	bool	operator < (const vector<T, Alloc> lhs, const vector<T, Alloc> rhs);
+	template <typename T, class Alloc>
+	bool	operator <= (const vector<T, Alloc> lhs, const vector<T, Alloc> rhs);
+	template <typename T, class Alloc>
+	bool	operator > (const vector<T, Alloc> lhs, const vector<T, Alloc> rhs);
+	template <typename T, class Alloc>
+	bool	operator >= (const vector<T, Alloc> lhs, const vector<T, Alloc> rhs);
 }
 
 # include "vector.tpp"
