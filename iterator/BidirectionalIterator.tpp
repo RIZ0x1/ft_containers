@@ -6,7 +6,7 @@
 #  error __FILE__ should only be included from BidirectionalIterator.hpp
 # endif
 
-# define TC_BIDIR_ITER	BidirectionalIterator<value_type>
+# define FT_BIDIR_ITER BidirectionalIterator<value_type>
 
 using ft::BidirectionalIterator;
 
@@ -17,22 +17,22 @@ using ft::BidirectionalIterator;
 // ? ***************************************************************************
 
 template <typename value_type>
-TC_BIDIR_ITER::BidirectionalIterator() : _p_node(NULL)
+FT_BIDIR_ITER::BidirectionalIterator() : _p_node(NULL)
 {
 }
 
 template <typename value_type>
-TC_BIDIR_ITER::BidirectionalIterator(pointer p_node) : _p_node(p_node)
+FT_BIDIR_ITER::BidirectionalIterator(pointer p_node) : _p_node(p_node)
 {
 }
 
 template <typename value_type>
-TC_BIDIR_ITER::BidirectionalIterator(const BidirectionalIterator& other) : _p_node(other._p_node)
+FT_BIDIR_ITER::BidirectionalIterator(const BidirectionalIterator& other) : _p_node(other._p_node)
 {
 }
 
 template <typename value_type>
-TC_BIDIR_ITER::~BidirectionalIterator()
+FT_BIDIR_ITER::~BidirectionalIterator()
 {
 }
 
@@ -41,101 +41,101 @@ TC_BIDIR_ITER::~BidirectionalIterator()
 // ? ***************************************************************************
 
 template <typename value_type>
-bool	TC_BIDIR_ITER::operator == (const iterator &other) const
+bool FT_BIDIR_ITER::operator == (const iterator &other) const
 {
-	return ( this->_get_pointer() == other._get_pointer() );
+    return ( this->_get_pointer() == other._get_pointer() );
 }
 
 template <typename value_type>
-bool	TC_BIDIR_ITER::operator != (const iterator &other) const
+bool FT_BIDIR_ITER::operator != (const iterator &other) const
 {
-	return ( this->_get_pointer() != other._get_pointer() );
+    return ( this->_get_pointer() != other._get_pointer() );
 }
 
 template <typename value_type>
-bool	TC_BIDIR_ITER::operator < (const iterator &other) const
+bool FT_BIDIR_ITER::operator < (const iterator &other) const
 {
-	return ( this->_get_pointer() < other._get_pointer() );
+    return ( this->_get_pointer() < other._get_pointer() );
 }
 
 template <typename value_type>
-bool	TC_BIDIR_ITER::operator > (const iterator &other) const
+bool FT_BIDIR_ITER::operator > (const iterator &other) const
 {
-	return ( this->_get_pointer() > other._get_pointer() );
+    return ( this->_get_pointer() > other._get_pointer() );
 }
 
 template <typename value_type>
-bool	TC_BIDIR_ITER::operator <= (const iterator &other) const
+bool FT_BIDIR_ITER::operator <= (const iterator &other) const
 {
-	return ( this->_get_pointer() <= other._get_pointer() );
+    return ( this->_get_pointer() <= other._get_pointer() );
 }
 
 template <typename value_type>
-bool	TC_BIDIR_ITER::operator >= (const iterator &other) const
+bool FT_BIDIR_ITER::operator >= (const iterator &other) const
 {
-	return ( this->_get_pointer() >= other._get_pointer() );
+    return ( this->_get_pointer() >= other._get_pointer() );
 }
 
 template <typename value_type>
-typename TC_BIDIR_ITER::reference	TC_BIDIR_ITER::operator * () const
+typename FT_BIDIR_ITER::reference FT_BIDIR_ITER::operator * () const
 {
-	return ( *_get_pointer() );
+    return ( *_get_pointer() );
 }
 
 template <typename value_type>
-typename TC_BIDIR_ITER::reference	TC_BIDIR_ITER::operator [] (const size_type pos) const
-{
-
-}
-
-template <typename value_type>
-typename TC_BIDIR_ITER::pointer	TC_BIDIR_ITER::operator -> () const
-{
-	return ( &(operator*()) );
-}
-
-template <typename value_type>
-typename TC_BIDIR_ITER::iterator	TC_BIDIR_ITER::operator + (const difference_type N) const
+typename FT_BIDIR_ITER::reference FT_BIDIR_ITER::operator [] (const size_type pos) const
 {
 
 }
 
 template <typename value_type>
-typename TC_BIDIR_ITER::iterator	TC_BIDIR_ITER::operator - (const difference_type N) const
+typename FT_BIDIR_ITER::pointer FT_BIDIR_ITER::operator -> () const
+{
+    return ( &(operator*()) );
+}
+
+template <typename value_type>
+typename FT_BIDIR_ITER::iterator FT_BIDIR_ITER::operator + (const difference_type N) const
 {
 
 }
 
 template <typename value_type>
-typename TC_BIDIR_ITER::iterator	TC_BIDIR_ITER::operator ++ ()
+typename FT_BIDIR_ITER::iterator FT_BIDIR_ITER::operator - (const difference_type N) const
 {
 
 }
 
 template <typename value_type>
-const typename TC_BIDIR_ITER::iterator	TC_BIDIR_ITER::operator ++ (int)
-{
-}
-
-template <typename value_type>
-typename TC_BIDIR_ITER::iterator	TC_BIDIR_ITER::operator -- ()
-{
-}
-
-template <typename value_type>
-const typename TC_BIDIR_ITER::iterator	TC_BIDIR_ITER::operator -- (int)
+typename FT_BIDIR_ITER::iterator FT_BIDIR_ITER::operator ++ ()
 {
 
 }
 
 template <typename value_type>
-typename TC_BIDIR_ITER::iterator	TC_BIDIR_ITER::operator += (const difference_type N)
+const typename FT_BIDIR_ITER::iterator FT_BIDIR_ITER::operator ++ (int)
+{
+}
+
+template <typename value_type>
+typename FT_BIDIR_ITER::iterator FT_BIDIR_ITER::operator -- ()
+{
+}
+
+template <typename value_type>
+const typename FT_BIDIR_ITER::iterator FT_BIDIR_ITER::operator -- (int)
 {
 
 }
 
 template <typename value_type>
-typename TC_BIDIR_ITER::iterator	TC_BIDIR_ITER::operator -= (const difference_type N)
+typename FT_BIDIR_ITER::iterator FT_BIDIR_ITER::operator += (const difference_type N)
+{
+
+}
+
+template <typename value_type>
+typename FT_BIDIR_ITER::iterator FT_BIDIR_ITER::operator -= (const difference_type N)
 {
 
 }
@@ -145,9 +145,9 @@ typename TC_BIDIR_ITER::iterator	TC_BIDIR_ITER::operator -= (const difference_ty
 // ? ***************************************************************************
 
 template <typename value_type>
-typename TC_BIDIR_ITER::pointer TC_BIDIR_ITER::_get_pointer() const
+typename FT_BIDIR_ITER::pointer FT_BIDIR_ITER::_get_pointer() const
 {
-	return ( _p_node );
+    return ( _p_node );
 }
 
 #endif // BIDIRECTIONAL_ITERATOR_TPP

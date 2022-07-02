@@ -3,15 +3,15 @@ project(ft_containers)
 
 set(ROOT_DIR ${CMAKE_SOURCE_DIR})
 
-set(SRCS
-    ${ROOT_DIR}/tests/vector.cpp
+set(SRCS # TEST FILE
+    ${ROOT_DIR}/tests/stack.cpp
 )
 
 set(HDRS
     ${ROOT_DIR}/vector/vector.hpp
     ${ROOT_DIR}/stack/stack.hpp
     ${ROOT_DIR}/map/map.hpp
-    ${ROOT_DIR}/map/BinaryTreeNode.hpp
+    ${ROOT_DIR}/map/BinarySearchTree.hpp
     ${ROOT_DIR}/map/pair.hpp
     ${ROOT_DIR}/iterator/iterators_core.hpp
     ${ROOT_DIR}/iterator/ContiguousIterator.hpp
@@ -24,7 +24,7 @@ set(HDRS
 set(TPPS
     ${ROOT_DIR}/vector/vector.tpp
     ${ROOT_DIR}/map/map.tpp
-    ${ROOT_DIR}/map/BinaryTreeNode.tpp
+    ${ROOT_DIR}/map/BinarySearchTree.tpp
     ${ROOT_DIR}/map/pair.tpp
     ${ROOT_DIR}/iterator/ContiguousIterator.tpp
     ${ROOT_DIR}/iterator/BidirectionalIterator.tpp
