@@ -5,7 +5,7 @@
 #  error __FILE__ should only be included from vector.hpp
 # endif
 
-# define FT_VECTOR    vector<value_type, allocator_type>    // Template Class 'vector'
+# define FT_VECTOR    vector<value_type, allocator_type>
 
 using ft::vector;
 

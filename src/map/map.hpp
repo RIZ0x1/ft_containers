@@ -4,9 +4,9 @@
 # include <memory>
 # include <stdexcept>
 # include <functional>
-# include <pair.hpp>
-# include "BidirectionalIterator.hpp"
+# include "../iterator/BidirectionalIterator.hpp"
 # include "BinarySearchTree.hpp"
+# include "pair.hpp"
 
 namespace ft
 {

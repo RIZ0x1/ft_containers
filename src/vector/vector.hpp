@@ -9,18 +9,18 @@
 # include <limits>
 # include <iostream>
 # include <stdexcept>
-# include "ContiguousIterator.hpp"
-# include "enable_if.hpp"
-# include "is_integral.hpp"
-# include "lexicographical_compare.hpp"
+# include "../iterator/ContiguousIterator.hpp"
+# include "../ft_utils/enable_if.hpp"
+# include "../ft_utils/is_integral.hpp"
+# include "../ft_utils/lexicographical_compare.hpp"
 
 namespace ft {
     template < typename T, typename Allocator = std::allocator<T> >
     class vector
     {
     public:
-        typedef T                                                            value_type;
-        typedef Allocator                                                    allocator_type;
+        typedef T                                                       value_type;
+        typedef Allocator                                               allocator_type;
 
         typedef typename ft::ContiguousIterator<value_type>             iterator;
         typedef typename ft::ConstContiguousIterator<value_type>        const_iterator;

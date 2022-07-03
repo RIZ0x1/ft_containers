@@ -2,7 +2,6 @@
 # define BIDIRECTIONAL_ITERATOR_TPP
 
 # ifndef BIDIRECTIONAL_ITERATOR_HPP
-#  include "BidirectionalIterator.hpp"
 #  error __FILE__ should only be included from BidirectionalIterator.hpp
 # endif
 

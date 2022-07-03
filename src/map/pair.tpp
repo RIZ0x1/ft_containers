@@ -6,7 +6,7 @@
 #  error __FILE__ should only be included from pair.hpp
 # endif
 
-#define TC_PAIR pair<first_type, second_type> // Template Class 'pair'
+#define FT_PAIR pair<first_type, second_type>
 
 using ft::pair;
 
@@ -15,24 +15,23 @@ using ft::pair;
 // ? ***************************************************************************
 
 template <typename first_type, typename second_type>
-TC_PAIR::pair() : t(first_type()), u(second_type())
+FT_PAIR::pair() : key(first_type()), value(second_type())
 {
 }
 
 template <typename first_type, typename second_type>
-TC_PAIR::pair(const pair& other) : t(other.t), u(other.u)
+FT_PAIR::pair(const pair& other) : key(other.t), value(other.u)
 {
 }
 
 template <typename first_type, typename second_type>
-TC_PAIR::pair(const first_type& x, const second_type& y) : t(x), u(y)
+FT_PAIR::pair(const first_type& x, const second_type& y) : key(x), value(y)
 {
-
 }
 
 template <typename first_type, typename second_type>
 template <typename U1, typename U2>
-TC_PAIR::pair(const pair<U1, U2> &other,
+FT_PAIR::pair(const pair<U1, U2> &other,
               typename ft::enable_if<std::is_convertible<const U1&, first_type>::value>::type*,
               typename ft::enable_if<std::is_convertible<const U2&, second_type>::value>::type*)
               : key(other.key), value(other.value)
@@ -40,7 +39,7 @@ TC_PAIR::pair(const pair<U1, U2> &other,
 }
 
 template <typename first_type, typename second_type>
-TC_PAIR::~pair()
+FT_PAIR::~pair()
 {
 }
 
@@ -49,7 +48,7 @@ TC_PAIR::~pair()
 // ? ***************************************************************************
 
 template <typename first_type, typename second_type>
-TC_PAIR& TC_PAIR::operator = (const pair& other)
+FT_PAIR& FT_PAIR::operator = (const pair& other)
 {
     this->t = other.t;
     this->u = other.u;
@@ -60,37 +59,37 @@ TC_PAIR& TC_PAIR::operator = (const pair& other)
 // ? ***************************************************************************
 
 template <typename first_type, typename second_type>
-bool operator == (const TC_PAIR& left, const TC_PAIR& right)
+bool operator == (const FT_PAIR& left, const FT_PAIR& right)
 {
     return (left->t == right.t && left->u == right.u);
 }
 
 template <typename first_type, typename second_type>
-bool operator != (const TC_PAIR& left, const TC_PAIR& right)
+bool operator != (const FT_PAIR& left, const FT_PAIR& right)
 {
     return (left->t != right.t && left->u != right.u);
 }
 
 template <typename first_type, typename second_type>
-bool operator < (const TC_PAIR& left, const TC_PAIR& right)
+bool operator < (const FT_PAIR& left, const FT_PAIR& right)
 {
     return (left->t >= right.t) ? false : (left->u < right.u);
 }
 
 template <typename first_type, typename second_type>
-bool operator <= (const TC_PAIR& left, const TC_PAIR& right)
+bool operator <= (const FT_PAIR& left, const FT_PAIR& right)
 {
     return (left->t > right.t ? false : (left->u <= right.u));
 }
 
 template <typename first_type, typename second_type>
-bool operator > (const TC_PAIR& left, const TC_PAIR& right)
+bool operator > (const FT_PAIR& left, const FT_PAIR& right)
 {
     return (left->t <= right.t) ? false : (left->u > right.u);
 }
 
 template <typename first_type, typename second_type>
-bool operator >= (const TC_PAIR& left, const TC_PAIR& right)
+bool operator >= (const FT_PAIR& left, const FT_PAIR& right)
 {
     return (left->t < right.t) ? false : (left->u >= right.u);
 }

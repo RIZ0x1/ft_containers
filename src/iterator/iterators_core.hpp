@@ -1,7 +1,7 @@
 #ifndef ITERATORS_HPP
 # define ITERATORS_HPP
 
-#include <cstddef> // ? <ptrdiff_t>
+#include <cstddef>
 
 namespace ft
 {
@@ -11,8 +11,9 @@ namespace ft
     struct bidirectional_iterator_tag : public forward_iterator_tag {};
     struct random_access_iterator_tag : public bidirectional_iterator_tag {};
 
-    template <typename Category, typename T, typename Distance = std::ptrdiff_t,
-    typename Pointer = T*, typename Reference = T&>
+    template <typename Category, typename T,
+              typename Distance = std::ptrdiff_t,
+              typename Pointer = T*, typename Reference = T&>
     struct iterator
     {
         typedef Category  iterator_category;
