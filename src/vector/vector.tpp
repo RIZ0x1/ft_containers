@@ -129,13 +129,13 @@ typename FT_VECTOR::const_reference FT_VECTOR::front() const
 template <typename value_type, typename allocator_type>
 typename FT_VECTOR::reference FT_VECTOR::back()
 {
-    return ( static_cast<reference>(*_end) );
+    return (static_cast<reference>( *(_end - 1) ));
 }
 
 template <typename value_type, typename allocator_type>
 typename FT_VECTOR::const_reference FT_VECTOR::back() const
 {
-    return ( static_cast<const_reference>(*_end) );
+    return (static_cast<const_reference>( *(_end - 1) ));
 }
 
 template <typename value_type, typename allocator_type>

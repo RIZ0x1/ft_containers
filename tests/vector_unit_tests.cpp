@@ -125,10 +125,32 @@ BOOST_AUTO_TEST_CASE(assign_iterators_2)
 
 BOOST_AUTO_TEST_CASE_TEMPLATE(front, T, test_types)
 {
-    ft::vector<int>  v0(1);
-    std::vector<int> v1(1);
+    ft::vector<T>  v0(2);
+    std::vector<T> v1(2);
 
-    BOOST_CHECK_EQUAL( v0[0], v1[0] );
+    BOOST_CHECK_EQUAL( v0.front(), v1.front() );
+}
+
+BOOST_AUTO_TEST_CASE_TEMPLATE(back, T, test_types)
+{
+    ft::vector<T>  v0(2);
+    std::vector<T> v1(2);
+
+    BOOST_CHECK_EQUAL( v0.back(), v1.back() );
+}
+
+BOOST_AUTO_TEST_CASE(square_brackets)
+{
+    ft::vector<int>  v0(count_small);
+    std::vector<int> v1(count_small);
+
+    for (int i = 0; i < count_small; i++)
+    {
+        v0[i] = i;
+        v1[i] = i;
+    }
+    for (int i = 0; i < count_small; i++)
+        BOOST_CHECK_EQUAL( v0[i], v1[i] );
 }
 
 BOOST_AUTO_TEST_SUITE_END()
