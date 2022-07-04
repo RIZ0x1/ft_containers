@@ -20,23 +20,23 @@ namespace ft {
     {
     public:
         typedef T                                                       value_type;
+        typedef const value_type                                        const_value_type;
+        typedef value_type&                                             reference;
+        typedef const value_type&                                       const_reference;
         typedef Allocator                                               allocator_type;
+        typedef typename allocator_type::pointer                        pointer;
+        typedef const typename allocator_type::pointer                  const_pointer;
+        typedef std::ptrdiff_t                                          difference_type;
+        typedef unsigned long int                                       size_type;
 
         typedef typename ft::ContiguousIterator<value_type>             iterator;
         typedef typename ft::ConstContiguousIterator<value_type>        const_iterator;
         typedef typename ft::ReverseContiguousIterator<value_type>      reverse_iterator;
         typedef typename ft::ConstReverseContiguousIterator<value_type> const_reverse_iterator;
 
-        typedef unsigned long int                   size_type;
-        typedef typename iterator::reference        reference;
-        typedef typename iterator::pointer          pointer;
-        typedef typename iterator::difference_type  difference_type;
-        typedef typename iterator::reference        const_reference;
-        typedef typename iterator::pointer          const_pointer;
-
     private:
-        pointer          _array;
-        pointer          _end;
+        value_type*      _array;
+        value_type*      _end;
         allocator_type   _alloc;
         size_type        _capacity;
 
@@ -44,14 +44,14 @@ namespace ft {
         vector();
         vector(const vector &other);
         explicit vector(const allocator_type &alloc);
-        explicit vector(size_type count, const value_type& value = value_type(), const allocator_type& alloc = allocator_type());
+        explicit vector(size_type count, const_reference value = value_type(), const allocator_type& alloc = allocator_type());
         template <class InputIt>
             vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(),
                 typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
         ~vector();
 
         allocator_type get_allocator() const;
-        void assign(size_type count, const value_type& value);
+        void assign(size_type count, const_reference value);
         template <class InputIt>
             void assign(InputIt first, InputIt last, typename ft::enable_if<!is_integral<InputIt>::value, InputIt>::type* = NULL);
 
@@ -61,8 +61,8 @@ namespace ft {
         const_reference     back(void) const;
         reference           at(size_type pos);
         const_reference     at(size_type pos) const;
-        pointer             data(void);
-        const_pointer       data(void) const;
+        value_type*         data(void);
+        const_value_type*   data(void) const;
 
         iterator               begin(void);
         const_iterator         begin(void) const;
@@ -82,7 +82,7 @@ namespace ft {
         void      clear(void);
         iterator  erase(iterator pos);
         iterator  erase(iterator first, iterator last);
-        void      push_back(const value_type& value);
+        void      push_back(const_reference value);
         void      pop_back(void);
         void      resize(size_type count, value_type value = value_type());
         void      swap(vector& other);
@@ -96,11 +96,11 @@ namespace ft {
         value_type&   operator [] (size_type pos) const;
 
     private:
-        void        _copy_array(const pointer start, const_pointer end, pointer result);
-        pointer     _allocate_array(size_type capacity);
+        void        _copy_array(const_value_type* start, const_value_type* end, value_type* result);
+        value_type* _allocate_array(size_type capacity);
         void        _destroy_array(iterator start, iterator end);
         void        _reallocate(size_type new_capacity);
-        void        _reallocate(size_type new_capacity, pointer copy_start_point, pointer copy_end_point);
+        void        _reallocate(size_type new_capacity, value_type* copy_start_point, value_type* copy_end_point);
     };
 
     template <typename T, class Alloc>

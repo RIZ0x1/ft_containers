@@ -29,7 +29,7 @@ FT_VECTOR::vector(const vector &other) : _capacity(0), _array(NULL), _end(_array
 }
 
 template <typename value_type, typename allocator_type>
-FT_VECTOR::vector(const allocator_type &alloc)
+FT_VECTOR::vector(const allocator_type& alloc)
 {
     this->_alloc = alloc;
     _array = NULL;
@@ -38,7 +38,7 @@ FT_VECTOR::vector(const allocator_type &alloc)
 }
 
 template <typename value_type, typename allocator_type>
-FT_VECTOR::vector(size_type count, const value_type& value, const allocator_type& alloc)
+FT_VECTOR::vector(size_type count, const_reference value, const allocator_type& alloc)
 {
     if ( count > max_size() ) throw std::length_error("vector");
 
@@ -73,7 +73,7 @@ FT_VECTOR::~vector()
 // ? ***************************************************************************
 
 template <typename value_type, typename allocator_type>
-void FT_VECTOR::assign(size_type count, const value_type& value)
+void FT_VECTOR::assign(size_type count, const_reference value)
 {
     clear();
     _array = this->_alloc.allocate(count);
@@ -90,9 +90,18 @@ template <typename InputIt>
 void FT_VECTOR::assign(InputIt first, InputIt last, typename ft::enable_if<!is_integral<InputIt>::value, InputIt>::type*)
 {
     clear();
-    const size_type new_capacity = (&(*last) - &(*first));
+    const size_type new_size = (&(*last) - &(*first));
 
-    _reallocate(new_capacity, &(*first), &(*last));
+    if ( new_size > capacity() )
+        _reallocate(new_size, &(*first), &(*last));
+    else
+    {
+        size_type i = 0;
+        for (; first != last; first++, i++)
+            _array[i] = *first;
+
+        _end = &_array[i];
+    }
 }
 
 template <typename value_type, typename allocator_type>
@@ -108,7 +117,7 @@ allocator_type FT_VECTOR::get_allocator() const
 template <typename value_type, typename allocator_type>
 typename FT_VECTOR::reference FT_VECTOR::front()
 {
-    return ( static_cast<const_reference>(*_array) );
+    return ( static_cast<reference>(*_array) );
 }
 
 template <typename value_type, typename allocator_type>
@@ -120,7 +129,7 @@ typename FT_VECTOR::const_reference FT_VECTOR::front() const
 template <typename value_type, typename allocator_type>
 typename FT_VECTOR::reference FT_VECTOR::back()
 {
-    return ( static_cast<const_reference>(*_end) );
+    return ( static_cast<reference>(*_end) );
 }
 
 template <typename value_type, typename allocator_type>
@@ -146,15 +155,15 @@ typename FT_VECTOR::const_reference FT_VECTOR::at(size_type pos) const
 }
 
 template <typename value_type, typename allocator_type>
-typename FT_VECTOR::pointer FT_VECTOR::data()
+typename FT_VECTOR::value_type* FT_VECTOR::data()
 {
     return (_array);
 }
 
 template <typename value_type, typename allocator_type>
-typename FT_VECTOR::const_pointer FT_VECTOR::data() const
+typename FT_VECTOR::const_value_type* FT_VECTOR::data() const
 {
-    return (static_cast<const_pointer>(_array));
+    return (_array);
 }
 
 // ? ***************************************************************************
@@ -222,7 +231,7 @@ bool FT_VECTOR::empty() const
 template <typename value_type, typename allocator_type>
 typename FT_VECTOR::size_type FT_VECTOR::size() const
 {
-    return ( static_cast<size_t>(_end - _array) );
+    return ( static_cast<size_type>(_end - _array) );
 }
 
 template <typename value_type, typename allocator_type>
@@ -234,9 +243,9 @@ typename FT_VECTOR::size_type FT_VECTOR::max_size() const
 template <typename value_type, typename allocator_type>
 void FT_VECTOR::reserve(size_type new_capacity)
 {
-    if (new_capacity > max_size())
+    if ( new_capacity > max_size() )
         throw std::length_error("ERROR: New capacity value is too high [ vector::reserve() ]");
-    if (new_capacity > capacity())
+    if ( new_capacity > capacity() )
         _reallocate(new_capacity);
 }
 
@@ -294,7 +303,7 @@ typename FT_VECTOR::iterator FT_VECTOR::erase(iterator first, iterator last)
 }
 
 template <typename value_type, typename allocator_type>
-void FT_VECTOR::push_back(const value_type& value)
+void FT_VECTOR::push_back(const_reference value)
 {
     if (size() < capacity())
     {
@@ -343,7 +352,7 @@ void FT_VECTOR::resize(size_type count, value_type value)
 template <typename value_type, typename allocator_type>
 void FT_VECTOR::swap(FT_VECTOR &other)
 {
-    pointer p_buf;
+    value_type* p_buf;
 
     p_buf = this->_array;
     this->_array = other._array;
@@ -371,12 +380,12 @@ typename FT_VECTOR::iterator FT_VECTOR::insert(iterator pos, const_reference val
     }
     else
     {
-        pointer new_array = _alloc.allocate(new_size);
-        pointer p_pos_a = &(*pos);
+        value_type* new_array = _alloc.allocate(new_size);
+        value_type* p_pos_a = &(*pos);
 
         _copy_array(_array, p_pos_a, new_array);
 
-        pointer    p_pos_b = ( new_array + (p_pos_a - _array) );
+        value_type*    p_pos_b = ( new_array + (p_pos_a - _array) );
 
         *p_pos_b = value;
         _copy_array(p_pos_a, _end, p_pos_b + 1);
@@ -402,11 +411,11 @@ void FT_VECTOR::insert(iterator pos, InputIt first, InputIt last, typename ft::e
     }
     else
     {
-        const pointer    second_part_size = _end - &(*pos);
-        pointer          array_second_part = _allocate_array(second_part_size);
+        const_value_type* second_part_size = _end - &(*pos);
+        value_type*       array_second_part = _allocate_array(second_part_size);
         _copy_array(pos, _end, array_second_part);
 
-        pointer    new_array = _allocate_array(new_size);
+        value_type* new_array = _allocate_array(new_size);
         _copy_array(begin(), pos, new_array);
 
         size_type n_pos = ( &(*pos) - &(*begin()) );
@@ -426,7 +435,7 @@ void FT_VECTOR::insert(iterator pos, InputIt first, InputIt last, typename ft::e
 template <typename value_type, typename allocator_type>
 void FT_VECTOR::insert(iterator pos, size_type count, const_reference value)
 {
-    const size_type    new_size = ( size() + count );
+    const size_type new_size = ( size() + count );
 
     if ( capacity() >= new_size && pos >= end() )
     {
@@ -435,11 +444,11 @@ void FT_VECTOR::insert(iterator pos, size_type count, const_reference value)
     }
     else
     {
-        const pointer    second_part_size = _end - &(*pos);
-        pointer          array_second_part = _allocate_array(second_part_size);
+        const_value_type* second_part_size = _end - &(*pos);
+        value_type*       array_second_part = _allocate_array(second_part_size);
         _copy_array(pos, _end, array_second_part);
 
-        pointer    new_array = _allocate_array(new_size);
+        value_type* new_array = _allocate_array(new_size);
         _copy_array(begin(), pos, new_array);
 
         size_type n_pos = ( &(*pos) - &(*begin()) );
@@ -480,18 +489,18 @@ value_type& FT_VECTOR::operator [] (size_type pos) const
 // ? ***************************************************************************
 
 template <typename value_type, typename allocator_type>
-void FT_VECTOR::_copy_array(const pointer start, const_pointer end, pointer result)
+void FT_VECTOR::_copy_array(const_value_type* start, const_value_type* end, value_type* result)
 {
     if (start == result)
         return ;
-    for (pointer p = start; p != end; p++, result++)
+    for (const_value_type* p = start; p != end; p++, result++)
         _alloc.construct(result, value_type(*p));
 }
 
 template <typename value_type, typename allocator_type>
-typename FT_VECTOR::pointer FT_VECTOR::_allocate_array(size_type capacity)
+typename FT_VECTOR::value_type* FT_VECTOR::_allocate_array(size_type capacity)
 {
-    pointer ret = NULL;
+    value_type* ret = NULL;
 
     try {
         ret = _alloc.allocate(capacity);
@@ -515,13 +524,13 @@ void FT_VECTOR::_reallocate(size_type new_capacity)
 }
 
 template <typename value_type, typename allocator_type>
-void FT_VECTOR::_reallocate(size_type new_capacity, pointer copy_start_point, pointer copy_end_point)
+void FT_VECTOR::_reallocate(size_type new_capacity, value_type* copy_start_point, value_type* copy_end_point)
 {
     if (new_capacity != 0)
     {
         clear();
 
-        pointer    tmp = _allocate_array(new_capacity);
+        value_type*    tmp = _allocate_array(new_capacity);
         _copy_array(copy_start_point, copy_end_point, tmp);
         this->_capacity = new_capacity;
         this->_array = tmp;
