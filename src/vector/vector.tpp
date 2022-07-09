@@ -413,24 +413,21 @@ void FT_VECTOR::insert(iterator pos, InputIt first, InputIt last, typename ft::e
     }
     else
     {
-        const_value_type* second_part_size = _end - &(*pos);
-        value_type*       array_second_part = _allocate_array(second_part_size);
-        _copy_array(pos, _end, array_second_part);
+        value_type* new_array = _alloc.allocate(new_size);
+        value_type* p_new_array = new_array;
 
-        value_type* new_array = _allocate_array(new_size);
-        _copy_array(begin(), pos, new_array);
-
-        size_type n_pos = ( &(*pos) - &(*begin()) );
-        for (; first != last; first++, n_pos++)
-            *(new_array + n_pos) = *first;
-
-        _copy_array( array_second_part, (array_second_part + second_part_size), (new_array + n_pos) );
+        iterator it = begin();
+        for (; it != pos; it++, p_new_array++)
+            *p_new_array = *it;
+        for (; first != last; first++, p_new_array++)
+            *p_new_array = *first;
+        for (; it != end(); it++, p_new_array++)
+            *p_new_array = *it;
 
         clear();
-        delete _array;
         _array = new_array;
-        _capacity = new_size;
-        _end = (_array + new_size);
+        _end = p_new_array;
+        _capacity = size();
     }
 }
 
@@ -446,23 +443,21 @@ void FT_VECTOR::insert(iterator pos, size_type count, const_reference value)
     }
     else
     {
-        const_value_type* second_part_size = _end - &(*pos);
-        value_type*       array_second_part = _allocate_array(second_part_size);
-        _copy_array(pos, _end, array_second_part);
+        value_type* new_array = _alloc.allocate(new_size);
+        value_type* p_new_array = new_array;
 
-        value_type* new_array = _allocate_array(new_size);
-        _copy_array(begin(), pos, new_array);
-
-        size_type n_pos = ( &(*pos) - &(*begin()) );
-        for (size_type i = 0; i < count; i++)
-            *(new_array + n_pos) = value;
-        _copy_array( array_second_part, (array_second_part + second_part_size), (new_array + n_pos) );
+        iterator it = begin();
+        for (; it != pos; it++, p_new_array++)
+            *p_new_array = *it;
+        for (size_type i = 0; i < count; i++, p_new_array++)
+            *p_new_array = value;
+        for (; it != end(); it++, p_new_array++)
+            *p_new_array = *it;
 
         clear();
-        delete _array;
         _array = new_array;
-        _capacity = new_size;
-        _end = (_array + new_size);
+        _end = p_new_array;
+        _capacity = size();
     }
 }
 
@@ -541,7 +536,7 @@ void FT_VECTOR::_reallocate(size_type new_capacity, value_type* copy_start_point
 }
 
 // ? ***************************************************************************
-// ? *                            PRIVATE METHODS                              *
+// ? *                         OPERATOR OVERLOADS                              *
 // ? ***************************************************************************
 
 template <typename T, class Alloc>

@@ -89,7 +89,7 @@ namespace ft {
         void      insert(iterator pos, size_type count, const_reference value);
         iterator  insert(iterator pos, const_reference value);
         template<class InputIt>
-            void insert( iterator pos, InputIt first, InputIt last ,
+            void insert( iterator pos, InputIt first, InputIt last,
                     typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL);
 
         vector&       operator = (const vector& other);

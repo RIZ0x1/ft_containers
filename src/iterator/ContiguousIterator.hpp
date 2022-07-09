@@ -26,23 +26,23 @@ namespace ft
         ContiguousIterator(const iterator& other);
         ~ContiguousIterator();
 
-        bool                    operator == (const iterator &other) const;
-        bool                    operator != (const iterator &other) const;
-        bool                    operator < (const iterator &other) const;
-        bool                    operator > (const iterator &other) const;
-        bool                    operator <= (const iterator &other) const;
-        bool                    operator >= (const iterator &other) const;
-        reference               operator * (void) const;
-        reference               operator [] (const size_type pos) const;
-        pointer                 operator -> (void) const;
-        iterator        operator + (const difference_type N) const;
-        iterator        operator - (const difference_type N) const;
-        iterator        operator ++ (void);
-        const iterator  operator ++ (int);
-        iterator        operator -- (void);
-        const iterator  operator -- (int);
-        iterator        operator += (const difference_type N);
-        iterator        operator -= (const difference_type N);
+        bool           operator == (const iterator &other) const;
+        bool           operator != (const iterator &other) const;
+        bool           operator < (const iterator &other) const;
+        bool           operator > (const iterator &other) const;
+        bool           operator <= (const iterator &other) const;
+        bool           operator >= (const iterator &other) const;
+        reference      operator * (void) const;
+        reference      operator [] (const size_type pos) const;
+        pointer        operator -> (void) const;
+        iterator       operator + (const difference_type N) const;
+        iterator       operator - (const difference_type N) const;
+        iterator       operator ++ (void);
+        const iterator operator ++ (int);
+        iterator       operator -- (void);
+        const iterator operator -- (int);
+        iterator       operator += (const difference_type N);
+        iterator       operator -= (const difference_type N);
 
     protected:
         inline pointer _get_pointer(void) const;

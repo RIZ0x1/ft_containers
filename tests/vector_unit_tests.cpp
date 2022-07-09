@@ -362,4 +362,45 @@ BOOST_AUTO_TEST_CASE(swap)
     BOOST_CHECK_EQUAL( v1[1], 1 );
 }
 
+BOOST_AUTO_TEST_CASE(insert_1)
+{
+    ft::vector<int>  v0(count_small);
+    std::vector<int> v1(count_small);
+
+    v0.insert(v0.begin() + 1, 1);
+    v1.insert(v1.begin() + 1, 1);
+
+    for (int i = 0; i < count_small; i++)
+        BOOST_CHECK_EQUAL( v0[i], v1[i] );
+}
+
+BOOST_AUTO_TEST_CASE(insert_2)
+{
+    ft::vector<int>  v0(count_big, 0);
+    ft::vector<int>  v1(count_small, 1);
+
+    std::vector<int> v2(count_big, 0);
+    std::vector<int> v3(count_small, 1);
+
+    v0.insert( v0.begin() + 5, v1.begin(), v1.end() );
+    v2.insert( v2.begin() + 5, v3.begin(), v3.end() );
+
+    for (int i = 0; i < (count_big + count_small); i++)
+        BOOST_CHECK_EQUAL(v0[i], v2[i]);
+}
+
+BOOST_AUTO_TEST_CASE(insert_3)
+{
+    ft::vector<int>  v0(count_big, 0);
+    std::vector<int> v1(count_big, 0);
+
+    v0.insert(v0.begin() + count_small, count_small, 1);
+    v1.insert(v1.begin() + count_small, count_small, 1);
+
+    for (int i = 0; i < ( count_mid - 2 ); i++)
+        BOOST_CHECK_EQUAL( v0.at(i), v1.at(i) );
+    BOOST_CHECK_EQUAL( v0.size(), v1.size() );
+    BOOST_CHECK_EQUAL( v1.capacity(), v1.capacity() );
+}
+
 BOOST_AUTO_TEST_SUITE_END()
