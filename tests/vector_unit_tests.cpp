@@ -153,4 +153,65 @@ BOOST_AUTO_TEST_CASE(square_brackets)
         BOOST_CHECK_EQUAL( v0[i], v1[i] );
 }
 
+BOOST_AUTO_TEST_CASE(at)
+{
+    ft::vector<int>  v0(count_mid);
+    std::vector<int> v1(count_mid);
+
+    for (int i = 0; i < count_mid; i++)
+    {
+        v0[i] = i;
+        v1[i] = i;
+    }
+    for (int i = 0; i < count_mid; i++)
+        BOOST_CHECK_EQUAL( v0[i], v1[i] );
+}
+
+BOOST_AUTO_TEST_CASE(data)
+{
+    ft::vector<int>  v0(2);
+    v0[0] = 0;
+
+    int* p0 = v0.data();
+    *(p0 + 1) = 1;
+
+    BOOST_CHECK_EQUAL( v0[1], 1 );
+}
+
+BOOST_AUTO_TEST_CASE(begin)
+{
+    ft::vector<int> v(2);
+    v[0] = 0;
+    v[1] = 1;
+
+    BOOST_CHECK_EQUAL( *(v.begin()), 0 );
+}
+
+BOOST_AUTO_TEST_CASE(end)
+{
+    ft::vector<int> v(2);
+    v[0] = 0;
+    v[1] = 1;
+
+    BOOST_CHECK_EQUAL( *(v.end() - 1), 1 );
+}
+
+BOOST_AUTO_TEST_CASE(begin_end)
+{
+    int i;
+    ft::vector<int>  v0(count_big);
+    std::vector<int> v1(count_big);
+
+    i = 0;
+    for (ft::vector<int>::iterator it = v0.begin(); it != v0.end(); it++)
+        *it = (i++);
+    i = 0;
+    for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); it++)
+        *it = (i++);
+
+    i = 0;
+    for (; i != count_big; i++)
+        BOOST_CHECK_EQUAL( v0[i], v1[i] );
+}
+
 BOOST_AUTO_TEST_SUITE_END()
