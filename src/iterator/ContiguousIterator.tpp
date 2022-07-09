@@ -173,12 +173,12 @@ typename FT_CONT_ITER::pointer FT_CONT_ITER::_get_pointer() const
 using ft::ReverseContiguousIterator;
 
 template <typename value_type>
-FT_REV_CONT_ITER::ReverseContiguousIterator() : ReverseContiguousIterator()
+FT_REV_CONT_ITER::ReverseContiguousIterator() : ContiguousIterator<value_type>()
 {
 }
 
 template <typename value_type>
-FT_REV_CONT_ITER::ReverseContiguousIterator(pointer ptr) : ReverseContiguousIterator(ptr)
+FT_REV_CONT_ITER::ReverseContiguousIterator(pointer ptr) : ContiguousIterator<value_type>(ptr)
 {
 }
 

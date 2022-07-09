@@ -185,13 +185,13 @@ typename FT_VECTOR::const_iterator FT_VECTOR::begin() const
 template <typename value_type, typename allocator_type>
 typename FT_VECTOR::reverse_iterator FT_VECTOR::rbegin()
 {
-    return ( reverse_iterator(_end) );
+    return ( reverse_iterator(_end - 1) );
 }
 
 template <typename value_type, typename allocator_type>
 typename FT_VECTOR::const_reverse_iterator FT_VECTOR::rbegin() const
 {
-    return ( const_reverse_iterator(_end) );
+    return ( const_reverse_iterator(_end - 1) );
 }
 
 template <typename value_type, typename allocator_type>
@@ -209,13 +209,13 @@ typename FT_VECTOR::const_iterator FT_VECTOR::end() const
 template <typename value_type, typename allocator_type>
 typename FT_VECTOR::reverse_iterator FT_VECTOR::rend()
 {
-    return ( reverse_iterator(_array) );
+    return ( reverse_iterator(_array - 1) );
 }
 
 template <typename value_type, typename allocator_type>
 typename FT_VECTOR::const_reverse_iterator FT_VECTOR::rend() const
 {
-    return ( const_reverse_iterator(_array) );
+    return ( const_reverse_iterator(_array - 1) );
 }
 
 // ? ***************************************************************************
@@ -268,6 +268,7 @@ void FT_VECTOR::clear()
     {
         for (size_type i = 0; i < size_value; i++)
             _alloc.destroy(&_array[i]);
+        _end = _array;
     }
 }
 
@@ -326,6 +327,7 @@ void FT_VECTOR::pop_back()
     {
         _alloc.destroy(_end - 1);
         (_end--);
+        (_capacity--);
     }
 }
 

@@ -32,17 +32,17 @@ namespace ft
         bool                    operator > (const iterator &other) const;
         bool                    operator <= (const iterator &other) const;
         bool                    operator >= (const iterator &other) const;
-        reference               operator *    (void) const;
+        reference               operator * (void) const;
         reference               operator [] (const size_type pos) const;
         pointer                 operator -> (void) const;
-        virtual iterator        operator + (const difference_type N) const;
-        virtual iterator        operator - (const difference_type N) const;
-        virtual iterator        operator ++ (void);
-        virtual const iterator  operator ++ (int);
-        virtual iterator        operator -- (void);
-        virtual const iterator  operator -- (int);
-        virtual iterator        operator += (const difference_type N);
-        virtual iterator        operator -= (const difference_type N);
+        iterator        operator + (const difference_type N) const;
+        iterator        operator - (const difference_type N) const;
+        iterator        operator ++ (void);
+        const iterator  operator ++ (int);
+        iterator        operator -- (void);
+        const iterator  operator -- (int);
+        iterator        operator += (const difference_type N);
+        iterator        operator -= (const difference_type N);
 
     protected:
         inline pointer _get_pointer(void) const;
@@ -64,7 +64,7 @@ namespace ft
     class ReverseContiguousIterator : public ContiguousIterator<T>
     {
     public:
-        typedef ReverseContiguousIterator                                iterator;
+        typedef ReverseContiguousIterator<T>                             iterator;
         typedef typename iterator_traits<iterator>::iterator_category    iterator_category;
         typedef typename iterator_traits<iterator>::value_type           value_type;
         typedef typename iterator_traits<iterator>::difference_type      difference_type;
