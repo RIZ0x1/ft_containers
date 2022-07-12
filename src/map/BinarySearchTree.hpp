@@ -11,6 +11,7 @@ namespace ft
         typedef Value      value_type;
 
     private:
+        BinarySearchTree    *_parent_node;
         BinarySearchTree    *_left_node;
         BinarySearchTree    *_right_node;
         key_type            _key;
@@ -28,6 +29,8 @@ namespace ft
         void                set_value(const value_type& value);
         const key_type      get_key(void) const;
         const value_type    get_value(void) const;
+
+
 
         BinarySearchTree&   operator = (const BinarySearchTree& other);
     };
