@@ -55,7 +55,7 @@ FT_PAIR& FT_PAIR::operator = (const pair& other)
 }
 
 // ? ***************************************************************************
-// ? *                    NON-MEMBER OPERATOR OVERLOADS                        *
+// ? *                             NON-MEMBER                                  *
 // ? ***************************************************************************
 
 template <typename first_type, typename second_type>

@@ -9,13 +9,12 @@ namespace ft
     class BidirectionalIterator : public iterator<bidirectional_iterator_tag, Node>
     {
     public:
-        typedef typename ft::iterator<random_access_iterator_tag, Node>  traits;
-        typedef typename iterator_traits<traits>::iterator_category      iterator_category;
-        typedef typename iterator_traits<traits>::value_type             value_type;
-        typedef typename iterator_traits<traits>::difference_type        difference_type;
-        typedef typename iterator_traits<traits>::pointer                pointer;
-        typedef typename iterator_traits<traits>::reference              reference;
         typedef BidirectionalIterator<Node>                              iterator;
+        typedef typename iterator_traits<iterator>::iterator_category    iterator_category;
+        typedef typename iterator_traits<iterator>::value_type           value_type;
+        typedef typename iterator_traits<iterator>::difference_type      difference_type;
+        typedef typename iterator_traits<iterator>::pointer              pointer;
+        typedef typename iterator_traits<iterator>::reference            reference;
         typedef unsigned long                                            size_type;
 
     protected:

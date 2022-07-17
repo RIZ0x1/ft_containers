@@ -4,16 +4,14 @@
 namespace ft
 {
   template <typename T1, typename T2>
-  class pair
+  struct pair
   {
-  public:
-    typedef T1 key_type;
-    typedef T2 value_type;
+    typedef T1 first_type;
+    typedef T2 second_type;
 
-    key_type   key;
-    value_type value;
+    first_type  key;
+    second_type value;
 
-  public:
     pair();
     pair(const pair& other);
     pair(const T1& x, const T2& y);
