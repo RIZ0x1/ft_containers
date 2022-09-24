@@ -7,7 +7,7 @@
 
 # define FT_RBT RedBlackTree<key_type, value_type>
 
-using ft::RedBlackTree;
+using ft::RedBlackNode;
 
 template <typename key_type, typename value_type>
 FT_RBT::RedBlackTree() : _root(NULL) _alloc(allocator_type())
@@ -74,19 +74,38 @@ RedBlackNode* FT_RBT::_insert_case1(RedBlackNode *node)
     if (node != NULL)
     {
         if (node->parent == NULL)
+        {
             node->color = NodeColor::Black;
+            _assign(node, _root);
+        }
         else
             _insert_case2(node);
     }
 }
 
 template <typename key_type, typename value_type>
-RedBlackNode* FT_RBT::_insert_case1(RedBlackNode *node)
+RedBlackNode* FT_RBT::_insert_case2(RedBlackNode *node)
 {
     if (node != NULL)
     {
         if (node->parent->color == NodeColor::Black)
-            
+            _assign(node, _root);
+    }
+}
+
+template <typename key_type, typename value_type>
+void FT_RBT::_assign(RedBlackNode* node, RedBlackNode* parent) throw(std::runtime_error)
+{
+    if (node == NULL)
+        throw std::runtime_error("NULL as parameter");
+
+    if (parent != NULL)
+    {
+        node->parent = parent;
+        if (parent->data->key < node->data->key)
+        parent->left = node;
+        else
+        parent->right = node;
     }
 }
 
@@ -100,8 +119,11 @@ RedBlackNode* FT_RBT::_grandparent(const RedBlackNode* node)
 }
 
 template <typename key_type, typename value_type>
-RedBlackNode* FT_RBT::_uncle(const RedBlackNode* node)
+RedBlackNode* FT_RBT::_uncle(const RedBlackNode* node) throw(std::runtime_error)
 {
+    if (node != NULL && parent != NULL)
+        throw std::runtime_error("NULL as parameter");
+
     RedBlackNode* grandparent = _grandparent(node);
 
     if (grandparent != NULL)
@@ -115,8 +137,11 @@ RedBlackNode* FT_RBT::_uncle(const RedBlackNode* node)
 }
 
 template <typename key_type, typename value_type>
-void FT_RBT::_rotate_left(RedBlackNode* node)
+void FT_RBT::_rotate_left(RedBlackNode* node) throw(std::runtime_error)
 {
+    if (node != NULL && parent != NULL)
+        throw std::runtime_error("NULL as parameter");
+
     if (node->left != NULL)
     {
         RedBlackNode* replace_node = node->left;
@@ -133,8 +158,11 @@ void FT_RBT::_rotate_left(RedBlackNode* node)
 }
 
 template <typename key_type, typename value_type>
-void FT_RBT::_rotate_right(RedBlackNode* node)
+void FT_RBT::_rotate_right(RedBlackNode* node) throw(std::runtime_error)
 {
+    if (node != NULL && parent != NULL)
+        throw std::runtime_error("NULL as parameter");
+
     if (node->right != NULL)
     {
         RedBlackNode* replace_node = node->right;

@@ -21,9 +21,6 @@ namespace ft
                          data(NULL),
                          color(NodeColor::Red);
         ~RedBlackNode() {
-                         delete parent;
-                         delete left;
-                         delete right;
                          delete data;
         }
 
