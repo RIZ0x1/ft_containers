@@ -9,7 +9,7 @@
 # include <limits>
 # include <iostream>
 # include <stdexcept>
-# include "../iterator/ContiguousIterator.hpp"
+# include "../iterator/VectorIterator.hpp"
 # include "../ft_utils/enable_if.hpp"
 # include "../ft_utils/is_integral.hpp"
 # include "../ft_utils/lexicographical_compare.hpp"
@@ -29,10 +29,10 @@ namespace ft {
         typedef std::ptrdiff_t                                          difference_type;
         typedef unsigned long int                                       size_type;
 
-        typedef typename ft::ContiguousIterator<value_type>             iterator;
-        typedef typename ft::ConstContiguousIterator<value_type>        const_iterator;
-        typedef typename ft::ReverseContiguousIterator<value_type>      reverse_iterator;
-        typedef typename ft::ConstReverseContiguousIterator<value_type> const_reverse_iterator;
+        typedef typename ft::VectorIterator<value_type>             iterator;
+        typedef typename ft::ConstVectorIterator<value_type>        const_iterator;
+        typedef typename ft::ReverseVectorIterator<value_type>      reverse_iterator;
+        typedef typename ft::ConstReverseVectorIterator<value_type> const_reverse_iterator;
 
     private:
         value_type*      _array;

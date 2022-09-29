@@ -1,14 +1,14 @@
-#ifndef CONTIGUOUS_ITERATOR_TPP
-# define CONTIGUOUS_ITERATOR_TPP
+#ifndef VECTOR_ITERATOR_TPP
+# define VECTOR_ITERATOR_TPP
 
-#include "ContiguousIterator.hpp"
+#include "VectorIterator.hpp"
 
-# ifndef CONTIGUOUS_ITERATOR_HPP
-#  error __FILE__ should be included only from ContiguousIterator.hpp
+# ifndef VECTOR_ITERATOR_HPP
+#  error __FILE__ should be included only from VectorIterator.hpp
 # endif
 
-# define FT_CONT_ITER ContiguousIterator<value_type>
-# define FT_REV_CONT_ITER ReverseContiguousIterator<value_type>
+# define FT_CONT_ITER VectorIterator<value_type>
+# define FT_REV_CONT_ITER ReverseVectorIterator<value_type>
 
 // ? ***************************************************************************
 // ? ***************************************************************************
@@ -16,25 +16,25 @@
 // ? ***************************************************************************
 // ? ***************************************************************************
 
-using ft::ContiguousIterator;
+using ft::VectorIterator;
 
 template <typename value_type>
-FT_CONT_ITER::ContiguousIterator() : _ptr(NULL)
+FT_CONT_ITER::VectorIterator() : _ptr(NULL)
 {
 }
 
 template <typename value_type>
-FT_CONT_ITER::ContiguousIterator(pointer ptr) : _ptr(ptr)
+FT_CONT_ITER::VectorIterator(pointer ptr) : _ptr(ptr)
 {
 }
 
 template <typename value_type>
-FT_CONT_ITER::ContiguousIterator(const iterator& other) : _ptr(other._get_pointer())
+FT_CONT_ITER::VectorIterator(const iterator& other) : _ptr(other._get_pointer())
 {
 }
 
 template <typename value_type>
-FT_CONT_ITER::~ContiguousIterator()
+FT_CONT_ITER::~VectorIterator()
 {
 }
 
@@ -170,26 +170,26 @@ typename FT_CONT_ITER::pointer FT_CONT_ITER::_get_pointer() const
 // ? ***************************************************************************
 // ? ***************************************************************************
 
-using ft::ReverseContiguousIterator;
+using ft::ReverseVectorIterator;
 
 template <typename value_type>
-FT_REV_CONT_ITER::ReverseContiguousIterator() : ContiguousIterator<value_type>()
+FT_REV_CONT_ITER::ReverseVectorIterator() : VectorIterator<value_type>()
 {
 }
 
 template <typename value_type>
-FT_REV_CONT_ITER::ReverseContiguousIterator(pointer ptr) : ContiguousIterator<value_type>(ptr)
+FT_REV_CONT_ITER::ReverseVectorIterator(pointer ptr) : VectorIterator<value_type>(ptr)
 {
 }
 
 template <typename value_type>
-FT_REV_CONT_ITER::ReverseContiguousIterator(const ReverseContiguousIterator& other)
+FT_REV_CONT_ITER::ReverseVectorIterator(const ReverseVectorIterator& other)
 {
     this->_ptr = other._get_pointer();
 }
 
 template <typename value_type>
-FT_REV_CONT_ITER::~ReverseContiguousIterator()
+FT_REV_CONT_ITER::~ReverseVectorIterator()
 {
 }
 
@@ -255,4 +255,4 @@ typename FT_REV_CONT_ITER::iterator    FT_REV_CONT_ITER::operator += (const diff
     return (*this);
 }
 
-#endif // CONTIGUOUS_ITERATOR_TPP
+#endif // VECTOR_ITERATOR_TPP

@@ -1,12 +1,12 @@
-#ifndef CONTIGUOUS_ITERATOR_HPP
-# define CONTIGUOUS_ITERATOR_HPP
+#ifndef VECTOR_ITERATOR_HPP
+# define VECTOR_ITERATOR_HPP
 
 #include "iterators_core.hpp"
 
 namespace ft
 {
     template <typename T>
-    class ContiguousIterator : public iterator<random_access_iterator_tag, T>
+    class VectorIterator : public iterator<random_access_iterator_tag, T>
     {
     public:
         typedef typename ft::iterator<random_access_iterator_tag, T>   traits;
@@ -15,16 +15,16 @@ namespace ft
         typedef typename iterator_traits<traits>::difference_type      difference_type;
         typedef typename iterator_traits<traits>::pointer              pointer;
         typedef typename iterator_traits<traits>::reference            reference;
-        typedef ContiguousIterator<T>                                  iterator;
+        typedef VectorIterator<T>                                      iterator;
         typedef unsigned long                                          size_type;
 
     protected:
         pointer _ptr;
     public:
-        ContiguousIterator();
-        explicit ContiguousIterator(pointer ptr);
-        ContiguousIterator(const iterator& other);
-        ~ContiguousIterator();
+        VectorIterator();
+        explicit VectorIterator(pointer ptr);
+        VectorIterator(const iterator& other);
+        ~VectorIterator();
 
         bool           operator == (const iterator &other) const;
         bool           operator != (const iterator &other) const;
@@ -49,22 +49,22 @@ namespace ft
     };
 
     template <typename T>
-    class ConstContiguousIterator : public ContiguousIterator<const T>
+    class ConstVectorIterator : public VectorIterator<const T>
     {
     public:
-        typedef ConstContiguousIterator<T>                  iterator;
+        typedef ConstVectorIterator<T>                  iterator;
         typedef typename iterator_traits<iterator>::pointer pointer;
     public:
-        ConstContiguousIterator() : ContiguousIterator<const T>() {};
-        explicit ConstContiguousIterator(pointer ptr) : ContiguousIterator<const T>(ptr) {};
-        ConstContiguousIterator(const ConstContiguousIterator& other) : ContiguousIterator<const T>::_ptr(other._get_pointer()) {};
+        ConstVectorIterator() : VectorIterator<const T>() {};
+        explicit ConstVectorIterator(pointer ptr) : VectorIterator<const T>(ptr) {};
+        ConstVectorIterator(const ConstVectorIterator& other) : VectorIterator<const T>::_ptr(other._get_pointer()) {};
     };
 
     template <typename T>
-    class ReverseContiguousIterator : public ContiguousIterator<T>
+    class ReverseVectorIterator : public VectorIterator<T>
     {
     public:
-        typedef ReverseContiguousIterator<T>                             iterator;
+        typedef ReverseVectorIterator<T>                             iterator;
         typedef typename iterator_traits<iterator>::iterator_category    iterator_category;
         typedef typename iterator_traits<iterator>::value_type           value_type;
         typedef typename iterator_traits<iterator>::difference_type      difference_type;
@@ -72,10 +72,10 @@ namespace ft
         typedef typename iterator_traits<iterator>::reference            reference;
 
     public:
-        ReverseContiguousIterator();
-        explicit ReverseContiguousIterator(pointer ptr);
-        ReverseContiguousIterator(const iterator& other);
-        ~ReverseContiguousIterator();
+        ReverseVectorIterator();
+        explicit ReverseVectorIterator(pointer ptr);
+        ReverseVectorIterator(const iterator& other);
+        ~ReverseVectorIterator();
 
         iterator            operator + (const difference_type N) const;
         iterator            operator - (const difference_type N) const;
@@ -88,18 +88,18 @@ namespace ft
     };
 
     template <typename T>
-    class ConstReverseContiguousIterator : public ReverseContiguousIterator<const T>
+    class ConstReverseVectorIterator : public ReverseVectorIterator<const T>
     {
     public:
-        typedef ConstContiguousIterator<T>                  iterator;
+        typedef ConstVectorIterator<T>                  iterator;
         typedef typename iterator_traits<iterator>::pointer pointer;
     public:
-        ConstReverseContiguousIterator() : ReverseContiguousIterator<const T>() {};
-        explicit ConstReverseContiguousIterator(pointer ptr) : ReverseContiguousIterator<const T>(ptr) {};
-        ConstReverseContiguousIterator(const ConstReverseContiguousIterator& other) : ReverseContiguousIterator<const T>::_ptr(other._get_pointer()) {};
+        ConstReverseVectorIterator() : ReverseVectorIterator<const T>() {};
+        explicit ConstReverseVectorIterator(pointer ptr) : ReverseVectorIterator<const T>(ptr) {};
+        ConstReverseVectorIterator(const ConstReverseVectorIterator& other) : ReverseVectorIterator<const T>::_ptr(other._get_pointer()) {};
     };
 }
 
-#include "ContiguousIterator.tpp"
+#include "VectorIterator.tpp"
 
-#endif // CONTIGUOUS_ITERATOR_HPP
+#endif // VECTOR_ITERATOR_HPP

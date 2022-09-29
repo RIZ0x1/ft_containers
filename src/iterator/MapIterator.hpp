@@ -1,15 +1,15 @@
-#ifndef BIDIRECTIONAL_ITERATOR_HPP
-# define BIDIRECTIONAL_ITERATOR_HPP
+#ifndef MAP_ITERATOR_HPP
+# define MAP_ITERATOR_HPP
 
 # include "iterators_core.hpp"
 
 namespace ft
 {
     template <typename Node>
-    class BidirectionalIterator : public iterator<bidirectional_iterator_tag, Node>
+    class MapIterator : public iterator<bidirectional_iterator_tag, Node>
     {
     public:
-        typedef BidirectionalIterator<Node>                              iterator;
+        typedef MapIterator<Node>                              iterator;
         typedef typename iterator_traits<iterator>::iterator_category    iterator_category;
         typedef typename iterator_traits<iterator>::value_type           value_type;
         typedef typename iterator_traits<iterator>::difference_type      difference_type;
@@ -20,10 +20,10 @@ namespace ft
     protected:
         pointer _p_node;
     public:
-        BidirectionalIterator();
-        explicit BidirectionalIterator(pointer p_node);
-        BidirectionalIterator(const iterator& other);
-        ~BidirectionalIterator();
+        MapIterator();
+        explicit MapIterator(pointer p_node);
+        MapIterator(const iterator& other);
+        ~MapIterator();
 
         bool                    operator == (const iterator &other) const;
         bool                    operator != (const iterator &other) const;
@@ -48,4 +48,4 @@ namespace ft
     };
 }
 
-#endif // BIDIRECTIONAL_ITERATOR_HPP
+#endif // MAP_ITERATOR_HPP
