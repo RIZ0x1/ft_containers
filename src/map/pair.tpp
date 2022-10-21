@@ -20,7 +20,7 @@ FT_PAIR::pair() : key(first_type()), value(second_type())
 }
 
 template <typename first_type, typename second_type>
-FT_PAIR::pair(const pair& other) : key(other.t), value(other.u)
+FT_PAIR::pair(const pair<first_type, second_type>& other) : key(other.t), value(other.u)
 {
 }
 
@@ -48,7 +48,7 @@ FT_PAIR::~pair()
 // ? ***************************************************************************
 
 template <typename first_type, typename second_type>
-FT_PAIR& FT_PAIR::operator = (const pair& other)
+FT_PAIR& FT_PAIR::operator = (const pair<first_type, second_type>& other)
 {
     this->t = other.t;
     this->u = other.u;
@@ -94,10 +94,13 @@ bool operator >= (const FT_PAIR& left, const FT_PAIR& right)
     return (left->t < right.t) ? false : (left->u >= right.u);
 }
 
-template <typename T1, typename T2>
-pair<T1, T2> make_pair(T1 t, T2 u)
+namespace ft
 {
-    return ( ft::pair<T1, T2>(t, u) );
+    template <typename T1, typename T2>
+    pair<T1, T2> make_pair(T1 t, T2 u)
+    {
+        return ( ft::pair<T1, T2>(t, u) );
+    }
 }
 
 #endif // PAIR_TPP

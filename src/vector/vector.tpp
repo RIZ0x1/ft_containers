@@ -5,7 +5,7 @@
 #  error __FILE__ should only be included from vector.hpp
 # endif
 
-# define FT_VECTOR    vector<value_type, allocator_type>
+# define FT_VECTOR vector<value_type, allocator_type>
 
 using ft::vector;
 
@@ -18,7 +18,7 @@ FT_VECTOR::vector()
 {
     _alloc = allocator_type();
     _array = NULL;
-    _end = _array;
+    _end   = _array;
     _capacity = 0;
 }
 
@@ -57,7 +57,8 @@ FT_VECTOR::vector(InputIt first, InputIt last, const allocator_type &alloc, type
 {
     this->_alloc = alloc;
 
-    for (; first != last; first++) // this is bad
+    reserve(last - first);
+    for (; first != last; first++)
         push_back(*first);
 }
 

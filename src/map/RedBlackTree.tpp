@@ -5,59 +5,70 @@
 #  error __FILE__ should only be included from RedBlackTree.hpp
 # endif
 
-# define FT_RBT RedBlackTree<key_type, value_type>
+# define FT_RBT RedBlackTree<key_type, value_type, allocator_type>
 
-using ft::RedBlackNode;
+using ft::RedBlackTree;
 
-template <typename key_type, typename value_type>
-FT_RBT::RedBlackTree() : _root(NULL) _alloc(allocator_type())
+// ? ***************************************************************************
+// ? *                       CONSTRUCTORS & DESTRUCTOR                         *
+// ? ***************************************************************************
+
+template <typename key_type, typename value_type, typename allocator_type>
+FT_RBT::RedBlackTree() : _root(NULL), _alloc(allocator_type())
 {
 }
 
-template <typename key_type, typename value_type>
-FT_RBT::RedBlackTree(const RedBlackTree& other)
+template <typename key_type, typename value_type, typename allocator_type>
+FT_RBT::RedBlackTree(const FT_RBT& other)
 {
     // TODO
 }
 
-template <typename key_type, typename value_type>
-void FT_RBT::_insert(const key_type& key, const value_type& value, RedBlackNode* root)
-{
+// ? ***************************************************************************
+// ? *                             MEMBER FUNCTIONS                            *
+// ? ***************************************************************************
 
+template <typename key_type, typename value_type, typename allocator_type>
+bool FT_RBT::is_empty() const
+{
+    return (_root == NULL);
 }
 
-template <typename key_type, typename value_type>
+template <typename key_type, typename value_type, typename allocator_type>
 void FT_RBT::insert(const key_type& key, const value_type& value)
 {
-    _insert(key, value, _root);
+    typename FT_RBT::node_type *node = _alloc.allocate(1);
+    node->data = ft::make_pair<key_type, value_type>(key, value);
+    node->data.key = key;
+    node->data.value = value;
+
+    _insert(node, _root);
 }
 
-template <typename key_type, typename value_type>
-void FT_RBT::delete(const key_type& key)
+template <typename key_type, typename value_type, typename allocator_type>
+void FT_RBT::insert(const pair_type& pair)
+{
+    node_type *node = _alloc.allocate(1);
+    node->data = ft::make_pair<key_type, value_type>(pair.key, pair.value);
+    node->data.key = pair.key;
+    node->data.value = pair.value;
+
+    _insert(node, _root);
+}
+
+template <typename key_type, typename value_type, typename allocator_type>
+void FT_RBT::remove(const key_type& key)
 {
 
 }
 
-template <typename key_type, typename value_type>
-RedBlackNode* FT_RBT::_find(const key_type& key, RedBlackNode* root)
-{
-    if (root == NULL)
-        return (NULL);
-    if (root.data.key < key)
-        return ( _find(key, root.left) );
-    if (root.data.key > key)
-        return ( _find(key, root.right) );
-    else
-        return (root);
-}
-
-template <typename key_type, typename value_type>
-RedBlackNode* FT_RBT::find(const key_type& key)
+template <typename key_type, typename value_type, typename allocator_type>
+typename FT_RBT::node_type* FT_RBT::find(const key_type& key)
 {
     return ( _find(key, _root) );
 }
 
-template <typename key_type, typename value_type>
+template <typename key_type, typename value_type, typename allocator_type>
 template <typename OperationType>
 void FT_RBT::traverse(OperationType* f)
 {
@@ -68,49 +79,68 @@ void FT_RBT::traverse(OperationType* f)
 // *                                 UTILS                                     *
 // *****************************************************************************
 
-template <typename key_type, typename value_type>
-RedBlackNode* FT_RBT::_insert_case1(RedBlackNode *node)
+template <typename key_type, typename value_type, typename allocator_type>
+void FT_RBT::_insert(node_type* node, node_type* root)
 {
-    if (node != NULL)
+    node_type *cursor = root;
+
+    if (cursor == NULL || node == NULL)
+        throw std::runtime_error("(RedBlackTree::_insert): NULL as parameter");
+
+    while (cursor->left != NULL || cursor->right != NULL)
     {
-        if (node->parent == NULL)
-        {
-            node->color = NodeColor::Black;
-            _assign(node, _root);
-        }
+        if (node->data.key < cursor->data.key)
+            cursor = cursor->left;
         else
-            _insert_case2(node);
+            cursor = cursor->right;
     }
+    
+    if (node->data.key < cursor->data.key)
+        cursor->left = node;
+    else
+        cursor->right = node;
+    node->parent = cursor;
+    node->color  = NodeColor::Red;
+    _insert_fixup(node, root);
 }
 
-template <typename key_type, typename value_type>
-RedBlackNode* FT_RBT::_insert_case2(RedBlackNode *node)
+template <typename key_type, typename value_type, typename allocator_type>
+void FT_RBT::_insert_fixup(node_type* node, node_type* root)
 {
-    if (node != NULL)
-    {
-        if (node->parent->color == NodeColor::Black)
-            _assign(node, _root);
-    }
+
 }
 
-template <typename key_type, typename value_type>
-void FT_RBT::_assign(RedBlackNode* node, RedBlackNode* parent) throw(std::runtime_error)
+template <typename key_type, typename value_type, typename allocator_type>
+typename FT_RBT::node_type* FT_RBT::_find(const key_type& key, node_type* root) const
+{
+    if (root == NULL)
+        return (NULL);
+    if (root->data.key < key)
+        return ( _find(key, root->left) );
+    if (root->data.key > key)
+        return ( _find(key, root->right) );
+    else
+        return (root);
+}
+
+template <typename key_type, typename value_type, typename allocator_type>
+void FT_RBT::_assign(node_type* node, node_type* parent) const throw(std::runtime_error)
 {
     if (node == NULL)
-        throw std::runtime_error("NULL as parameter");
+        throw std::runtime_error("(RedBlackTree::_assign): NULL as parameter");
 
     if (parent != NULL)
     {
         node->parent = parent;
-        if (parent->data->key < node->data->key)
-        parent->left = node;
+        if (parent->data.key > node->data.key)
+            parent->left = node;
         else
-        parent->right = node;
+            parent->right = node;
     }
 }
 
-template <typename key_type, typename value_type>
-RedBlackNode* FT_RBT::_grandparent(const RedBlackNode* node)
+template <typename key_type, typename value_type, typename allocator_type>
+typename FT_RBT::node_type* FT_RBT::_grandparent(const node_type* node) const
 {
     if (node != NULL && node->parent != NULL)
         return (node->parent->parent);
@@ -118,17 +148,17 @@ RedBlackNode* FT_RBT::_grandparent(const RedBlackNode* node)
         return (NULL);
 }
 
-template <typename key_type, typename value_type>
-RedBlackNode* FT_RBT::_uncle(const RedBlackNode* node) throw(std::runtime_error)
+template <typename key_type, typename value_type, typename allocator_type>
+typename FT_RBT::node_type* FT_RBT::_uncle(const node_type* node) const throw(std::runtime_error)
 {
-    if (node != NULL && parent != NULL)
-        throw std::runtime_error("NULL as parameter");
+    if (node != NULL)
+        throw std::runtime_error("(RedBlackTree::_uncle): NULL as parameter");
 
-    RedBlackNode* grandparent = _grandparent(node);
+    node_type* grandparent = _grandparent(node);
 
     if (grandparent != NULL)
     {
-        if (grandparent->left == node->left)
+        if (grandparent->left == node->parent)
             return (grandparent->right);
         else
             return (grandparent->left);
@@ -136,15 +166,15 @@ RedBlackNode* FT_RBT::_uncle(const RedBlackNode* node) throw(std::runtime_error)
     return (NULL);
 }
 
-template <typename key_type, typename value_type>
-void FT_RBT::_rotate_left(RedBlackNode* node) throw(std::runtime_error)
+template <typename key_type, typename value_type, typename allocator_type>
+void FT_RBT::_rotate_left(node_type* node) const throw(std::runtime_error)
 {
-    if (node != NULL && parent != NULL)
-        throw std::runtime_error("NULL as parameter");
+    if (node != NULL)
+        throw std::runtime_error("(RedBlackTree::_rotate_left): NULL as parameter");
 
     if (node->left != NULL)
     {
-        RedBlackNode* replace_node = node->left;
+        node_type* replace_node = node->left;
         node->left = replace_node->right;
         replace_node->right = node;
         replace_node->parent = node->parent;
@@ -157,15 +187,15 @@ void FT_RBT::_rotate_left(RedBlackNode* node) throw(std::runtime_error)
     }
 }
 
-template <typename key_type, typename value_type>
-void FT_RBT::_rotate_right(RedBlackNode* node) throw(std::runtime_error)
+template <typename key_type, typename value_type, typename allocator_type>
+void FT_RBT::_rotate_right(node_type* node) const throw(std::runtime_error)
 {
-    if (node != NULL && parent != NULL)
-        throw std::runtime_error("NULL as parameter");
+    if (node != NULL)
+        throw std::runtime_error("(RedBlackTree::_rotate_right): NULL as parameter");
 
     if (node->right != NULL)
     {
-        RedBlackNode* replace_node = node->right;
+        node_type* replace_node = node->right;
         node->right = replace_node->left;
         replace_node->left = node;
         replace_node->parent = node->parent;

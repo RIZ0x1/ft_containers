@@ -19,15 +19,15 @@ namespace ft {
     class vector
     {
     public:
-        typedef T                                                       value_type;
-        typedef const value_type                                        const_value_type;
-        typedef value_type&                                             reference;
-        typedef const value_type&                                       const_reference;
-        typedef Allocator                                               allocator_type;
-        typedef typename allocator_type::pointer                        pointer;
-        typedef const typename allocator_type::pointer                  const_pointer;
-        typedef std::ptrdiff_t                                          difference_type;
-        typedef unsigned long int                                       size_type;
+        typedef T                                                   value_type;
+        typedef const value_type                                    const_value_type;
+        typedef value_type&                                         reference;
+        typedef const value_type&                                   const_reference;
+        typedef Allocator                                           allocator_type;
+        typedef typename allocator_type::pointer                    pointer;
+        typedef const typename allocator_type::pointer              const_pointer;
+        typedef std::ptrdiff_t                                      difference_type;
+        typedef unsigned long int                                   size_type;
 
         typedef typename ft::VectorIterator<value_type>             iterator;
         typedef typename ft::ConstVectorIterator<value_type>        const_iterator;

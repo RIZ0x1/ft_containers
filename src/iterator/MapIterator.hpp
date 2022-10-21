@@ -5,11 +5,11 @@
 
 namespace ft
 {
-    template <typename Node>
-    class MapIterator : public iterator<bidirectional_iterator_tag, Node>
+    template <typename NodeType>
+    class MapIterator : public iterator<bidirectional_iterator_tag, NodeType>
     {
     public:
-        typedef MapIterator<Node>                              iterator;
+        typedef MapIterator<NodeType>                                    iterator;
         typedef typename iterator_traits<iterator>::iterator_category    iterator_category;
         typedef typename iterator_traits<iterator>::value_type           value_type;
         typedef typename iterator_traits<iterator>::difference_type      difference_type;
