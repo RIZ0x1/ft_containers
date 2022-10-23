@@ -15,17 +15,17 @@ using ft::pair;
 // ? ***************************************************************************
 
 template <typename first_type, typename second_type>
-FT_PAIR::pair() : key(first_type()), value(second_type())
+FT_PAIR::pair() : first(first_type()), second(second_type())
 {
 }
 
 template <typename first_type, typename second_type>
-FT_PAIR::pair(const pair<first_type, second_type>& other) : key(other.t), value(other.u)
+FT_PAIR::pair(const pair<first_type, second_type>& other) : first(other.t), second(other.u)
 {
 }
 
 template <typename first_type, typename second_type>
-FT_PAIR::pair(const first_type& x, const second_type& y) : key(x), value(y)
+FT_PAIR::pair(const first_type& x, const second_type& y) : first(x), second(y)
 {
 }
 
@@ -34,7 +34,7 @@ template <typename U1, typename U2>
 FT_PAIR::pair(const pair<U1, U2> &other,
               typename ft::enable_if<std::is_convertible<const U1&, first_type>::value>::type*,
               typename ft::enable_if<std::is_convertible<const U2&, second_type>::value>::type*)
-              : key(other.first), value(other.second)
+              : first(other.first), second(other.second)
 {
 }
 
