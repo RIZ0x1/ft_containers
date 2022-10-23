@@ -39,8 +39,8 @@ void FT_RBT::insert(const key_type& key, const value_type& value)
 {
     typename FT_RBT::node_type *node = _alloc.allocate(1);
     node->data = ft::make_pair<key_type, value_type>(key, value);
-    node->data.key = key;
-    node->data.value = value;
+    node->data.first = key;
+    node->data.second = value;
 
     _insert(node, _root);
 }
@@ -49,9 +49,9 @@ template <typename key_type, typename value_type, typename allocator_type>
 void FT_RBT::insert(const pair_type& pair)
 {
     node_type *node = _alloc.allocate(1);
-    node->data = ft::make_pair<key_type, value_type>(pair.key, pair.value);
-    node->data.key = pair.key;
-    node->data.value = pair.value;
+    node->data = ft::make_pair<key_type, value_type>(pair.first, pair.second);
+    node->data.first = pair.first;
+    node->data.second = pair.second;
 
     _insert(node, _root);
 }
@@ -89,13 +89,13 @@ void FT_RBT::_insert(node_type* node, node_type* root)
 
     while (cursor->left != NULL || cursor->right != NULL)
     {
-        if (node->data.key < cursor->data.key)
+        if (node->data.first < cursor->data.first)
             cursor = cursor->left;
         else
             cursor = cursor->right;
     }
     
-    if (node->data.key < cursor->data.key)
+    if (node->data.first < cursor->data.first)
         cursor->left = node;
     else
         cursor->right = node;
@@ -115,9 +115,9 @@ typename FT_RBT::node_type* FT_RBT::_find(const key_type& key, node_type* root) 
 {
     if (root == NULL)
         return (NULL);
-    if (root->data.key < key)
+    if (root->data.first < key)
         return ( _find(key, root->left) );
-    if (root->data.key > key)
+    if (root->data.first > key)
         return ( _find(key, root->right) );
     else
         return (root);
@@ -132,7 +132,7 @@ void FT_RBT::_assign(node_type* node, node_type* parent) const throw(std::runtim
     if (parent != NULL)
     {
         node->parent = parent;
-        if (parent->data.key > node->data.key)
+        if (parent->data.first > node->data.first)
             parent->left = node;
         else
             parent->right = node;

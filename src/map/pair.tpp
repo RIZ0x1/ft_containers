@@ -34,7 +34,7 @@ template <typename U1, typename U2>
 FT_PAIR::pair(const pair<U1, U2> &other,
               typename ft::enable_if<std::is_convertible<const U1&, first_type>::value>::type*,
               typename ft::enable_if<std::is_convertible<const U2&, second_type>::value>::type*)
-              : key(other.key), value(other.value)
+              : key(other.first), value(other.second)
 {
 }
 

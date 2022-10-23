@@ -88,27 +88,27 @@ void FT_MAP::swap(const map& other)
 
 }
 
-// ****************************************************************************
-// *                              NON-MEMBER FUNCTIONS                        *
-// ****************************************************************************
+// ? ***************************************************************************
+// ? *                              NON-MEMBER FUNCTIONS                       *
+// ? ***************************************************************************
 
-    template <typename Key, typename T, typename Compare, typename Allocator>
-    bool operator == (const ft::map<Key, T, Compare, Allocator>& lhs,
-                      const ft::map<Key, T, Compare, Allocator>& rhs) {}
-    template <typename Key, typename T, typename Compare, typename Allocator>
-    bool operator != (const ft::map<Key, T, Compare, Allocator>& lhs,
-                      const ft::map<Key, T, Compare, Allocator>& rhs) {}
-    template <typename Key, typename T, typename Compare, typename Allocator>
-    bool operator <  (const ft::map<Key, T, Compare, Allocator>& lhs,
-                      const ft::map<Key, T, Compare, Allocator>& rhs) {}
-    template <typename Key, typename T, typename Compare, typename Allocator>
-    bool operator <= (const ft::map<Key, T, Compare, Allocator>& lhs,
-                      const ft::map<Key, T, Compare, Allocator>& rhs) {}
-    template <typename Key, typename T, typename Compare, typename Allocator>
-    bool operator >  (const ft::map<Key, T, Compare, Allocator>& lhs,
-                      const ft::map<Key, T, Compare, Allocator>& rhs) {}
-    template <typename Key, typename T, typename Compare, typename Allocator>
-    bool operator >= (const ft::map<Key, T, Compare, Allocator>& lhs,
-                      const ft::map<Key, T, Compare, Allocator>& rhs) {}
+template <typename Key, typename T, typename Compare, typename Allocator>
+bool operator == (const ft::map<Key, T, Compare, Allocator>& lhs,
+                  const ft::map<Key, T, Compare, Allocator>& rhs) {}
+template <typename Key, typename T, typename Compare, typename Allocator>
+bool operator != (const ft::map<Key, T, Compare, Allocator>& lhs,
+                  const ft::map<Key, T, Compare, Allocator>& rhs) {}
+template <typename Key, typename T, typename Compare, typename Allocator>
+bool operator <  (const ft::map<Key, T, Compare, Allocator>& lhs,
+                  const ft::map<Key, T, Compare, Allocator>& rhs) {}
+template <typename Key, typename T, typename Compare, typename Allocator>
+bool operator <= (const ft::map<Key, T, Compare, Allocator>& lhs,
+                  const ft::map<Key, T, Compare, Allocator>& rhs) {}
+template <typename Key, typename T, typename Compare, typename Allocator>
+bool operator >  (const ft::map<Key, T, Compare, Allocator>& lhs,
+                  const ft::map<Key, T, Compare, Allocator>& rhs) {}
+template <typename Key, typename T, typename Compare, typename Allocator>
+bool operator >= (const ft::map<Key, T, Compare, Allocator>& lhs,
+                  const ft::map<Key, T, Compare, Allocator>& rhs) {}
 
 #endif // MAP_TPP
