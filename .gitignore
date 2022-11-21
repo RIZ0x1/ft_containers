@@ -38,9 +38,9 @@ ft_out.dSYM
 std_out.dSYM
 qt-creator-build
 qt-creator-build/*
-cllion-build
+clion-build
 build
 CMakeLists.txt.user
 cmake-build-debug
 .idea
-**/out
+**/*_test

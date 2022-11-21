@@ -59,7 +59,7 @@ void FT_RBT::insert(const pair_type& pair)
 template <typename key_type, typename value_type, typename allocator_type>
 void FT_RBT::remove(const key_type& key)
 {
-
+    _remove(_find(key, _root), _root);
 }
 
 template <typename key_type, typename value_type, typename allocator_type>
@@ -107,7 +107,76 @@ void FT_RBT::_insert(node_type* node, node_type* root)
 template <typename key_type, typename value_type, typename allocator_type>
 void FT_RBT::_insert_fixup(node_type* node, node_type* root)
 {
+    if (node == NULL)
+        throw std::runtime_error("(RedBlackTree::_insert_fixup): NULL as parameter");
 
+    node_type *parent = node->parent;
+
+    while (node != _root && parent->color == NodeColor::Red)
+    {
+        node_type *gparent = _grandparent(node);
+        node_type *uncle = _uncle(node);
+
+        if (uncle == gparent->right)
+        {
+            if (uncle != NULL && uncle->color == NodeColor::Red)
+            {
+                parent->color   = NodeColor::Black;
+                uncle->color    = NodeColor::Black;
+                gparent->color  = NodeColor::Red;
+                node = gparent;
+                parent = node->parent;
+            }
+            else
+            {
+                if (parent->right == node)
+                {
+                    _rotate_left(parent);
+                    _swap(node, parent);
+                }
+                _rotate_right(gparent);
+                gparent->color = NodeColor::Red;
+                parent->color  = NodeColor::Black;
+                break ;
+            }
+        }
+        else
+        {
+            if (uncle != NULL && uncle->color == NodeColor::Red)
+            {
+                gparent->color  = NodeColor::Red;
+                parent->color   = NodeColor::Black;
+                uncle->color    = NodeColor::Black;
+                node = gparent;
+                parent = node->parent;
+            }
+            else
+            {
+                if (parent->left == node)
+                {
+                    _rotate_right(parent);
+                    _swap(node, parent);
+                }
+                _rotate_left(gparent);
+                gparent->color = NodeColor::Red;
+                parent->color  = NodeColor::Black;
+                break ;
+            }
+        }
+    }
+    root->color = NodeColor::Black;
+}
+
+template <typename key_type, typename value_type, typename allocator_type>
+void FT_RBT::_remove(node_type* node, node_type* root)
+{
+    // todo
+}
+
+template <typename key_type, typename value_type, typename allocator_type>
+void FT_RBT::_remove_fixup(node_type* node, node_type* root)
+{
+    // todo
 }
 
 template <typename key_type, typename value_type, typename allocator_type>

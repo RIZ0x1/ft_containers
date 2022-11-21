@@ -38,6 +38,8 @@ namespace ft
     private:
         void         _insert(node_type* node, node_type* root);
         void         _insert_fixup(node_type* node, node_type* root);
+        void         _remove(node_type* node, node_type* root);
+        void         _remove_fixup(node_type* node, node_type* root);
 
         node_type*   _find(const key_type& key, node_type* root) const;
 

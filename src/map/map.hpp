@@ -65,6 +65,8 @@ namespace ft
         key_compare   key_comp() const;
         value_compare value_comp() const;
 
+        /* Operator */
+        mapped_type& operator [] (const key_type& key);
     };
 
     template <typename Key, typename T, typename Compare, typename Allocator>
